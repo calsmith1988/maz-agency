@@ -1,0 +1,215 @@
+---
+import Base from "~/layouts/Base.astro";
+import { site } from "~/config/site";
+
+const lastUpdated = "23 April 2026";
+---
+
+<Base
+  title="Privacy"
+  description={`${site.legalName} privacy policy - how we collect, use and protect your information.`}
+>
+  <section class="section">
+    <div class="container-page max-w-3xl">
+      <p class="eyebrow">Legal</p>
+      <h1 class="mt-5">Privacy policy</h1>
+      <p class="mt-4 text-moss text-[0.9rem]">Last updated: {lastUpdated}</p>
+
+      <div class="maz-prose mt-10">
+        <p>
+          This privacy policy explains how {site.legalName} trading as {site.brand}
+          collects, uses and protects personal data when you visit
+          <a href={site.url}>{site.url}</a>, book a call, contact us, join our
+          newsletter or otherwise interact with our website and marketing.
+        </p>
+
+        <h2>Who we are</h2>
+        <p>
+          {site.legalName} (company number {site.legal.companyNumber}) is a
+          UK-based Amazon advertising agency trading as {site.brand}. Its
+          registered office is {site.legal.registeredAddress}. For privacy
+          questions or requests, email
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+        </p>
+
+        <h2>Personal data we collect</h2>
+        <ul>
+          <li>
+            Contact and enquiry data such as your name, work email address,
+            brand name, role, phone number and anything you include in a
+            message, call request or email to us.
+          </li>
+          <li>
+            Booking data you submit through Calendly or similar scheduling
+            tools, including preferred time slots, call notes and meeting
+            metadata.
+          </li>
+          <li>
+            Newsletter and lead-management data, such as subscription status,
+            campaign source, page of origin and interactions with emails or
+            forms.
+          </li>
+          <li>
+            Device, browser, usage and attribution data collected through
+            analytics, advertising and remarketing tools, which may include IP
+            address, approximate location, identifiers, referring URLs, page
+            views, events and ad campaign performance data.
+          </li>
+          <li>
+            Business information you choose to share with us during a sales
+            conversation or client onboarding, including marketplace footprint,
+            ad spend ranges and operational pain points.
+          </li>
+        </ul>
+
+        <h2>How we use personal data</h2>
+        <ul>
+          <li>To respond to enquiries, arrange calls and assess whether we may be a fit to work together.</li>
+          <li>To send newsletter or marketing updates where you have asked for them or where we can do so lawfully.</li>
+          <li>To manage our pipeline, maintain CRM records and follow up on genuine business enquiries.</li>
+          <li>To operate, secure, test and improve the website, campaigns and user experience.</li>
+          <li>To measure traffic, conversions, campaign performance and remarketing audiences.</li>
+          <li>To protect our business, enforce our rights and comply with legal or regulatory obligations.</li>
+        </ul>
+
+        <h2>Our legal bases</h2>
+        <p>
+          Where UK GDPR or EU GDPR applies, we typically rely on one or more of
+          the following legal bases:
+        </p>
+        <ul>
+          <li>
+            <strong>Legitimate interests</strong> to run and improve our website,
+            respond to B2B enquiries, manage leads, maintain records and market
+            our services responsibly.
+          </li>
+          <li>
+            <strong>Steps prior to entering into a contract</strong> where you ask
+            us about services, pricing, proposals or onboarding.
+          </li>
+          <li>
+            <strong>Consent</strong> where required, including for newsletter
+            signups and certain analytics, advertising or remarketing
+            technologies.
+          </li>
+          <li>
+            <strong>Legal obligation</strong> where we must retain or disclose
+            information to comply with applicable law, tax, regulatory or law
+            enforcement obligations.
+          </li>
+        </ul>
+
+        <h2>Where data comes from</h2>
+        <p>
+          We collect data directly from you, from your browser or device when
+          you use the site, from our booking and analytics providers, from
+          advertising platforms, and in some cases from business communications
+          or publicly available professional information you choose to point us
+          to during a sales conversation.
+        </p>
+
+        <h2>Who we share data with</h2>
+        <p>
+          We use specialist providers to help us run the website and business.
+          Depending on the interaction, this may include website hosting and
+          infrastructure providers, email and productivity tools, Calendly,
+          analytics providers, Google advertising services, Meta advertising
+          services, newsletter tools, CRM systems, and professional advisers.
+        </p>
+        <p>
+          We do not sell personal information for money. However, some
+          advertising and remarketing technologies may be treated as
+          &ldquo;sharing&rdquo; or targeted advertising under certain privacy laws.
+          You can limit these technologies through your browser settings, any
+          consent controls we make available, or by contacting us.
+        </p>
+
+        <h2>International transfers</h2>
+        <p>
+          Because we serve clients internationally and use global service
+          providers, personal data may be processed outside the UK or EEA,
+          including in the United States and other countries where our
+          providers operate. Where required, we use appropriate safeguards such
+          as contractual protections, adequacy decisions or similar lawful
+          transfer mechanisms.
+        </p>
+
+        <h2>How long we keep data</h2>
+        <ul>
+          <li>General enquiry and prospect data: usually up to 24 months from the last meaningful contact.</li>
+          <li>Newsletter data: until you unsubscribe, object, or we otherwise stop sending the relevant communications.</li>
+          <li>Suppression records: as long as reasonably necessary to respect opt-out requests.</li>
+          <li>Analytics and advertising data: according to the settings and retention periods configured in the relevant platform.</li>
+          <li>Client or pre-client records: as required for contractual, operational, accounting and legal purposes.</li>
+        </ul>
+
+        <h2>Your rights</h2>
+        <p>
+          If UK GDPR or EU GDPR applies to you, you may have the right to
+          request access to your personal data, rectification, erasure,
+          restriction, portability, and objection to certain processing. Where
+          we rely on consent, you may withdraw that consent at any time.
+        </p>
+        <p>
+          To exercise these rights, email
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+          We may need to verify your identity before acting on a request.
+        </p>
+
+        <h2>US and other regional disclosures</h2>
+        <p>
+          If you are located in a US state or other jurisdiction that provides
+          additional privacy rights, you may have rights to know, access,
+          delete or correct certain personal information, and to opt out of
+          certain targeted advertising or profiling activities. You can request
+          this by contacting us using the details above.
+        </p>
+
+        <h2>Children</h2>
+        <p>
+          This website is aimed at business users and is not directed to
+          children. We do not knowingly collect personal data from children.
+        </p>
+
+        <h2>Cookies and tracking</h2>
+        <p>
+          For more detail on cookies, analytics and advertising technologies,
+          see our <a href="/cookies">cookie and tracking notice</a>.
+        </p>
+
+        <h2>Complaints</h2>
+        <p>
+          If you are unhappy with how we handle personal data, please contact
+          us first so we can try to resolve the issue. If you are in the UK,
+          you also have the right to complain to the Information
+          Commissioner&rsquo;s Office at <a href="https://ico.org.uk">ico.org.uk</a>.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          We may update this policy from time to time to reflect changes to the
+          law, our services, or the tools we use. The latest version will
+          always be posted on this page with the updated date shown above.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .maz-prose h2 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .maz-prose p { margin: 0.75rem 0; color: var(--color-ink); line-height: 1.7; }
+  .maz-prose ul { margin: 0.75rem 0; padding-left: 1.4rem; color: var(--color-ink); line-height: 1.7; }
+  .maz-prose ul li { list-style: disc; margin: 0.4rem 0; }
+  .maz-prose a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+    text-underline-offset: 3px;
+  }
+</style>

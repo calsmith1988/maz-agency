@@ -1,0 +1,33 @@
+---
+import Base from "~/layouts/Base.astro";
+import Hero from "~/components/Hero.astro";
+import LogoBar from "~/components/LogoBar.astro";
+import VSL from "~/components/VSL.astro";
+import Positioning from "~/components/Positioning.astro";
+import Process from "~/components/Process.astro";
+import CaseStudies from "~/components/CaseStudies.astro";
+import StatStrip from "~/components/StatStrip.astro";
+import Team from "~/components/Team.astro";
+import Pricing from "~/components/Pricing.astro";
+import FAQ from "~/components/FAQ.astro";
+import BookCall from "~/components/BookCall.astro";
+---
+
+<Base>
+  <Hero />
+  <LogoBar />
+  <VSL />
+  <Positioning />
+  <Process />
+  <CaseStudies />
+  <StatStrip />
+  <Team />
+  <Pricing />
+  <FAQ />
+  <BookCall
+    inline={false}
+    eyebrow="Ready when you are"
+    heading="Prefer to talk it through?"
+    body="Thirty minutes. We&rsquo;ll look at your account live and tell you what we&rsquo;d prioritise first. No pitch deck, no hard sell."
+  />
+</Base>

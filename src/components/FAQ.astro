@@ -1,0 +1,111 @@
+---
+import { site } from "~/config/site";
+
+const faqs = [
+  {
+    q: "What qualifies a brand to work with you?",
+    a: "We work best with established brands doing at least $20k/month in Amazon revenue, with healthy organic listings and inventory we can scale into. If you&rsquo;re earlier-stage, tell us anyway - sometimes the fit is there, sometimes we&rsquo;ll point you somewhere better.",
+  },
+  {
+    q: "What happens on the first call?",
+    a: "It&rsquo;s a straightforward strategy call. We&rsquo;ll look at your current setup, understand the commercial goals behind the account, and tell you what we&rsquo;d prioritise first if we were managing it.",
+  },
+  {
+    q: "What is your fee structure?",
+    a: "&pound;750 per month per region managed (North America, United Kingdom, Europe, etc.) with unlimited SKUs included. No percentage-of-spend and no setup fees, so scaling ad spend never moves the management fee.",
+  },
+  {
+    q: "What are your contract terms?",
+    a: "Monthly rolling. 30 days&rsquo; notice to pause or stop. We earn the next month every month.",
+  },
+  {
+    q: "How do you handle communication?",
+    a: "Slack, Teams or WhatsApp for quick day-to-day questions with same-day replies Mon-Fri. Email for approvals, documents and longer topics (within one business day). Loom when a screen-share is clearer than text. A monthly strategic update as a deck plus Loom or a 30-60 minute call, with a mid-month pulse check in between.",
+  },
+  {
+    q: "How do you set up account access?",
+    a: "We use Seller Central user permissions (not a login share) and request read-only access to any business analytics you use (Sellerboard, Helium10, Sellerise, etc). Onboarding typically takes a few days from sign-off.",
+  },
+  {
+    q: "How quickly can you begin?",
+    a: "Usually within one to two weeks of the contract being signed. The first step is a proper review of the account so the initial strategic actions are grounded, not guessed.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.a.replace(/<[^>]*>/g, ""),
+    },
+  })),
+};
+---
+
+<section class="section bg-ivory" id="faq">
+  <div class="container-page">
+    <div class="grid md:grid-cols-[1fr_1.5fr] gap-10 md:gap-20">
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2 class="mt-4 text-balance">
+          The answers we give most often.
+        </h2>
+        <p class="lead mt-5">
+          Still have a question? Email
+          <a
+            href={`mailto:${site.contact.email}`}
+            class="text-ink underline underline-offset-4 decoration-gold hover:decoration-ink"
+          >
+            {site.contact.email}
+          </a>
+          &mdash; we read every one.
+        </p>
+      </div>
+
+      <div class="divide-y divide-putty border-t border-b border-putty">
+        {
+          faqs.map((faq, i) => (
+            <details class="group py-5" name="maz-faq" open={i === 0}>
+              <summary
+                class="flex items-start justify-between gap-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden"
+              >
+                <span class="font-serif text-[1.1rem] md:text-[1.2rem] text-ink leading-snug">
+                  {faq.q}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="mt-1 inline-flex w-7 h-7 items-center justify-center text-ink border border-putty rounded-full group-open:rotate-45 transition-transform"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="12"
+                    height="12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </span>
+              </summary>
+              <div
+                class="mt-4 pr-8 text-moss leading-relaxed text-[0.98rem]"
+                set:html={faq.a}
+              />
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(faqJsonLd)}
+/>

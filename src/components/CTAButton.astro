@@ -1,0 +1,72 @@
+---
+interface Props {
+  href: string;
+  variant?: "primary" | "secondary" | "ghost" | "light";
+  size?: "sm" | "md" | "lg";
+  external?: boolean;
+  class?: string;
+  "aria-label"?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  external = false,
+  class: className = "",
+  "aria-label": ariaLabel,
+} = Astro.props;
+
+const base =
+  "inline-flex items-center justify-center gap-2 font-sans font-medium " +
+  "tracking-tight transition-all duration-200 whitespace-nowrap " +
+  "rounded-sm border focus-visible:outline-offset-4";
+
+const sizes: Record<NonNullable<Props["size"]>, string> = {
+  sm: "text-sm px-4 py-2",
+  md: "text-[0.95rem] px-5 py-2.5",
+  lg: "text-base px-7 py-3.5",
+};
+
+const variants: Record<NonNullable<Props["variant"]>, string> = {
+  primary:
+    "bg-ink text-ivory border-ink hover:bg-[#0f1714] hover:border-[#0f1714]",
+  secondary:
+    "bg-transparent text-ink border-ink/25 hover:border-ink hover:bg-ink/[0.04]",
+  ghost:
+    "bg-transparent text-ink border-transparent underline underline-offset-4 decoration-gold hover:decoration-ink",
+  light:
+    "bg-ivory text-ink border-ivory hover:bg-champagne hover:border-champagne",
+};
+
+const rel = external ? "noopener noreferrer" : undefined;
+const target = external ? "_blank" : undefined;
+---
+
+<a
+  href={href}
+  class={`${base} ${sizes[size]} ${variants[variant]} ${className}`}
+  target={target}
+  rel={rel}
+  aria-label={ariaLabel}
+>
+  <slot />
+  {
+    external && (
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M7 17L17 7" />
+        <path d="M8 7h9v9" />
+      </svg>
+    )
+  }
+</a>

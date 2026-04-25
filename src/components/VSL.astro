@@ -1,0 +1,180 @@
+---
+import { site } from "~/config/site";
+
+/**
+ * Video Sales Letter section.
+ *
+ * Drop a poster image at public/vsl/poster.jpg (recommended 1920x1080).
+ * Paste a YouTube or Vimeo watch URL into PUBLIC_VSL_URL in .env, or edit
+ * site.vslUrl directly. The modal converts to an embed URL automatically.
+ *
+ * If no VSL URL is configured, the section renders a "Video coming soon"
+ * placeholder so the page still flows correctly.
+ */
+
+function toEmbedUrl(url: string): string | null {
+  if (!url) return null;
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+
+    if (host === "youtu.be") {
+      const id = u.pathname.slice(1);
+      return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : null;
+    }
+    if (host.endsWith("youtube.com")) {
+      const id = u.searchParams.get("v") ?? u.pathname.split("/").filter(Boolean).pop();
+      return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : null;
+    }
+    if (host.endsWith("vimeo.com")) {
+      const id = u.pathname.split("/").filter(Boolean).pop();
+      return id ? `https://player.vimeo.com/video/${id}?autoplay=1` : null;
+    }
+    return url;
+  } catch {
+    return null;
+  }
+}
+
+const embedUrl = toEmbedUrl(site.vslUrl);
+const hasVideo = Boolean(embedUrl);
+---
+
+<section class="section bg-ivory">
+  <div class="container-page">
+    <div class="max-w-3xl">
+      <p class="eyebrow">Watch a 3-minute walkthrough</p>
+      <h2 class="mt-4">See what we spot in a real Amazon ads account.</h2>
+      <p class="lead mt-5">
+        A short walkthrough of the hidden opportunities we find in the first
+        look at a new account &mdash; the wasted spend, the under-targeted
+        search terms, and the fastest wins.
+      </p>
+    </div>
+
+    <div class="mt-10 md:mt-14">
+      <button
+        type="button"
+        class="group relative block w-full aspect-video rounded-md overflow-hidden border border-putty bg-champagne text-left focus-visible:outline-offset-4"
+        data-vsl-open
+        disabled={!hasVideo}
+        aria-label={hasVideo ? "Play the MAZ walkthrough video" : "Video coming soon"}
+      >
+        <img
+          src="/vsl/poster.jpg"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover"
+          onerror="this.style.display='none'"
+        />
+        <div
+          class="absolute inset-0"
+          style="background: linear-gradient(180deg, rgba(30,42,36,0) 40%, rgba(30,42,36,0.55) 100%);"
+        >
+        </div>
+
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span
+            class="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-ivory/95 text-ink shadow-lg shadow-ink/10 transition-transform duration-300 group-hover:scale-105"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              width="32"
+              height="32"
+              fill="currentColor"
+            >
+              <path d="M8 5.5v13l11-6.5-11-6.5z" />
+            </svg>
+          </span>
+        </div>
+
+        <div class="absolute left-6 bottom-6 right-6 text-ivory">
+          <p
+            class="font-sans text-[0.72rem] tracking-[0.22em] uppercase text-putty"
+          >
+            {hasVideo ? "Play video" : "Video coming soon"}
+          </p>
+          <p class="font-serif text-xl md:text-2xl mt-1.5 max-w-lg">
+            {site.brand} walkthrough &mdash; what we spot in a real account.
+          </p>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+{
+  hasVideo && (
+    <div
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/85 p-4"
+      data-vsl-modal
+      role="dialog"
+      aria-modal="true"
+      aria-label="Video player"
+    >
+      <div class="relative w-full max-w-5xl aspect-video bg-ink">
+        <button
+          type="button"
+          data-vsl-close
+          class="absolute -top-10 right-0 text-ivory hover:text-gold inline-flex items-center gap-2 text-sm"
+          aria-label="Close video"
+        >
+          Close
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+        <div
+          class="w-full h-full"
+          data-vsl-slot
+          data-embed={embedUrl}
+        />
+      </div>
+    </div>
+  )
+}
+
+<script>
+  const openBtn = document.querySelector<HTMLButtonElement>("[data-vsl-open]");
+  const modal = document.querySelector<HTMLElement>("[data-vsl-modal]");
+  const closeBtn = document.querySelector<HTMLButtonElement>("[data-vsl-close]");
+  const slot = document.querySelector<HTMLElement>("[data-vsl-slot]");
+
+  function openModal() {
+    if (!modal || !slot) return;
+    const src = slot.dataset.embed;
+    if (!src) return;
+    slot.innerHTML = `<iframe src="${src}" class="w-full h-full" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="MAZ video walkthrough"></iframe>`;
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    if (!modal || !slot) return;
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    slot.innerHTML = "";
+    document.body.style.overflow = "";
+  }
+
+  openBtn?.addEventListener("click", openModal);
+  closeBtn?.addEventListener("click", closeModal);
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>

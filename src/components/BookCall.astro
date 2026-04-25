@@ -1,0 +1,71 @@
+---
+import CTAButton from "./CTAButton.astro";
+import { site } from "~/config/site";
+
+interface Props {
+  /** When true, renders an inline Calendly iframe. When false, renders a CTA button that opens Calendly in a new tab. */
+  inline?: boolean;
+  eyebrow?: string;
+  heading?: string;
+  body?: string;
+}
+
+const {
+  inline = false,
+  eyebrow = "Ready when you are",
+  heading = "Book your Amazon ads strategy call.",
+  body = "30 minutes, no pitch deck. We&rsquo;ll look at your account live, tell you what we&rsquo;d prioritise first, and you decide whether to take it further.",
+} = Astro.props;
+
+const hasCalendly = Boolean(site.calendlyUrl);
+---
+
+<section class="section bg-ivory" id="book-a-call">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 class="mt-4 text-balance">{heading}</h2>
+      <p class="lead mt-5" set:html={body} />
+    </div>
+
+    <div class="mt-10 md:mt-14">
+      {
+        inline && hasCalendly ? (
+          <div
+            class="border border-putty rounded-lg overflow-hidden bg-champagne"
+            style="min-height: 720px;"
+          >
+            <iframe
+              src={site.calendlyUrl}
+              title="Book a call with MAZ"
+              loading="lazy"
+              class="w-full h-[720px] border-0"
+              allow="camera; microphone; autoplay; encrypted-media; fullscreen; payment"
+            />
+          </div>
+        ) : (
+          <div class="flex flex-wrap gap-3">
+            <CTAButton href={site.calendlyUrl} size="lg" external={hasCalendly}>
+              Book a call
+            </CTAButton>
+            <CTAButton
+              href={`mailto:${site.contact.email}`}
+              variant="secondary"
+              size="lg"
+            >
+              Email us instead
+            </CTAButton>
+          </div>
+        )
+      }
+    </div>
+
+    <p class="mt-5 max-w-2xl text-[0.82rem] leading-relaxed text-moss">
+      When you book, your details are processed by Calendly and the calendar
+      providers connected to that booking flow so we can schedule and manage
+      the meeting. We may also record the enquiry in our CRM for follow-up on
+      your request. See our <a href="/privacy" class="text-ink underline underline-offset-4 decoration-gold hover:decoration-ink">privacy policy</a>
+      and <a href="/cookies" class="text-ink underline underline-offset-4 decoration-gold hover:decoration-ink">cookie notice</a>.
+    </p>
+  </div>
+</section>

@@ -1,0 +1,136 @@
+---
+import Base from "~/layouts/Base.astro";
+import { site } from "~/config/site";
+
+const lastUpdated = "23 April 2026";
+---
+
+<Base
+  title="Cookies"
+  description={`${site.legalName} cookie and tracking notice.`}
+>
+  <section class="section">
+    <div class="container-page max-w-3xl">
+      <p class="eyebrow">Legal</p>
+      <h1 class="mt-5">Cookie and tracking notice</h1>
+      <p class="mt-4 text-moss text-[0.9rem]">Last updated: {lastUpdated}</p>
+
+      <div class="maz-prose mt-10">
+        <p>
+          This notice explains how {site.legalName} uses cookies and similar
+          technologies on <a href={site.url}>{site.url}</a>.
+        </p>
+        <p>
+          {site.legalName}, trading as {site.brand}, is registered in England
+          and Wales under company number {site.legal.companyNumber}. Its
+          registered office is {site.legal.registeredAddress}.
+        </p>
+
+        <h2>What cookies are</h2>
+        <p>
+          Cookies are small text files placed on your device when you visit a
+          website. Similar technologies include pixels, tags, scripts, local
+          storage and SDK-style identifiers used to recognise a browser or
+          device, remember preferences, measure activity and support marketing.
+        </p>
+
+        <h2>How we use cookies and similar technologies</h2>
+        <p>Depending on the page, campaign and tools active on the site, we may use cookies and similar technologies for:</p>
+        <ul>
+          <li>essential site functionality and security;</li>
+          <li>traffic measurement, analytics and site improvement;</li>
+          <li>campaign attribution and conversion measurement;</li>
+          <li>remarketing and advertising audience creation;</li>
+          <li>newsletter, CRM or lead-source tracking linked to forms and campaigns.</li>
+        </ul>
+
+        <h2>Categories of cookies</h2>
+        <ul>
+          <li>
+            <strong>Strictly necessary:</strong> help core site functions,
+            security and load balancing work properly.
+          </li>
+          <li>
+            <strong>Analytics and performance:</strong> help us understand how
+            visitors use the site so we can improve journeys, content and
+            conversion performance.
+          </li>
+          <li>
+            <strong>Advertising and remarketing:</strong> used by marketing
+            partners such as Google and Meta to measure ad performance, build
+            audiences and show more relevant advertising.
+          </li>
+          <li>
+            <strong>Functional:</strong> support embedded services such as
+            scheduling tools, video tools or lead-capture experiences.
+          </li>
+        </ul>
+
+        <h2>Third-party tools we may use</h2>
+        <p>
+          Our marketing and website stack may include tools such as Calendly,
+          Google Analytics, Google Ads, Meta advertising technologies, CRM and
+          newsletter tools, and other measurement or marketing services we use
+          from time to time. These providers may collect information directly
+          from your device or browser when their scripts, pixels or embeds are
+          loaded.
+        </p>
+
+        <h2>Consent and control</h2>
+        <p>
+          Where required by law, non-essential cookies and similar technologies
+          should only be used with appropriate choice or consent. You can also
+          manage cookies through your browser settings, device settings, ad
+          platform controls and any consent tools we make available on the
+          website.
+        </p>
+        <p>
+          Please note that disabling certain cookies may affect how parts of
+          the site, embedded tools or marketing journeys work.
+        </p>
+
+        <h2>How long cookies last</h2>
+        <p>
+          Some cookies are session-based and expire when you close your
+          browser. Others remain for a defined period unless you delete them
+          earlier. Retention varies by provider and platform configuration.
+        </p>
+
+        <h2>Targeted advertising</h2>
+        <p>
+          Advertising cookies and similar technologies may be used to measure
+          visits from campaigns, understand which pages or actions led to a
+          booking or enquiry, and build audiences for future campaigns. In some
+          jurisdictions this activity may be treated as targeted advertising or
+          sharing of personal information.
+        </p>
+
+        <h2>More information</h2>
+        <p>
+          For more detail on how we handle personal data, see our
+          <a href="/privacy"> privacy policy</a>. If you have questions about
+          this notice or want to raise a privacy request, email
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .maz-prose h2 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .maz-prose p { margin: 0.75rem 0; color: var(--color-ink); line-height: 1.7; }
+  .maz-prose ul { margin: 0.75rem 0; padding-left: 1.4rem; color: var(--color-ink); line-height: 1.7; }
+  .maz-prose ul li { list-style: disc; margin: 0.4rem 0; }
+  .maz-prose a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+    text-underline-offset: 3px;
+  }
+</style>

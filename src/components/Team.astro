@@ -1,0 +1,80 @@
+---
+const members = [
+  {
+    name: "Calum",
+    role: "Founder & Ad Strategist",
+    photo: "/team/calum.jpg",
+    bio: "Sets the overall Amazon ads strategy, oversees account performance, and makes sure targets and campaigns are aligned with your wider business goals. Eight years managing Amazon ads across beauty, supplements, outdoors and consumables in the US, Canada, UK, EU, India and Australia.",
+  },
+  {
+    name: "Genny",
+    role: "Amazon Ads Manager",
+    photo: "/team/genny.png",
+    useFallback: true,
+    bio: "Manages bids, budgets, keywords and new campaign launches day-to-day, keeping performance moving in the right direction across every marketplace. Genny is deeply experienced, highly knowledgeable, and has been a core part of the team for four years.",
+  },
+  {
+    name: "Eir",
+    role: "Operations & VA",
+    photo: "/team/eir.jpg",
+    bio: "Keeps the wheels turning behind the scenes - preparing bulk sheets, pulling reports and organising the detail so the team can move quickly.",
+  },
+];
+---
+
+<section class="section bg-ivory" id="team">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Your Amazon ads team</p>
+      <h2 class="mt-4 text-balance">
+        A small team. Hands on your account, every business day.
+      </h2>
+      <p class="lead mt-5">
+        No layered agency pod, no junior relay-race. You&rsquo;ll know exactly
+        who&rsquo;s in your account and you&rsquo;ll speak to them directly.
+      </p>
+    </div>
+
+    <ul class="mt-14 grid gap-8 md:gap-10 md:grid-cols-3">
+      {
+        members.map((m) => (
+          <li class="flex flex-col">
+            <div class="relative aspect-[4/5] bg-champagne border border-putty overflow-hidden rounded-md">
+              {
+                !m.useFallback && (
+                  <img
+                    src={m.photo}
+                    alt={`${m.name}, ${m.role}`}
+                    loading="lazy"
+                    decoding="async"
+                    class="absolute inset-0 h-full w-full object-cover"
+                    onerror={`this.style.display='none'; this.parentElement.querySelector('[data-fallback]').style.display='flex';`}
+                  />
+                )
+              }
+              <div
+                data-fallback
+                class:list={[
+                  "absolute inset-0 items-end p-6",
+                  m.useFallback ? "flex" : "hidden",
+                ]}
+                style="background: linear-gradient(180deg, transparent, rgba(94,103,95,0.18));"
+              >
+                <span class="font-serif text-[2.2rem] text-moss leading-none">
+                  {m.name}
+                </span>
+              </div>
+            </div>
+            <div class="mt-5">
+              <h3 class="font-serif text-[1.3rem]">{m.name}</h3>
+              <p class="mt-1 text-[0.85rem] tracking-wide uppercase text-moss">
+                {m.role}
+              </p>
+              <p class="mt-4 text-moss leading-relaxed text-[0.98rem]">{m.bio}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

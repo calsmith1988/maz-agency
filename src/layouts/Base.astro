@@ -1,0 +1,284 @@
+---
+import "@fontsource-variable/fraunces/index.css";
+import "@fontsource-variable/inter/index.css";
+import "~/styles/global.css";
+import Nav from "~/components/Nav.astro";
+import Footer from "~/components/Footer.astro";
+import CookieConsent from "~/components/CookieConsent.astro";
+import { site } from "~/config/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = site.metaDescription,
+  ogImage = "/og-default.svg",
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title
+  ? `${title} | ${site.brand} - ${site.tagline}`
+  : `${site.brand} - ${site.tagline}`;
+
+const canonical = new URL(Astro.url.pathname, site.url).toString();
+const ogImageUrl = new URL(ogImage, site.url).toString();
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.legalName,
+  alternateName: site.brand,
+  url: site.url,
+  logo: new URL("/brand/maz-logo.svg", site.url).toString(),
+  description: site.metaDescription,
+  email: site.contact.email,
+  telephone: site.contact.phone,
+  foundingDate: String(site.foundedYear),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "8 Henfron",
+    addressLocality: "Caerphilly",
+    postalCode: "CF83 2NU",
+    addressCountry: "GB",
+  },
+  sameAs: [site.socials.linkedin, site.socials.x].filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <meta name="theme-color" content="#F8F5EF" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(orgJsonLd)}
+    />
+
+    <script is:inline>
+      (() => {
+        const KEY = "maz_cookie_consent_v1";
+        const defaults = {
+          necessary: true,
+          analytics: false,
+          advertising: false,
+        };
+
+        const normalise = (value) => ({
+          ...defaults,
+          ...(value && typeof value === "object" ? value : {}),
+          necessary: true,
+        });
+
+        const read = () => {
+          try {
+            const raw = window.localStorage.getItem(KEY);
+            return raw ? normalise(JSON.parse(raw)) : normalise(null);
+          } catch {
+            return normalise(null);
+          }
+        };
+
+        const write = (value) => {
+          const next = normalise(value);
+          try {
+            window.localStorage.setItem(KEY, JSON.stringify(next));
+          } catch {}
+          window.__mazConsent = next;
+          window.dispatchEvent(
+            new CustomEvent("maz:consent-changed", { detail: next }),
+          );
+          return next;
+        };
+
+        window.mazConsentKey = KEY;
+        window.mazGetConsent = read;
+        window.mazSetConsent = write;
+        window.mazHasConsent = (category) =>
+          category === "necessary" ? true : Boolean(read()?.[category]);
+        window.__mazConsent = read();
+      })();
+    </script>
+
+    {
+      (site.plausibleDomain ||
+        site.tracking.googleAnalyticsId ||
+        site.tracking.googleAdsId ||
+        site.tracking.metaPixelId) && (
+        <script
+          is:inline
+          define:vars={{
+            plausibleDomain: site.plausibleDomain,
+            googleAnalyticsId: site.tracking.googleAnalyticsId,
+            googleAdsId: site.tracking.googleAdsId,
+            metaPixelId: site.tracking.metaPixelId,
+          }}
+          set:html={`
+            (() => {
+              let plausibleLoaded = false;
+              let gtagBooted = false;
+              let gaConfigured = false;
+              let adsConfigured = false;
+              let metaLoaded = false;
+              let metaTracked = false;
+
+              const hasAnalyticsConsent = () => window.mazHasConsent?.("analytics");
+              const hasAdvertisingConsent = () => window.mazHasConsent?.("advertising");
+
+              const ensureScript = (id, src) => {
+                if (document.getElementById(id)) return;
+                const script = document.createElement("script");
+                script.id = id;
+                script.async = true;
+                script.src = src;
+                document.head.appendChild(script);
+              };
+
+              const bootPlausible = () => {
+                if (!plausibleDomain || plausibleLoaded || !hasAnalyticsConsent()) return;
+                plausibleLoaded = true;
+                const script = document.createElement("script");
+                script.defer = true;
+                script.dataset.domain = plausibleDomain;
+                script.src = "https://plausible.io/js/script.js";
+                document.head.appendChild(script);
+              };
+
+              const bootGtag = () => {
+                if (gtagBooted || (!googleAnalyticsId && !googleAdsId)) return;
+                ensureScript(
+                  "maz-google-gtag",
+                  "https://www.googletagmanager.com/gtag/js?id=" +
+                    encodeURIComponent(googleAnalyticsId || googleAdsId),
+                );
+                window.dataLayer = window.dataLayer || [];
+                window.gtag =
+                  window.gtag ||
+                  function gtag() {
+                    window.dataLayer.push(arguments);
+                  };
+                window.gtag("js", new Date());
+                gtagBooted = true;
+              };
+
+              const syncGoogleConsent = () => {
+                if (!googleAnalyticsId && !googleAdsId) return;
+                bootGtag();
+                window.gtag("consent", "update", {
+                  analytics_storage: hasAnalyticsConsent() ? "granted" : "denied",
+                  ad_storage: hasAdvertisingConsent() ? "granted" : "denied",
+                  ad_user_data: hasAdvertisingConsent() ? "granted" : "denied",
+                  ad_personalization: hasAdvertisingConsent() ? "granted" : "denied",
+                });
+              };
+
+              const bootGoogleAnalytics = () => {
+                if (!googleAnalyticsId || gaConfigured || !hasAnalyticsConsent()) return;
+                bootGtag();
+                syncGoogleConsent();
+                window.gtag("config", googleAnalyticsId, {
+                  anonymize_ip: true,
+                });
+                gaConfigured = true;
+              };
+
+              const bootGoogleAds = () => {
+                if (!googleAdsId || adsConfigured || !hasAdvertisingConsent()) return;
+                bootGtag();
+                syncGoogleConsent();
+                window.gtag("config", googleAdsId);
+                adsConfigured = true;
+              };
+
+              const bootMeta = () => {
+                if (!metaPixelId || metaLoaded || !hasAdvertisingConsent()) return;
+                ((f, b, e, v, n, t, s) => {
+                  if (f.fbq) return;
+                  n = f.fbq = function fbq() {
+                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+                  };
+                  if (!f._fbq) f._fbq = n;
+                  n.push = n;
+                  n.loaded = true;
+                  n.version = "2.0";
+                  n.queue = [];
+                  t = b.createElement(e);
+                  t.async = true;
+                  t.src = v;
+                  s = b.getElementsByTagName(e)[0];
+                  s.parentNode.insertBefore(t, s);
+                })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+
+                metaLoaded = true;
+                window.fbq("init", metaPixelId);
+              };
+
+              const trackMetaPageView = () => {
+                if (!metaPixelId || metaTracked || !hasAdvertisingConsent()) return;
+                bootMeta();
+                window.fbq?.("track", "PageView");
+                metaTracked = true;
+              };
+
+              const loadTracking = () => {
+                bootPlausible();
+                syncGoogleConsent();
+                bootGoogleAnalytics();
+                bootGoogleAds();
+                trackMetaPageView();
+              };
+
+              loadTracking();
+              window.addEventListener("maz:consent-changed", loadTracking);
+            })();
+          `}
+        />
+      )
+    }
+  </head>
+
+  <body class="min-h-dvh flex flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:text-ivory focus:px-3 focus:py-2"
+    >
+      Skip to content
+    </a>
+
+    <Nav />
+
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+    <CookieConsent />
+  </body>
+</html>

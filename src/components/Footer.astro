@@ -1,0 +1,131 @@
+---
+import Logo from "./Logo.astro";
+import { site } from "~/config/site";
+
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    heading: "Agency",
+    links: [
+      { href: "/about", label: "About" },
+      { href: "/case-studies", label: "Case studies" },
+      { href: "/contact", label: "Contact" },
+    ],
+  },
+  {
+    heading: "Get started",
+    links: [
+      { href: "/book-a-call", label: "Book a call" },
+      { href: "/contact", label: "Contact" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { href: "/privacy", label: "Privacy" },
+      { href: "/cookies", label: "Cookies" },
+      { href: "/terms", label: "Terms" },
+    ],
+  },
+];
+---
+
+<footer class="bg-ink text-ivory mt-0">
+  <div class="container-page py-16 md:py-20">
+    <div class="grid gap-12 md:grid-cols-[1.25fr_1fr_1fr_1fr]">
+      <div>
+        <Logo variant="light" showTagline />
+        <p class="mt-5 text-[0.95rem] text-putty max-w-xs leading-relaxed">
+          Profitable Amazon ads, managed daily since {site.foundedYear}.
+        </p>
+        <div class="mt-6 space-y-4 text-[0.9rem]">
+          <div class="space-y-1.5 text-putty">
+            <p class="text-putty">{site.legalName}</p>
+            <p class="text-putty">Company Number: {site.legal.companyNumber}</p>
+            <p class="text-putty">Trading as: {site.brand}</p>
+          </div>
+
+          <div class="space-y-1.5 text-putty">
+            <p class="text-putty">{site.legal.registeredAddress}</p>
+          </div>
+
+          <div class="space-y-1.5 text-putty">
+            <p class="text-putty">
+              Tel:{" "}
+              <a
+                href={`tel:${site.contact.phone.replace(/\s+/g, "")}`}
+                class="text-putty hover:text-ivory transition-colors"
+              >
+                {site.contact.phone}
+              </a>
+            </p>
+          </div>
+
+          <div class="space-y-1.5 text-putty">
+            <p class="text-putty">Email</p>
+            <p class="text-putty">
+              <a
+                href={`mailto:${site.contact.email}`}
+                class="text-putty hover:text-ivory transition-colors"
+              >
+                {site.contact.email}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {
+        columns.map((col) => (
+          <div>
+            <h4 class="font-sans text-[0.72rem] tracking-[0.22em] uppercase text-putty font-medium">
+              {col.heading}
+            </h4>
+            <ul class="mt-5 space-y-3">
+              {col.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-[0.95rem] text-ivory/85 hover:text-ivory hover:underline underline-offset-4 decoration-gold"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-moss/50 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-[0.8rem] text-putty">
+      <p>&copy; {year} {site.legalName}. All rights reserved.</p>
+      <div class="flex flex-wrap items-center gap-5">
+        <button
+          type="button"
+          data-open-cookie-settings
+          class="hover:text-ivory"
+        >
+          Cookie settings
+        </button>
+        <a
+          href={site.socials.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-ivory"
+        >
+          LinkedIn
+        </a>
+        <a
+          href={site.socials.x}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-ivory"
+        >
+          X
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

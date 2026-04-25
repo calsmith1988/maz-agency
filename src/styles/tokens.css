@@ -1,0 +1,41 @@
+/*
+ * MAZ design tokens
+ * Single source of truth for colour, typography, spacing.
+ * Consumed by global.css via Tailwind v4 @theme.
+ *
+ * Roles:
+ *   ink       primary text, dark inverse sections (VSL, footer)
+ *   moss      secondary text, muted UI
+ *   putty     dividers, subtle section bands, form borders
+ *   champagne alternating section surface
+ *   ivory     default page background
+ *   gold      accent only: CTAs, key numbers, underlines
+ */
+
+@theme {
+  --color-ink: #1E2A24;
+  --color-moss: #5E675F;
+  --color-putty: #D8D0C4;
+  --color-champagne: #EDE6DA;
+  --color-ivory: #F8F5EF;
+  --color-gold: #B59A6A;
+  --color-gold-dark: #9A8258;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
+
+  --text-display: clamp(2.75rem, 1.5rem + 4.5vw, 5.5rem);
+  --text-h1: clamp(2.25rem, 1.25rem + 3.5vw, 4rem);
+  --text-h2: clamp(1.75rem, 1rem + 2.5vw, 2.75rem);
+  --text-h3: clamp(1.25rem, 0.9rem + 1.2vw, 1.75rem);
+  --text-eyebrow: 0.75rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  --container-page: 1200px;
+
+  --spacing-section: clamp(4rem, 2rem + 6vw, 7rem);
+}

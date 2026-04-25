@@ -1,0 +1,6 @@
+# Drop the final MAZ logo assets here when ready:
+# maz-logo.svg   - full horizontal wordmark
+# maz-mark.svg   - standalone M monogram / avatar mark
+#
+# Then edit src/components/Logo.astro to render an <img src="/brand/maz-logo.svg">
+# instead of the typographic placeholder.

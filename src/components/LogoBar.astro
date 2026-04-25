@@ -1,0 +1,147 @@
+---
+/**
+ * Client logo bar.
+ *
+ * Works with PNG, JPG or SVG logos of varying sizes and colours. Each file
+ * is constrained to a uniform max-height and treated with a greyscale
+ * filter + multiply blend so a mixed set of brand colours sits calmly
+ * together on the champagne surface.
+ *
+ * Drop logos at public/logos/logo-01.png ... logo-06.png (or swap the
+ * extension in EXT below).
+ *
+ * Per-logo tuning:
+ *   Some logos render too small or too big at the shared baseline because
+ *   the source file has different amounts of built-in padding. Adjust the
+ *   `scale` value on a slot below to compensate:
+ *
+ *     scale: 1.0   - neutral baseline
+ *     scale: 1.25  - bump up ~25% (logo looks shrunken at baseline)
+ *     scale: 0.75  - shrink ~25%  (logo looks oversized at baseline)
+ *
+ *   The scale applies a CSS transform only; the underlying PNG is
+ *   untouched. Values roughly in the 0.7-1.3 range look clean; much more
+ *   than that and the logo will break the row rhythm.
+ *
+ * Opt-out of the monochrome treatment: add `untreated: true` to a slot
+ * if it's already dark-on-dark or otherwise doesn't want the filter.
+ *
+ * Boost mode: add `boost: true` if the source PNG is already a light grey
+ * and the shared filter leaves it looking washed-out next to darker logos.
+ * The boost variant drops brightness + lifts contrast to pull it back to
+ * the same visual weight as black marks.
+ */
+
+interface LogoSlot {
+  src: string;
+  alt: string;
+  scale?: number;
+  untreated?: boolean;
+  boost?: boolean;
+}
+
+const EXT = "png" as const;
+
+const logos: LogoSlot[] = [
+  { src: `/logos/logo-01.${EXT}`, alt: "Client logo 01" },
+  { src: `/logos/logo-02.${EXT}`, alt: "Client logo 02", scale: 1.25, boost: true },
+  { src: `/logos/logo-03.${EXT}`, alt: "Client logo 03", scale: 0.85 },
+  { src: `/logos/logo-04.${EXT}`, alt: "Client logo 04", scale: 0.6 },
+  { src: `/logos/logo-05.${EXT}`, alt: "Client logo 05", scale: 0.6 },
+  { src: `/logos/logo-06.${EXT}`, alt: "Client logo 06", scale: 0.85 },
+];
+---
+
+<section
+  aria-label="Selected clients"
+  class="border-y border-putty bg-champagne/60"
+>
+  <div class="container-page py-10 md:py-12">
+    <p class="eyebrow text-center">Trusted by ambitious eCommerce brands</p>
+
+    <ul
+      class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-8 md:gap-x-10 gap-y-8 items-center justify-items-center"
+    >
+      {
+        logos.map((logo, i) => (
+          <li class="flex items-center justify-center w-full h-14 md:h-16">
+            <div
+              class="maz-logo-tile relative flex items-center justify-center w-full h-full"
+              style={`--logo-scale: ${logo.scale ?? 1};`}
+              data-untreated={logo.untreated ? "" : undefined}
+              data-boost={logo.boost ? "" : undefined}
+            >
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                loading="lazy"
+                decoding="async"
+                class="max-h-full max-w-full w-auto h-auto object-contain"
+                onerror={`this.style.display='none'; this.nextElementSibling.style.display='inline-block';`}
+              />
+              <span
+                class="hidden font-sans text-[0.7rem] tracking-[0.22em] text-moss/60"
+                aria-hidden="true"
+              >
+                CLIENT {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  /*
+   * Normalisation treatment:
+   * - mix-blend-mode: multiply blends near-white / light-grey PNG
+   *   backgrounds into the champagne surface so boxed logos don't show
+   *   visible rectangles
+   * - grayscale removes brand colour variance
+   * - contrast + brightness pull thin-stroke marks back to a legible
+   *   weight on the warm background
+   * - opacity softens everything to a uniform weight alongside serif type
+   * - transform: scale() lets each slot be nudged up or down without
+   *   touching the source file
+   *
+   * Works for PNG (incl. lossy JPEG), transparent SVG, and PNGs with
+   * light-coloured backgrounds. Logos on dark / black backgrounds should
+   * opt out via untreated: true on the slot data.
+   */
+  .maz-logo-tile :global(img) {
+    mix-blend-mode: multiply;
+    filter: grayscale(1) contrast(1.05) brightness(0.85);
+    opacity: 0.82;
+    transform: scale(var(--logo-scale, 1));
+    transform-origin: center;
+    transition: filter 200ms ease, opacity 200ms ease, transform 200ms ease;
+  }
+  .maz-logo-tile:hover :global(img) {
+    opacity: 1;
+    filter: grayscale(1) contrast(1.1) brightness(0.75);
+  }
+
+  /*
+   * data-boost: for logos whose source PNG is already a light grey.
+   * brightness(0) collapses every opaque pixel to pure black while
+   * transparency is preserved, so a grey mark renders at the same weight
+   * as a true-black mark. The base opacity is kept to match the muted
+   * tone of the rest of the row.
+   */
+  .maz-logo-tile[data-boost] :global(img) {
+    filter: brightness(0);
+    opacity: 0.82;
+  }
+  .maz-logo-tile[data-boost]:hover :global(img) {
+    filter: brightness(0);
+    opacity: 1;
+  }
+
+  .maz-logo-tile[data-untreated] :global(img) {
+    mix-blend-mode: normal;
+    filter: none;
+    opacity: 1;
+  }
+</style>

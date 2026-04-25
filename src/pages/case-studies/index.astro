@@ -1,0 +1,44 @@
+---
+import Base from "~/layouts/Base.astro";
+import CaseStudyCard from "~/components/CaseStudyCard.astro";
+import { getCollection } from "astro:content";
+
+const all = (await getCollection("case-studies")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Base
+  title="Case studies"
+  description="Real results from real Amazon ads engagements: SURI, Brand Hatchers, SHO and more. See the numbers, the strategy shifts, and what changed in the account."
+>
+  <section class="section">
+    <div class="container-page">
+      <p class="eyebrow">Case studies</p>
+      <h1 class="mt-5 max-w-3xl text-balance">
+        Results are the sales pitch.
+      </h1>
+      <p class="lead mt-6">
+        A selection of recent engagements across personal care, multi-brand
+        portfolios and consumer goods. Every number below is from the
+        account&mdash;no composite or illustrative data.
+      </p>
+
+      <div class="mt-14 grid gap-6 md:gap-7 md:grid-cols-2 lg:grid-cols-3">
+        {
+          all.map((c) => (
+            <CaseStudyCard
+              href={`/case-studies/${c.id}`}
+              client={c.data.client}
+              tagline={c.data.tagline}
+              region={c.data.region}
+              category={c.data.category}
+              heroMetrics={c.data.heroMetrics}
+              cardImage={c.data.cardImage}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

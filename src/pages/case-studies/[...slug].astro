@@ -1,0 +1,151 @@
+---
+import Base from "~/layouts/Base.astro";
+import CTAButton from "~/components/CTAButton.astro";
+import AuditCTA from "~/components/AuditCTA.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const all = await getCollection("case-studies");
+  return all.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+---
+
+<Base title={data.title} description={data.summary}>
+  <article>
+    <header class="bg-champagne border-b border-putty">
+      <div class="container-page py-16 md:py-24">
+        <a
+          href="/case-studies"
+          class="inline-flex items-center gap-2 text-[0.9rem] text-moss hover:text-ink underline underline-offset-4 decoration-putty hover:decoration-ink"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M19 12H5M11 6l-6 6 6 6" />
+          </svg>
+          All case studies
+        </a>
+
+        <div class="mt-6 flex flex-wrap items-center gap-2 text-[0.72rem] tracking-[0.22em] uppercase text-moss">
+          {data.region && <span>{data.region}</span>}
+          {data.region && data.category && <span aria-hidden="true">&middot;</span>}
+          {data.category && <span>{data.category}</span>}
+        </div>
+
+        <h1 class="mt-5 max-w-4xl text-balance">{data.title}</h1>
+        <p class="lead mt-6">{data.summary}</p>
+
+        <dl class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-10 border-t border-putty">
+          {
+            data.heroMetrics.map((m) => (
+              <div>
+                <dt class="stat-figure text-gold text-4xl md:text-5xl">
+                  {m.value}
+                </dt>
+                <dd class="mt-2 text-moss text-[0.88rem] tracking-wide">
+                  {m.label}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </header>
+
+    <div class="section">
+      <div
+        class="container-page grid md:grid-cols-[minmax(0,1fr)_minmax(0,640px)_minmax(0,1fr)] md:gap-0"
+      >
+        <div class="hidden md:block" aria-hidden="true"></div>
+        <div class="maz-prose">
+          <Content />
+        </div>
+        <div class="hidden md:block" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <section class="border-t border-putty bg-champagne">
+      <div class="container-page py-14 md:py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <p class="eyebrow">Want similar results?</p>
+          <h2 class="mt-3 text-balance max-w-xl">
+            Let&rsquo;s see what&rsquo;s hiding in your account.
+          </h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <CTAButton href="/book-a-call" size="lg">Book a call</CTAButton>
+          <CTAButton href="/contact" variant="secondary" size="lg">
+            Contact us
+          </CTAButton>
+        </div>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style is:global>
+  .maz-prose {
+    color: var(--color-ink);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .maz-prose h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 1rem + 1.5vw, 2rem);
+    margin-top: 2.75rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .maz-prose h2:first-child { margin-top: 0; }
+  .maz-prose h3 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .maz-prose p { margin: 1rem 0; }
+  .maz-prose ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.25rem 0;
+  }
+  .maz-prose ul li {
+    position: relative;
+    padding-left: 1.4rem;
+    margin: 0.6rem 0;
+  }
+  .maz-prose ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.6rem;
+    height: 1px;
+    background: var(--color-gold);
+  }
+  .maz-prose strong {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .maz-prose em { font-style: italic; }
+  .maz-prose a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+    text-underline-offset: 3px;
+  }
+</style>

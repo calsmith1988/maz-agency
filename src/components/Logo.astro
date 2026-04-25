@@ -1,0 +1,37 @@
+---
+/**
+ * MAZ wordmark (placeholder).
+ * When a final SVG logo is supplied, drop it at public/brand/maz-logo.svg
+ * and swap this component for an <img> referencing it.
+ */
+interface Props {
+  variant?: "light" | "dark";
+  showTagline?: boolean;
+  class?: string;
+}
+
+const { variant = "dark", showTagline = false, class: className = "" } = Astro.props;
+
+const textColor = variant === "light" ? "text-ivory" : "text-ink";
+const taglineColor = variant === "light" ? "text-putty" : "text-moss";
+---
+
+<a
+  href="/"
+  aria-label="MAZ - Amazon Ads Agency - Home"
+  class={`inline-flex items-baseline gap-3 font-serif leading-none ${textColor} ${className}`}
+>
+  <span
+    class="text-[1.6rem] md:text-[1.8rem] tracking-[0.18em] font-medium"
+    style="font-feature-settings: 'ss01';"
+  >
+    MAZ
+  </span>
+  {
+    showTagline && (
+      <span class={`hidden md:inline font-sans text-[0.62rem] tracking-[0.28em] uppercase ${taglineColor}`}>
+        Amazon Ads Agency
+      </span>
+    )
+  }
+</a>

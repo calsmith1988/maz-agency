@@ -1,0 +1,50 @@
+---
+import Base from "~/layouts/Base.astro";
+import BookCall from "~/components/BookCall.astro";
+import { site } from "~/config/site";
+
+const expectations = [
+  "A 30-minute call, no deck, no slide-decks.",
+  "A quick look at your account live if you want to share screen.",
+  "Our honest read on the 2-3 highest-leverage things to fix first.",
+  "A written follow-up with those priorities so you've got it in writing.",
+];
+---
+
+<Base
+  title="Book a call"
+  description="Book a 30-minute Amazon ads strategy call with MAZ. No pitch deck - we'll look at your account live and tell you what we'd prioritise first."
+>
+  <section class="bg-champagne border-b border-putty">
+    <div class="container-page py-14 md:py-20 grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-14 items-end">
+      <div>
+        <p class="eyebrow">Book a call</p>
+        <h1 class="mt-4 text-balance">
+          Thirty minutes.
+          <span class="italic text-moss">No pitch deck.</span>
+        </h1>
+        <p class="lead mt-5">
+          We&rsquo;ll look at your account live and tell you what we&rsquo;d
+          prioritise first. You decide whether to take it further.
+        </p>
+      </div>
+      <ul class="space-y-3 md:pb-2">
+        {
+          expectations.map((e) => (
+            <li class="flex gap-3 text-[0.98rem] leading-relaxed">
+              <span aria-hidden="true" class="mt-[0.7em] w-3 h-px bg-gold flex-none" />
+              <span>{e}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <BookCall
+    inline={Boolean(site.calendlyUrl)}
+    eyebrow="Pick a time"
+    heading="Choose a slot that works for you."
+    body="The calendar below syncs directly with our Google Calendar. You&rsquo;ll get a Google Meet link the moment you confirm."
+  />
+</Base>

@@ -1,0 +1,6 @@
+# Drop VSL poster frame here:
+# poster.jpg  (recommended 1920x1080, 16:9)
+#
+# The video URL itself is set in .env via PUBLIC_VSL_URL or in
+# src/config/site.ts. The VSL component converts YouTube / Vimeo
+# watch URLs to embed URLs automatically.

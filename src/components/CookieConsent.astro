@@ -1,0 +1,199 @@
+<div
+  id="maz-cookie-consent"
+  hidden
+  class="fixed inset-x-4 bottom-4 z-50 mx-auto w-full max-w-5xl rounded-xl border border-putty bg-ivory p-5 shadow-[0_20px_60px_rgba(30,42,36,0.18)] md:p-6"
+>
+  <div class="flex flex-col gap-4">
+    <div>
+      <p class="eyebrow">Cookie settings</p>
+      <h2 class="mt-3 text-[1.4rem] md:text-[1.6rem] text-ink">
+        Choose how we use cookies.
+      </h2>
+      <p class="mt-3 text-[0.95rem] leading-relaxed text-moss">
+        We use strictly necessary cookies to keep the site working. With your
+        permission, we also use analytics and advertising cookies to measure
+        traffic, attribution and campaign performance.
+        <a
+          href="/cookies"
+          class="text-ink underline underline-offset-4 decoration-gold hover:decoration-ink"
+        >
+          Read the cookie notice
+        </a>.
+      </p>
+    </div>
+
+    <div id="maz-cookie-settings-panel" hidden class="rounded-lg border border-putty bg-champagne/50 p-4">
+      <div class="space-y-4">
+        <label class="flex items-start justify-between gap-4">
+          <div>
+            <span class="block font-medium text-ink">Strictly necessary</span>
+            <span class="mt-1 block text-[0.84rem] leading-relaxed text-moss">
+              Required for core site functionality and security. Always on.
+            </span>
+          </div>
+          <input type="checkbox" checked disabled class="mt-1 h-4 w-4 accent-ink" />
+        </label>
+
+        <label class="flex items-start justify-between gap-4">
+          <div>
+            <span class="block font-medium text-ink">Analytics</span>
+            <span class="mt-1 block text-[0.84rem] leading-relaxed text-moss">
+              Helps us understand visits, page performance and conversion paths.
+            </span>
+          </div>
+          <input id="maz-cookie-analytics" type="checkbox" class="mt-1 h-4 w-4 accent-ink" />
+        </label>
+
+        <label class="flex items-start justify-between gap-4">
+          <div>
+            <span class="block font-medium text-ink">Advertising</span>
+            <span class="mt-1 block text-[0.84rem] leading-relaxed text-moss">
+              Supports ad attribution, remarketing and audience building.
+            </span>
+          </div>
+          <input id="maz-cookie-advertising" type="checkbox" class="mt-1 h-4 w-4 accent-ink" />
+        </label>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <button
+        id="maz-cookie-accept-all"
+        type="button"
+        class="inline-flex items-center justify-center rounded-sm border border-ink bg-ink px-5 py-3 text-sm font-medium text-ivory transition-colors hover:bg-[#0f1714] hover:border-[#0f1714]"
+      >
+        Accept all
+      </button>
+      <button
+        id="maz-cookie-reject"
+        type="button"
+        class="inline-flex items-center justify-center rounded-sm border border-ink/25 bg-transparent px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-ink hover:bg-ink/[0.04]"
+      >
+        Reject non-essential
+      </button>
+      <button
+        id="maz-cookie-manage"
+        type="button"
+        class="inline-flex items-center justify-center rounded-sm border border-putty bg-transparent px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-ink/30 hover:bg-champagne"
+      >
+        Manage settings
+      </button>
+      <button
+        id="maz-cookie-save"
+        type="button"
+        hidden
+        class="inline-flex items-center justify-center rounded-sm border border-ink bg-ink px-5 py-3 text-sm font-medium text-ivory transition-colors hover:bg-[#0f1714] hover:border-[#0f1714]"
+      >
+        Save preferences
+      </button>
+      <button
+        id="maz-cookie-cancel"
+        type="button"
+        hidden
+        class="inline-flex items-center justify-center rounded-sm border border-putty bg-transparent px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-ink/30 hover:bg-champagne"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const banner = document.getElementById("maz-cookie-consent");
+    const panel = document.getElementById("maz-cookie-settings-panel");
+    const analyticsInput = document.getElementById("maz-cookie-analytics");
+    const advertisingInput = document.getElementById("maz-cookie-advertising");
+    const acceptAllButton = document.getElementById("maz-cookie-accept-all");
+    const rejectButton = document.getElementById("maz-cookie-reject");
+    const manageButton = document.getElementById("maz-cookie-manage");
+    const saveButton = document.getElementById("maz-cookie-save");
+    const cancelButton = document.getElementById("maz-cookie-cancel");
+    const settingsTriggers = document.querySelectorAll("[data-open-cookie-settings]");
+    const consentKey = window.mazConsentKey || "maz_cookie_consent_v1";
+
+    if (!banner || !panel || !analyticsInput || !advertisingInput) return;
+
+    let isManaging = false;
+
+    const hasSavedChoice = () => {
+      try {
+        return Boolean(window.localStorage.getItem(consentKey));
+      } catch {
+        return false;
+      }
+    };
+
+    const getConsent = () =>
+      window.mazGetConsent?.() || {
+        necessary: true,
+        analytics: false,
+        advertising: false,
+      };
+
+    const update = () => {
+      const consent = getConsent();
+      analyticsInput.checked = Boolean(consent.analytics);
+      advertisingInput.checked = Boolean(consent.advertising);
+
+      panel.hidden = !isManaging;
+      saveButton.hidden = !isManaging;
+      cancelButton.hidden = !isManaging;
+      manageButton.hidden = isManaging;
+
+      const shouldShowBanner = !hasSavedChoice() || isManaging;
+      banner.hidden = !shouldShowBanner;
+    };
+
+    const applyConsent = (consent) => {
+      window.mazSetConsent?.(consent);
+      isManaging = false;
+      update();
+    };
+
+    const openConsent = () => {
+      isManaging = true;
+      update();
+      manageButton?.focus();
+    };
+
+    acceptAllButton?.addEventListener("click", () => {
+      applyConsent({
+        necessary: true,
+        analytics: true,
+        advertising: true,
+      });
+    });
+
+    rejectButton?.addEventListener("click", () => {
+      applyConsent({
+        necessary: true,
+        analytics: false,
+        advertising: false,
+      });
+    });
+
+    manageButton?.addEventListener("click", openConsent);
+
+    saveButton?.addEventListener("click", () => {
+      applyConsent({
+        necessary: true,
+        analytics: analyticsInput.checked,
+        advertising: advertisingInput.checked,
+      });
+    });
+
+    cancelButton?.addEventListener("click", () => {
+      isManaging = !hasSavedChoice();
+      update();
+    });
+
+    settingsTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", openConsent);
+    });
+
+    window.mazOpenConsent = openConsent;
+    window.addEventListener("maz:consent-changed", update);
+    update();
+  })();
+</script>

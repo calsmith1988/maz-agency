@@ -1,0 +1,98 @@
+---
+import Base from "~/layouts/Base.astro";
+import Team from "~/components/Team.astro";
+import StatStrip from "~/components/StatStrip.astro";
+import { site } from "~/config/site";
+---
+
+<Base
+  title="About"
+  description="MAZ is an Amazon Ads agency for ambitious eCommerce brands, running daily in-account management since 2017. Meet the team and the philosophy."
+>
+  <section class="section">
+    <div class="container-page">
+      <p class="eyebrow">About {site.brand}</p>
+      <h1 class="mt-5 max-w-4xl text-balance">
+        A small, specialist team
+        <span class="italic text-moss">running Amazon ads since {site.foundedYear}.</span>
+      </h1>
+      <p class="lead mt-6">
+        We started {site.brand} because most brands we met had been through a
+        revolving door of freelancers and generalist agencies, and none of them
+        could explain what had actually been done to the account. We fixed
+        that for our own clients first. Now it&rsquo;s the product.
+      </p>
+
+      <div class="mt-16 grid md:grid-cols-2 gap-10 md:gap-14">
+        <div>
+          <h2 class="text-[1.6rem] md:text-[1.9rem]">What we believe</h2>
+          <ul class="mt-6 space-y-5 text-[1rem] leading-relaxed">
+            <li class="flex gap-4">
+              <span aria-hidden="true" class="mt-[0.75em] w-3 h-px bg-gold flex-none" />
+              <span>
+                <strong class="font-medium">Real analysts, not bidding bots.</strong>
+                &nbsp;Automation is a tool, not a strategy. Every campaign is
+                touched by a real human, every business day.
+              </span>
+            </li>
+            <li class="flex gap-4">
+              <span aria-hidden="true" class="mt-[0.75em] w-3 h-px bg-gold flex-none" />
+              <span>
+                <strong class="font-medium">Transparent reporting.</strong>
+                &nbsp;You&rsquo;ll know not just what we changed, but why we
+                changed it - documented in every update.
+              </span>
+            </li>
+            <li class="flex gap-4">
+              <span aria-hidden="true" class="mt-[0.75em] w-3 h-px bg-gold flex-none" />
+              <span>
+                <strong class="font-medium">Clean data over busy work.</strong>
+                &nbsp;Major strategy shifts are limited to one or two per
+                fortnight so results stay measurable.
+              </span>
+            </li>
+            <li class="flex gap-4">
+              <span aria-hidden="true" class="mt-[0.75em] w-3 h-px bg-gold flex-none" />
+              <span>
+                <strong class="font-medium">Realistic windows.</strong>
+                &nbsp;Performance is judged over 7-14 days to account for
+                Amazon&rsquo;s attribution lag - not over yesterday.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-[1.6rem] md:text-[1.9rem]">How we engage</h2>
+          <dl class="mt-6 space-y-5 text-[1rem] leading-relaxed">
+            <div>
+              <dt class="font-medium">Communication</dt>
+              <dd class="text-moss mt-1">
+                Slack, Teams or WhatsApp for quick questions (same-day Mon-Fri).
+                Email within one business day for approvals and longer topics.
+                Loom whenever a screen-share is clearer than words.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-medium">Reporting</dt>
+              <dd class="text-moss mt-1">
+                Monthly strategic update - deck plus Loom or a 30-60 minute
+                call. Mid-month pulse check between updates.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-medium">Contract</dt>
+              <dd class="text-moss mt-1">
+                Monthly rolling. 30 days&rsquo; notice to pause or stop. We earn
+                the next month, every month.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <StatStrip />
+  <Team />
+</Base>

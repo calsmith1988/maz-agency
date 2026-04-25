@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import CaseStudyCard from "./CaseStudyCard.astro";
+import CTAButton from "./CTAButton.astro";
+
+const all = await getCollection("case-studies");
+const featured = all
+  .filter((c) => c.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="section bg-ivory" id="case-studies">
+  <div class="container-page">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Past clients&rsquo; results</p>
+        <h2 class="mt-4 text-balance">
+          The only sales pitch we need.
+        </h2>
+      </div>
+      <CTAButton href="/case-studies" variant="ghost" size="md">
+        All case studies
+      </CTAButton>
+    </div>
+
+    <div class="mt-12 md:mt-14 grid gap-6 md:gap-7 md:grid-cols-3">
+      {
+        featured.map((c) => (
+          <CaseStudyCard
+            href={`/case-studies/${c.id}`}
+            client={c.data.client}
+            tagline={c.data.tagline}
+            region={c.data.region}
+            category={c.data.category}
+            heroMetrics={c.data.heroMetrics}
+            cardImage={c.data.cardImage}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

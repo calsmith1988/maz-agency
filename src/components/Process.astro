@@ -1,0 +1,60 @@
+---
+const phases = [
+  {
+    num: "01",
+    title: "Audit",
+    body:
+      "We audit everything - campaigns, keywords, ASINs, search terms, competitors - and map out a clear, prioritised action plan.",
+  },
+  {
+    num: "02",
+    title: "Quick wins & cut waste",
+    body:
+      "We tighten targeting, cut wasted spend, and push the obvious winners so you see movement fast.",
+  },
+  {
+    num: "03",
+    title: "Scale & optimise",
+    body:
+      "We refine structure, test new keywords and audiences, and push profitable areas while protecting organic rank.",
+  },
+  {
+    num: "04",
+    title: "Review & decide",
+    body:
+      "We share results, walk you through what we&rsquo;ve done, and outline the plan going forward.",
+  },
+];
+---
+
+<section class="section bg-ivory">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p class="eyebrow">How we work</p>
+      <h2 class="mt-4 text-balance">
+        A calm, repeatable process &mdash; not a guessing game.
+      </h2>
+      <p class="lead mt-5">
+        From first audit to steady-state scaling, every phase is documented,
+        explained, and measured against targets you sign off on up front.
+      </p>
+    </div>
+
+    <ol
+      class="mt-12 md:mt-16 grid gap-px bg-putty/80 border border-putty rounded-lg overflow-hidden md:grid-cols-2 lg:grid-cols-4"
+    >
+      {
+        phases.map((phase) => (
+          <li class="bg-ivory p-7 md:p-8 flex flex-col">
+            <div class="flex items-center gap-3">
+              <span class="stat-figure text-gold text-xl">{phase.num}</span>
+              <span class="h-px w-8 bg-putty" />
+            </div>
+            <h3 class="mt-5 font-serif text-[1.4rem]">{phase.title}</h3>
+            <p class="mt-3 text-moss text-[0.98rem] leading-relaxed" set:html={phase.body} />
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

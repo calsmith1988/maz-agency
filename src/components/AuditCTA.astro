@@ -1,0 +1,43 @@
+---
+import CTAButton from "./CTAButton.astro";
+import { site, withUtm } from "~/config/site";
+
+interface Props {
+  source?: string;
+  compact?: boolean;
+}
+
+const { source = "audit_cta_band", compact = false } = Astro.props;
+const auditUrl = withUtm(site.auditToolUrl, "maz_site", source, "free_audit");
+---
+
+<section class={`${compact ? "section-thin" : "section"} bg-ink text-ivory`}>
+  <div class="container-page">
+    <div class="grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16 items-center">
+      <div>
+        <p class="eyebrow text-putty">Don&rsquo;t want to hop on a call yet?</p>
+        <h2
+          class="mt-4 text-balance"
+          style="color: var(--color-ivory);"
+        >
+          Get a free instant audit of your Amazon ads account.
+        </h2>
+        <p class="mt-5 text-putty text-[1.02rem] leading-relaxed max-w-xl">
+          Upload a bulk sheet. Our audit tool returns a prioritised action plan
+          with AI-assisted commentary in minutes &mdash; no call, no pitch, no
+          obligation. If what you see is useful, book a discovery call to
+          action it.
+        </p>
+      </div>
+
+      <div class="flex flex-col items-start md:items-end gap-4">
+        <CTAButton href={auditUrl} variant="light" size="lg" external>
+          Run the free audit
+        </CTAButton>
+        <p class="text-[0.8rem] text-putty">
+          Opens the MAZ Audit Tool in a new tab
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

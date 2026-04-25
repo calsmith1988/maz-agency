@@ -1,0 +1,113 @@
+---
+interface Props {
+  href: string;
+  client: string;
+  tagline: string;
+  region?: string;
+  category?: string;
+  heroMetrics: { value: string; label: string }[];
+  cardImage?: string;
+}
+
+const { href, client, tagline, region, category, heroMetrics, cardImage } =
+  Astro.props;
+
+const imageClass =
+  cardImage?.includes("/sho.") ? "maz-case-img maz-case-img--sho" : "maz-case-img";
+---
+
+<a
+  href={href}
+  class="group relative flex flex-col bg-ivory border border-putty rounded-md overflow-hidden transition-all duration-200 hover:border-ink hover:-translate-y-0.5"
+>
+  <div class="maz-case-media relative aspect-[4/3] bg-champagne overflow-hidden">
+    {
+      cardImage && (
+        <img
+          src={cardImage}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class:list={[
+            imageClass,
+            "absolute inset-0 h-full w-full object-contain p-4 md:p-5 transition-[transform,filter] duration-500 group-hover:scale-[1.01]",
+          ]}
+          onerror="this.style.display='none'"
+        />
+      )
+    }
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-ink/35 via-ink/5 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-60"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="absolute inset-0 flex items-end p-5">
+      <div class="font-serif text-[2rem] md:text-[2.4rem] text-ivory tracking-tight drop-shadow-sm">
+        {client}
+      </div>
+    </div>
+  </div>
+
+  <div class="p-6 md:p-7 flex-1 flex flex-col">
+    <div class="flex flex-wrap items-center gap-2 text-[0.72rem] tracking-[0.18em] uppercase text-moss">
+      {region && <span>{region}</span>}
+      {region && category && <span aria-hidden="true">&middot;</span>}
+      {category && <span>{category}</span>}
+    </div>
+
+    <p class="mt-4 font-serif text-[1.2rem] md:text-[1.3rem] leading-snug text-ink">
+      {tagline}
+    </p>
+
+    <dl class="mt-6 grid grid-cols-3 gap-4 pt-5 border-t border-putty">
+      {
+        heroMetrics.map((m) => (
+          <div>
+            <dt class="stat-figure text-[1.3rem] md:text-[1.5rem] text-ink">
+              {m.value}
+            </dt>
+            <dd class="mt-1 text-[0.72rem] text-moss leading-tight">
+              {m.label}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <span class="mt-6 inline-flex items-center gap-2 text-[0.88rem] text-ink underline underline-offset-4 decoration-gold group-hover:decoration-ink">
+      Read case study
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      >
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
+    </span>
+  </div>
+</a>
+
+<style>
+  /*
+   * Case study media treatment:
+   * - grayscale(1) normalises a mixed set of colour / B&W source images
+   *   so the card grid reads as one cohesive set
+   * - contrast + brightness give a subtle editorial print feel
+   * - hover eases the greyscale off for a quiet colour reveal, which also
+   *   signals interactivity without a heavy frame
+   */
+  .maz-case-img {
+    filter: grayscale(1) contrast(1.02) brightness(0.95);
+  }
+  .maz-case-img--sho {
+    transform: scale(0.92);
+  }
+  .group:hover .maz-case-img {
+    filter: grayscale(0.15) contrast(1) brightness(1);
+  }
+</style>

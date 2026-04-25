@@ -1,0 +1,88 @@
+---
+import CTAButton from "./CTAButton.astro";
+
+const inclusions = [
+  "Full management of Sponsored Products, Sponsored Brands, Sponsored Display",
+  "Deep-dive audit of campaigns, search terms and competitors",
+  "Clear, prioritised action plan for quick wins and longer-term gains",
+  "Daily monitoring and optimisation of bids, budgets, search terms and placements",
+  "Bi-weekly KPI snapshot with a short Loom walkthrough",
+  "Monthly strategic update - deck + Loom, or 30-60 minute call",
+  "Unlimited SKUs inside the managed region",
+  "Slack, Teams or WhatsApp for day-to-day comms (same-day Mon-Fri)",
+];
+
+const terms = [
+  { k: "Contract", v: "Monthly rolling" },
+  { k: "Notice", v: "30 days to pause or stop" },
+  { k: "Onboarding", v: "Start within 1-2 weeks of sign-off" },
+];
+---
+
+<section class="section bg-champagne" id="pricing">
+  <div class="container-page">
+    <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20">
+      <div>
+        <p class="eyebrow">Investment</p>
+        <h2 class="mt-4 text-balance">
+          Transparent pricing. No percentage-of-spend games.
+        </h2>
+        <p class="lead mt-5">
+          A flat management fee per region you want us to run. Spend scales,
+          the fee doesn&rsquo;t &mdash; so there&rsquo;s never a conflict
+          between our incentives and yours.
+        </p>
+
+        <div class="mt-10 border-t border-putty pt-8">
+          <div class="flex items-baseline gap-2">
+            <span class="stat-figure text-ink text-5xl md:text-6xl">
+              &pound;750
+            </span>
+            <span class="text-moss text-[1rem]">/ month / region</span>
+          </div>
+          <p class="mt-3 text-moss text-[0.95rem]">
+            Per region managed - North America, United Kingdom, Europe, etc.
+            Unlimited SKUs included.
+          </p>
+        </div>
+
+        <dl class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-putty pt-8">
+          {
+            terms.map((t) => (
+              <div>
+                <dt class="text-[0.7rem] tracking-[0.22em] uppercase text-moss">
+                  {t.k}
+                </dt>
+                <dd class="mt-2 font-serif text-[1.05rem] text-ink">{t.v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <CTAButton href="/book-a-call" size="lg">Book a call</CTAButton>
+          <CTAButton href="/contact" variant="secondary" size="lg">
+            Ask a question
+          </CTAButton>
+        </div>
+      </div>
+
+      <div class="bg-ivory border border-putty rounded-lg p-8 md:p-10">
+        <p class="eyebrow">What&rsquo;s included</p>
+        <ul class="mt-6 space-y-4">
+          {
+            inclusions.map((line) => (
+              <li class="flex gap-4 items-start text-[0.98rem] leading-relaxed">
+                <span
+                  aria-hidden="true"
+                  class="mt-2 inline-block w-3 h-px bg-gold flex-none"
+                />
+                <span>{line}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

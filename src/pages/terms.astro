@@ -1,0 +1,168 @@
+---
+import Base from "~/layouts/Base.astro";
+import { site } from "~/config/site";
+
+const lastUpdated = "23 April 2026";
+---
+
+<Base
+  title="Terms"
+  description={`${site.legalName} website terms of use.`}
+>
+  <section class="section">
+    <div class="container-page max-w-3xl">
+      <p class="eyebrow">Legal</p>
+      <h1 class="mt-5">Website terms</h1>
+      <p class="mt-4 text-moss text-[0.9rem]">Last updated: {lastUpdated}</p>
+
+      <div class="maz-prose mt-10">
+        <p>
+          These terms govern your use of <a href={site.url}>{site.url}</a>. By
+          accessing or using this website, you agree to these terms. If you do
+          not agree, please do not use the site.
+        </p>
+
+        <h2>Who operates this site</h2>
+        <p>
+          This website is operated by {site.legalName}, trading as {site.brand},
+          company number {site.legal.companyNumber}, with registered office at
+          {site.legal.registeredAddress}. The site is aimed primarily at
+          business users looking for Amazon advertising support, audits, case
+          studies and related information.
+        </p>
+
+        <h2>Permitted use</h2>
+        <p>
+          You may browse the site and use it for legitimate informational and
+          business enquiry purposes only. You must not misuse the site, attempt
+          to gain unauthorised access to any systems, interfere with security
+          or availability, scrape the site unlawfully, or use the content in a
+          way that infringes our rights or the rights of others.
+        </p>
+
+        <h2>Informational only</h2>
+        <p>
+          The website is provided for general information and marketing
+          purposes. Nothing on the site constitutes legal, financial, tax,
+          investment or professional advice, and nothing on the site is a
+          binding offer to provide services.
+        </p>
+
+        <h2>No reliance and results disclaimer</h2>
+        <p>
+          We aim to keep content accurate and up to date, but we do not promise
+          that all information on the site is complete, current or free from
+          error. Case studies, testimonials, examples and performance figures
+          are included to illustrate past work only. They are not guarantees of
+          future performance, and outcomes will vary by category, product,
+          market conditions, budget, operations and many other factors outside
+          our control.
+        </p>
+
+        <h2>Bookings, audits and external tools</h2>
+        <p>
+          The site may link to or embed third-party tools and services,
+          including booking tools, analytics tools, advertising technologies
+          and other external services we use from time to time. Those third
+          parties operate under their own terms and privacy notices, and we are
+          not responsible for their content, availability or policies.
+        </p>
+
+        <h2>Service engagements</h2>
+        <p>
+          Any Amazon advertising services, audits, consulting, onboarding,
+          account access or deliverables that we provide are governed by a
+          separate signed proposal, statement of work, master services
+          agreement or other engagement contract between us and the relevant
+          client. These website terms do not replace or amend any such
+          agreement.
+        </p>
+
+        <h2>Intellectual property</h2>
+        <p>
+          Unless otherwise stated, all text, layout, branding, graphics,
+          documents and other content on this website are owned by or licensed
+          to {site.legalName} and are protected by intellectual property laws.
+          You may view the site for your own internal business use, but you
+          must not copy, republish, adapt, distribute or commercially exploit
+          site content without permission.
+        </p>
+        <p>
+          Client names, logos, trade marks and product marks remain the
+          property of their respective owners and are used for identification
+          and portfolio purposes only.
+        </p>
+
+        <h2>User submissions</h2>
+        <p>
+          If you send us information through a contact form, email, booking
+          form or similar enquiry flow, you confirm that the information is
+          accurate to the best of your knowledge and that you have the right to
+          share it.
+          Do not submit confidential or sensitive information unless and until
+          an appropriate business relationship and any necessary confidentiality
+          protections are in place.
+        </p>
+
+        <h2>Availability and security</h2>
+        <p>
+          We may change, suspend or withdraw any part of the website at any
+          time without notice. We do not guarantee that the site will always be
+          available, uninterrupted, secure or free from bugs or harmful code,
+          although we take reasonable steps to maintain it.
+        </p>
+
+        <h2>Liability</h2>
+        <p>
+          To the fullest extent permitted by law, {site.legalName} excludes all
+          implied warranties, representations and conditions in relation to the
+          website and its content. We are not liable for any indirect,
+          incidental, consequential, special or business losses arising from or
+          connected with your use of, or inability to use, the website.
+        </p>
+        <p>
+          Nothing in these terms excludes or limits liability that cannot
+          legally be excluded, including liability for fraud, fraudulent
+          misrepresentation, or death or personal injury caused by negligence.
+        </p>
+
+        <h2>Privacy and cookies</h2>
+        <p>
+          Your use of the site is also subject to our
+          <a href="/privacy"> privacy policy</a> and
+          <a href="/cookies"> cookie and tracking notice</a>.
+        </p>
+
+        <h2>Governing law</h2>
+        <p>
+          These terms and any dispute or claim arising from them or the use of
+          the website are governed by the laws of England and Wales, and the
+          courts of England and Wales will have exclusive jurisdiction, unless
+          applicable mandatory law in your jurisdiction provides otherwise.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about these terms can be sent to
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .maz-prose h2 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .maz-prose p { margin: 0.75rem 0; color: var(--color-ink); line-height: 1.7; }
+  .maz-prose a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+    text-underline-offset: 3px;
+  }
+</style>

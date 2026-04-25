@@ -1,0 +1,70 @@
+---
+import CTAButton from "./CTAButton.astro";
+import { site } from "~/config/site";
+---
+
+<section class="relative overflow-hidden">
+  <div class="container-page pt-14 md:pt-24 pb-16 md:pb-24">
+    <p class="eyebrow">Managing Amazon ads since {site.foundedYear}</p>
+
+    <h1
+      class="mt-6 md:mt-8 font-serif text-balance max-w-[18ch]"
+      style={`font-size: var(--text-display); font-weight: 400;`}
+    >
+      Profitable Amazon ads,
+      <span class="italic text-moss">managed daily</span>
+      since {site.foundedYear}.
+    </h1>
+
+    <p class="lead mt-7 md:mt-9">
+      We run your Amazon ads like it&rsquo;s our own P&amp;L &mdash; transparent
+      reporting, real analysts, and sustainable growth across every
+      marketplace. No &ldquo;set and forget&rdquo; automation.
+    </p>
+
+    <div class="mt-10 flex flex-wrap items-center gap-3">
+      <CTAButton href="/book-a-call" size="lg">Book a call</CTAButton>
+      <CTAButton href="/contact" variant="secondary" size="lg">
+        Contact us
+      </CTAButton>
+    </div>
+
+    <div class="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6 border-t border-putty pt-10">
+      <div>
+        <div class="stat-figure text-3xl md:text-4xl">
+          {site.stats.adSpendManagedGbp} / {site.stats.adSpendManagedUsd}
+        </div>
+        <div class="mt-2 text-[0.85rem] text-moss tracking-wide">
+          Ad spend managed
+        </div>
+      </div>
+      <div>
+        <div class="stat-figure text-3xl md:text-4xl">
+          {site.stats.yearsManaging}+ yrs
+        </div>
+        <div class="mt-2 text-[0.85rem] text-moss tracking-wide">
+          Running since {site.foundedYear}
+        </div>
+      </div>
+      <div>
+        <div class="stat-figure text-3xl md:text-4xl">6&#8239;+</div>
+        <div class="mt-2 text-[0.85rem] text-moss tracking-wide">
+          Global marketplaces
+        </div>
+      </div>
+      <div>
+        <div class="stat-figure text-3xl md:text-4xl">Daily</div>
+        <div class="mt-2 text-[0.85rem] text-moss tracking-wide">
+          In-account optimisation
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -z-10 top-0 right-0 h-[540px] w-[540px] rounded-full blur-3xl opacity-60"
+    style="background: radial-gradient(closest-side, #EDE6DA, transparent 70%);"
+  >
+  </div>
+</section>

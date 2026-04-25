@@ -1,0 +1,45 @@
+---
+import { site } from "~/config/site";
+import CTAButton from "./CTAButton.astro";
+
+const stats = [
+  { figure: `${site.stats.yearsManaging}+`, label: `Years managing ads since ${site.foundedYear}` },
+  { figure: `${site.stats.adSpendManagedGbp} / ${site.stats.adSpendManagedUsd}`, label: "Ad spend managed" },
+  { figure: "US / UK / EU", label: "Global marketplaces" },
+];
+---
+
+<section class="bg-ink text-ivory">
+  <div class="container-page py-16 md:py-24">
+    <div class="grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-16 items-end">
+      <div>
+        <p class="eyebrow text-putty">The track record</p>
+        <h2 class="mt-4 text-ivory max-w-xl" style="color: var(--color-ivory);">
+          Nine years. Eight-figure spend. Every category you can think of.
+        </h2>
+        <p class="mt-5 text-putty max-w-xl leading-relaxed text-[1.02rem]">
+          Beauty, supplements, electronics, outdoors, consumables &mdash;
+          across the US, Canada, UK, EU, India and Australia. One US
+          consumables brand scaled from $10k to $300k in monthly ad-driven
+          sales over two years at a 22.8% ACoS.
+        </p>
+        <div class="mt-8">
+          <CTAButton href="/case-studies" variant="light" size="md">
+            Explore case studies
+          </CTAButton>
+        </div>
+      </div>
+
+      <dl class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-8 md:gap-10 md:border-l md:border-moss/50 md:pl-10">
+        {
+          stats.map((s) => (
+            <div>
+              <dt class="stat-figure text-gold text-4xl md:text-5xl">{s.figure}</dt>
+              <dd class="mt-2 text-putty text-[0.9rem] tracking-wide">{s.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

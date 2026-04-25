@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@import "./tokens.css";
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.55;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 450;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    color: var(--color-ink);
+  }
+
+  h1 { font-size: var(--text-h1); }
+  h2 { font-size: var(--text-h2); }
+  h3 { font-size: var(--text-h3); font-weight: 500; }
+
+  p { color: var(--color-ink); }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ivory);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--color-putty);
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+    font-weight: 500;
+  }
+
+  .lead {
+    font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.35rem);
+    color: var(--color-moss);
+    line-height: 1.5;
+    max-width: 58ch;
+  }
+
+  .stat-figure {
+    font-family: var(--font-serif);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .section {
+    padding-block: var(--spacing-section);
+  }
+
+  .section-thin {
+    padding-block: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  }
+
+  .rule {
+    height: 1px;
+    background: var(--color-putty);
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

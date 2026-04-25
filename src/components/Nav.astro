@@ -1,0 +1,110 @@
+---
+import Logo from "./Logo.astro";
+import CTAButton from "./CTAButton.astro";
+
+const navLinks = [
+  { href: "/case-studies", label: "Case studies" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="sticky top-0 z-40 bg-ivory/85 backdrop-blur-md border-b border-putty/60"
+  data-nav
+>
+  <div class="container-page flex items-center justify-between h-16 md:h-[72px]">
+    <Logo showTagline />
+
+    <nav class="hidden md:flex items-center gap-8" aria-label="Primary">
+      {
+        navLinks.map((link) => {
+          const active =
+            currentPath === link.href ||
+            (link.href !== "/" && currentPath.startsWith(link.href));
+          return (
+            <a
+              href={link.href}
+              class:list={[
+                "text-[0.92rem] text-ink/80 hover:text-ink transition-colors",
+                active && "text-ink underline underline-offset-[6px] decoration-gold decoration-2",
+              ]}
+              aria-current={active ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <CTAButton href="/book-a-call" size="sm" class="hidden sm:inline-flex">
+        Book a call
+      </CTAButton>
+
+      <button
+        type="button"
+        class="md:hidden inline-flex items-center justify-center w-10 h-10 border border-putty rounded-sm text-ink"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-nav-toggle
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-putty/60 bg-ivory"
+    data-nav-menu
+  >
+    <nav class="container-page py-6 flex flex-col gap-1" aria-label="Mobile">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="py-3 text-[1.05rem] text-ink border-b border-putty/50 last:border-b-0"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <div class="pt-5">
+        <CTAButton href="/book-a-call" size="md" class="w-full">
+          Book a call
+        </CTAButton>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-nav-menu]");
+
+  toggle?.addEventListener("click", () => {
+    if (!menu) return;
+    const open = menu.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+</script>
