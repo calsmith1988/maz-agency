@@ -1,6 +1,7 @@
 ---
 import Base from "~/layouts/Base.astro";
 import CaseStudyCard from "~/components/CaseStudyCard.astro";
+import AuditCTA from "~/components/AuditCTA.astro";
 import { getCollection } from "astro:content";
 
 const all = (await getCollection("case-studies")).sort(
@@ -41,4 +42,5 @@ const all = (await getCollection("case-studies")).sort(
       </div>
     </div>
   </section>
+  <AuditCTA source="case_studies_assessment_band" />
 </Base>

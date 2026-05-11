@@ -1,7 +1,6 @@
 ---
 import Base from "~/layouts/Base.astro";
 import CTAButton from "~/components/CTAButton.astro";
-import AuditCTA from "~/components/AuditCTA.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -88,8 +87,8 @@ const { data } = entry;
         </div>
         <div class="flex flex-wrap gap-3">
           <CTAButton href="/book-a-call" size="lg">Book a call</CTAButton>
-          <CTAButton href="/contact" variant="secondary" size="lg">
-            Contact us
+          <CTAButton href="/assessment" variant="secondary" size="lg">
+            Free assessment
           </CTAButton>
         </div>
       </div>

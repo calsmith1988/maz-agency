@@ -1,0 +1,123 @@
+---
+import Base from "~/layouts/Base.astro";
+import CTAButton from "~/components/CTAButton.astro";
+import { site, withUtm } from "~/config/site";
+
+const assessmentUrl = withUtm(
+  site.auditToolUrl,
+  "maz_site",
+  "assessment_landing_primary",
+  "free_assessment",
+);
+
+const steps = [
+  {
+    num: "01",
+    title: "Export your bulk sheet",
+    body: "From Seller Central > Advertising > Bulk Operations. Last 30 days is plenty.",
+  },
+  {
+    num: "02",
+    title: "Upload it to the tool",
+    body: "The tool parses campaigns, ad groups, keywords and search-term performance in seconds.",
+  },
+  {
+    num: "03",
+    title: "Get a prioritised assessment",
+    body: "AI-assisted commentary on wasted spend, harvest opportunities, negative candidates and structural fixes - ranked by impact.",
+  },
+];
+
+const findings = [
+  "Search terms draining spend that should be negated or harvested",
+  "Keywords plateauing that need bid or match-type changes",
+  "ASINs eating budget without converting at target ACoS",
+  "Campaign structure holes where demand isn't being captured",
+  "Placement bid multipliers that are leaving efficiency on the table",
+  "Sponsored Brands / Display gaps worth testing next",
+];
+---
+
+<Base
+  title="Free instant Amazon ads assessment"
+  description="Upload a bulk sheet and get a prioritised AI-assisted assessment of your Amazon ads account in minutes. No call required, no pitch, no obligation."
+>
+  <section class="section">
+    <div class="container-page grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-16 items-start">
+      <div>
+        <p class="eyebrow">Free instant assessment</p>
+        <h1 class="mt-5 text-balance">
+          Upload a bulk sheet.
+          <span class="italic text-moss">Get an assessment in minutes.</span>
+        </h1>
+        <p class="lead mt-6">
+          No call required, no pitch, no obligation. Our assessment tool analyses
+          your bulk sheet and returns a prioritised action plan with
+          AI-assisted commentary &mdash; the same first-look we&rsquo;d do on
+          an intro call, but instant and on your own time.
+        </p>
+
+        <div class="mt-9 flex flex-wrap gap-3">
+          <CTAButton href={assessmentUrl} size="lg" external>
+            Run the free assessment
+          </CTAButton>
+          <CTAButton href="/book-a-call" variant="secondary" size="lg">
+            Prefer a call instead
+          </CTAButton>
+        </div>
+
+        <p class="mt-5 text-[0.85rem] text-moss">
+          The assessment tool runs at
+          <span class="text-ink">{new URL(site.auditToolUrl).host}</span>
+          and opens in a new tab.
+        </p>
+      </div>
+
+      <aside class="bg-champagne border border-putty rounded-lg p-8 md:p-9">
+        <p class="eyebrow">What you&rsquo;ll get back</p>
+        <ul class="mt-5 space-y-3">
+          {
+            findings.map((f) => (
+              <li class="flex gap-3 text-[0.95rem] leading-relaxed">
+                <span aria-hidden="true" class="mt-[0.7em] w-2.5 h-px bg-gold flex-none" />
+                <span>{f}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-thin bg-champagne border-y border-putty">
+    <div class="container-page">
+      <p class="eyebrow">How it works</p>
+      <h2 class="mt-4 max-w-3xl text-balance">Three steps. A few minutes.</h2>
+
+      <ol class="mt-10 grid gap-px bg-putty/80 border border-putty rounded-lg overflow-hidden md:grid-cols-3">
+        {
+          steps.map((step) => (
+            <li class="bg-ivory p-7 md:p-8">
+              <div class="flex items-center gap-3">
+                <span class="stat-figure text-gold text-xl">{step.num}</span>
+                <span class="h-px w-8 bg-putty" />
+              </div>
+              <h3 class="mt-5 font-serif text-[1.3rem]">{step.title}</h3>
+              <p class="mt-3 text-moss leading-relaxed text-[0.98rem]">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="mt-12 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+        <p class="text-moss max-w-xl">
+          The assessment is free. If the output is useful and you want us to
+          action it, the next step is a discovery call &mdash; no pressure.
+        </p>
+        <CTAButton href={assessmentUrl} size="lg" external>
+          Run the free assessment
+        </CTAButton>
+      </div>
+    </div>
+  </section>
+</Base>

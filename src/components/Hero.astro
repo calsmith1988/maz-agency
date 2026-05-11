@@ -1,6 +1,8 @@
 ---
 import CTAButton from "./CTAButton.astro";
-import { site } from "~/config/site";
+import { site, withUtm } from "~/config/site";
+
+const assessmentUrl = withUtm(site.auditToolUrl, "maz_site", "hero_cta", "free_assessment");
 ---
 
 <section class="relative overflow-hidden">
@@ -24,8 +26,8 @@ import { site } from "~/config/site";
 
     <div class="mt-10 flex flex-wrap items-center gap-3">
       <CTAButton href="/book-a-call" size="lg">Book a call</CTAButton>
-      <CTAButton href="/contact" variant="secondary" size="lg">
-        Contact us
+      <CTAButton href={assessmentUrl} variant="secondary" size="lg" external>
+        Get a free instant assessment
       </CTAButton>
     </div>
 

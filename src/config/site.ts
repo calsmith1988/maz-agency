@@ -30,7 +30,7 @@ export const site = {
 
   // Phase-2 audit tool (external). UTMs are auto-appended.
   auditToolUrl:
-    env.PUBLIC_AUDIT_TOOL_URL ?? "https://audit.maz.agency",
+    env.PUBLIC_AUDIT_TOOL_URL ?? "https://assessment.wearemaz.com",
 
   // VSL - paste a YouTube or Vimeo watch URL; component handles both.
   vslUrl: env.PUBLIC_VSL_URL ?? "https://www.youtube.com/watch?v=8l2GVedgpP0",

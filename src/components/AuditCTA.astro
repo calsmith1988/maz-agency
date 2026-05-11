@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { source = "audit_cta_band", compact = false } = Astro.props;
-const auditUrl = withUtm(site.auditToolUrl, "maz_site", source, "free_audit");
+const assessmentUrl = withUtm(site.auditToolUrl, "maz_site", source, "free_assessment");
 ---
 
 <section class={`${compact ? "section-thin" : "section"} bg-ink text-ivory`}>
@@ -20,10 +20,10 @@ const auditUrl = withUtm(site.auditToolUrl, "maz_site", source, "free_audit");
           class="mt-4 text-balance"
           style="color: var(--color-ivory);"
         >
-          Get a free instant audit of your Amazon ads account.
+          Get a free instant assessment of your Amazon ads account.
         </h2>
         <p class="mt-5 text-putty text-[1.02rem] leading-relaxed max-w-xl">
-          Upload a bulk sheet. Our audit tool returns a prioritised action plan
+          Upload a bulk sheet. Our assessment tool returns a prioritised action plan
           with AI-assisted commentary in minutes &mdash; no call, no pitch, no
           obligation. If what you see is useful, book a discovery call to
           action it.
@@ -31,11 +31,11 @@ const auditUrl = withUtm(site.auditToolUrl, "maz_site", source, "free_audit");
       </div>
 
       <div class="flex flex-col items-start md:items-end gap-4">
-        <CTAButton href={auditUrl} variant="light" size="lg" external>
-          Run the free audit
+        <CTAButton href={assessmentUrl} variant="light" size="lg" external>
+          Run the free assessment
         </CTAButton>
         <p class="text-[0.8rem] text-putty">
-          Opens the MAZ Audit Tool in a new tab
+          Opens the MAZ Assessment Tool in a new tab
         </p>
       </div>
     </div>
