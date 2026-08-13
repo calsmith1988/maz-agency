@@ -219,6 +219,36 @@ const questions = [
     body: "Pure Amazon management, close strategic collaboration, systems/data development \u2014 or some combination of all three?",
   },
 ];
+
+const callNotesBlocks = [
+  {
+    title: "What we heard",
+    items: [
+      "MerchantSpring and Teikametrics / Sellerboard are still live; the plan is to phase them out as the internal dashboard comes up. Teleport is used to pull historical data the APIs cannot.",
+      "Weekly rhythm today: start at marketplace revenue vs last week / last year, then parent / insect-type assortment.",
+      "The gap: one view that drills from top-line revenue and profit down to the important search terms \u2014 market volume, rank, CTR and CVR vs market, plus PPC (spend, presence, top of search).",
+      "Competitor intel (reviews, pricing, title and image changes) is useful; they are not sure they want to rebuild that in-house and may tap an existing tool instead.",
+      "Scope is broader than Amazon: TikTok Shop, a Shopify DTC move, physical retail, centralising customer service and reviews. Cross-channel (e.g. Meta / Google vs Amazon) is where AI could find correlations Amazon-only tools miss.",
+    ],
+  },
+  {
+    title: "How we could fit",
+    items: [
+      "Custom embed into Super Ninja, not a generic product for every MAZ client.",
+      "Rich can build on their stack (MCP / agents querying the database rather than drowning in raw tables). Abaxar is a possible layer, not a replacement for the in-house data layer.",
+      "Calum\u2019s PPC lens: Pareto on keywords so agents and dashboards don\u2019t get lost in thousands of search terms; start with an experimental period rather than boiling the ocean.",
+      "Middle ground: their tools and internal systems plus ours, aimed at making PPC decisions easier, not adding more clutter.",
+    ],
+  },
+  {
+    title: "Agreed next steps",
+    items: [
+      "Move from exploratory talk to a formal partnership proposal, because they are selecting partners on a timeline.",
+      "Calum and Rich send Rutmer a written proposal covering the AI + PPC integration by the end of this week (Friday 14 August).",
+      "Calum also sends a short written summary of the AI models / approaches discussed, same deadline.",
+    ],
+  },
+];
 ---
 
 <WorkingDoc
@@ -652,6 +682,60 @@ const questions = [
             work out what the right partnership could look like.
           </p>
         </div>
+      </div>
+    </section>
+
+    {/* 9. Post-call notes */}
+    <section id="notes" class="section scroll-mt-16 border-t border-putty/70">
+      <div class="container-page">
+        <div class="max-w-2xl" data-reveal>
+          <p class="eyebrow">13 August 2026 &middot; Calum, Rich, Rutmer</p>
+          <h2 class="mt-5 text-balance">Notes from today&rsquo;s call</h2>
+          <div class="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-moss">
+            <p>
+              We met to see whether bringing Rich into the Super Ninja
+              partnership makes sense.
+            </p>
+            <p>
+              Super Ninja is already building an in-house data layer &mdash;
+              someone is working on it three days a week, and sales and profit
+              are already flowing from SP-API into Neon. That database stays at
+              the centre.
+            </p>
+            <p class="text-ink">
+              The opportunity is to work together on PPC operations,
+              decision-making, and AI on top of that stack &mdash; not to
+              replace it with a generic agency tool.
+            </p>
+          </div>
+        </div>
+
+        <ul class="mt-12 grid gap-4 lg:grid-cols-3 lg:gap-5 items-stretch">
+          {
+            callNotesBlocks.map((block, i) => (
+              <li
+                class="flex flex-col rounded-lg border p-7 md:p-8 bg-ivory border-putty/80"
+                data-reveal
+                style={`--reveal-delay: ${i * 70}ms`}
+              >
+                <h3 class="font-serif text-[1.45rem] md:text-[1.55rem]">
+                  {block.title}
+                </h3>
+                <ul class="mt-6 space-y-3 flex-1">
+                  {block.items.map((item) => (
+                    <li class="flex gap-3 text-[0.97rem] leading-relaxed">
+                      <span
+                        aria-hidden="true"
+                        class="mt-[0.75em] w-3 h-px flex-none bg-putty"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </section>
   </main>
