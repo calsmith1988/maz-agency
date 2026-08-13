@@ -5,6 +5,9 @@
   "outputDirectory": "dist",
   "trailingSlash": false,
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/conversation", "destination": "/super-ninja-call", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.(svg|jpg|jpeg|png|webp|avif|ico|woff2)",
@@ -13,6 +16,12 @@
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
         }
+      ]
+    },
+    {
+      "source": "/super-ninja-call",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
       ]
     },
     {

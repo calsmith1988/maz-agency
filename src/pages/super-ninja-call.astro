@@ -1,0 +1,513 @@
+---
+import WorkingDoc from "~/layouts/WorkingDoc.astro";
+import ConversationNav from "~/components/conversation/ConversationNav.astro";
+
+const workAreas = [
+  {
+    title: "Amazon Ads",
+    subtitle: "Strategy + execution",
+    footer: "Led by our existing Amazon team",
+    featured: false,
+    items: [
+      "Amazon advertising management",
+      "Campaign strategy and optimisation",
+      "Placement, budget and bid management",
+      "Competitor, category and marketplace analysis",
+      "Day-to-day account execution",
+      "Strategic oversight",
+    ],
+  },
+  {
+    title: "Data + AI",
+    subtitle: "Systems + intelligence",
+    footer: "Rich + Calum",
+    featured: false,
+    items: [
+      "Connecting ecommerce data sources",
+      "APIs and platform integrations",
+      "Dashboards and internal tools",
+      "AI-assisted analysis",
+      "Workflow automation",
+      "Building systems around how the team actually works",
+    ],
+  },
+  {
+    title: "Embedded Collaboration",
+    subtitle: "The layer that connects everything",
+    footer: "",
+    featured: true,
+    items: [
+      "Work directly alongside the internal ecommerce team",
+      "Shared access to information",
+      "Regular working sessions",
+      "Build around existing processes",
+      "Reduce agency / internal-team disconnect",
+      "Ideas → build → test → learn → improve",
+    ],
+  },
+];
+
+const steps = [
+  {
+    title: "Understand",
+    body: "What exists today and what the team actually needs.",
+  },
+  {
+    title: "Connect",
+    body: "Bring the relevant platforms, data and people together.",
+  },
+  {
+    title: "Build",
+    body: "Create only what is genuinely useful.",
+  },
+  {
+    title: "Operate",
+    body: "Use those systems alongside the day-to-day Amazon work.",
+  },
+  {
+    title: "Improve",
+    body: "Continuously learn from the data and refine the process.",
+  },
+];
+
+const questions = [
+  {
+    num: "01",
+    title: "What does the ideal setup look like for you?",
+    body: "If everything was working exactly how you wanted 12 months from now, what would the team be able to see, understand or do?",
+  },
+  {
+    num: "02",
+    title: "What\u2019s already being built internally?",
+    body: "What systems, dashboards, people or projects already exist \u2014 and where are the gaps?",
+  },
+  {
+    num: "03",
+    title: "Where does the current agency relationship create friction?",
+    body: "If advertising performance is good, what is missing from the relationship that has prompted the search for a new partner?",
+  },
+  {
+    num: "04",
+    title: "Where would you want us to sit?",
+    body: "Pure Amazon management, close strategic collaboration, systems/data development \u2014 or some combination of all three?",
+  },
+];
+---
+
+<WorkingDoc
+  title="Super Ninja Call"
+  description="Notes for a conversation about working as an embedded ecommerce partner — Amazon expertise, data, systems and closer collaboration."
+>
+  <ConversationNav />
+
+  <main>
+    {/* 1. Hero */}
+    <section
+      id="overview"
+      class="scroll-mt-16 pt-12 pb-16 md:pt-16 md:pb-20 lg:pt-20 lg:pb-24"
+    >
+      <div class="container-page">
+        <p class="eyebrow">Following our conversation</p>
+        <h1 class="mt-5 max-w-4xl text-balance">
+          More than Amazon Ads management.
+        </h1>
+
+        <p class="mt-6 max-w-2xl text-[1.15rem] md:text-[1.28rem] leading-snug text-ink">
+          Our first conversation made it clear that a traditional Amazon ad
+          agency approach won&rsquo;t cut it.
+        </p>
+        <div class="mt-5 max-w-2xl space-y-4 text-[1.05rem] md:text-[1.12rem] leading-relaxed text-moss">
+          <p>
+            It feels like the goal is to bring Amazon advertising, ecommerce
+            data, internal tools and the people making decisions much closer
+            together.
+          </p>
+          <p>
+            Rather than operating at arm&rsquo;s length as a traditional agency,
+            we think there is an opportunity to work as an embedded partner.
+          </p>
+        </div>
+
+        <div class="mt-10 md:mt-12" data-reveal>
+          <div
+            class="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3 md:gap-0"
+          >
+            <div class="relation-node">Your Team</div>
+            <div class="relation-join" aria-hidden="true">
+              <span class="relation-line"></span>
+              <span class="relation-arrow">↔</span>
+              <span class="relation-line"></span>
+            </div>
+            <div class="relation-node">Amazon Expertise</div>
+            <div class="relation-join" aria-hidden="true">
+              <span class="relation-line"></span>
+              <span class="relation-arrow">↔</span>
+              <span class="relation-line"></span>
+            </div>
+            <div class="relation-node">Data + AI</div>
+          </div>
+          <p class="mt-6 text-center text-[0.92rem] text-moss max-w-xl mx-auto">
+            One shared way of working. Less disconnect. Better information.
+            Faster action.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* 2. Why Rich */}
+    <section id="team" class="section scroll-mt-16 border-t border-putty/70">
+      <div class="container-page">
+        <div class="grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-12 lg:gap-20">
+          <div data-reveal>
+            <h2 class="text-balance">Why I brought Rich in</h2>
+            <p class="mt-6 text-[1.05rem] leading-relaxed text-moss max-w-prose">
+              After our conversation, I spent some time thinking about how we
+              could structure this properly rather than simply offer more
+              meetings or more hours around a traditional agency model.
+            </p>
+            <p class="mt-4 text-[1.05rem] leading-relaxed max-w-prose">
+              Rich&rsquo;s skill set complements our Amazon experience
+              particularly well.
+            </p>
+          </div>
+
+          <aside
+            class="bg-champagne/70 border border-putty rounded-lg p-8 md:p-10"
+            data-reveal
+            style="--reveal-delay: 80ms"
+          >
+            <p class="eyebrow">Alongside the Amazon team</p>
+            <h3 class="mt-4 font-serif text-[1.55rem] md:text-[1.75rem]">
+              Rich &mdash; Ecommerce + Data / AI
+            </h3>
+            <p class="mt-5 text-[1.05rem] leading-relaxed">
+              <strong class="font-medium">10+ years around ecommerce</strong>,
+              including paid social, building and operating ecommerce brands,
+              and working directly with the challenges that come with growing
+              online businesses.
+            </p>
+            <p class="mt-4 text-[1.02rem] leading-relaxed text-moss">
+              Over the last year, he has focused heavily on building ecommerce
+              infrastructure that connects platforms, APIs, data sources and AI
+              into usable systems.
+            </p>
+            <p class="mt-6 pt-6 border-t border-putty text-[0.98rem] leading-relaxed text-moss">
+              I thought it made sense for the three of us to have an informal
+              conversation and understand what you&rsquo;re trying to build
+              before prescribing a solution.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    {/* 3. How we could work together */}
+    <section id="how-we-work" class="section scroll-mt-16 border-t border-putty/70">
+      <div class="container-page">
+        <div class="max-w-2xl" data-reveal>
+          <h2 class="text-balance">One team, three connected areas</h2>
+        </div>
+
+        <ul class="mt-12 grid gap-4 lg:grid-cols-3 lg:gap-5 items-stretch">
+          {
+            workAreas.map((area, i) => (
+              <li
+                class:list={[
+                  "flex flex-col rounded-lg border p-7 md:p-8",
+                  area.featured
+                    ? "bg-champagne border-putty ring-1 ring-gold/35 lg:-translate-y-1"
+                    : "bg-ivory border-putty/80",
+                ]}
+                data-reveal
+                style={`--reveal-delay: ${i * 70}ms`}
+              >
+                {area.featured && (
+                  <span class="mb-4 inline-block h-[3px] w-10 bg-gold rounded-full" />
+                )}
+                <h3 class="font-serif text-[1.45rem] md:text-[1.55rem]">
+                  {area.title}
+                </h3>
+                <p class="mt-1.5 text-[0.8rem] tracking-[0.14em] uppercase text-moss">
+                  {area.subtitle}
+                </p>
+                <ul class="mt-6 space-y-3 flex-1">
+                  {area.items.map((item) => (
+                    <li class="flex gap-3 text-[0.97rem] leading-relaxed">
+                      <span
+                        aria-hidden="true"
+                        class:list={[
+                          "mt-[0.75em] w-3 h-px flex-none",
+                          area.featured ? "bg-gold" : "bg-putty",
+                        ]}
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                {area.footer && (
+                  <p class="mt-7 pt-5 border-t border-putty/80 text-[0.78rem] tracking-[0.12em] uppercase text-moss">
+                    {area.footer}
+                  </p>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    {/* 4. The core idea */}
+    <section
+      id="shared-intelligence"
+      class="section scroll-mt-16 bg-champagne border-y border-putty/70"
+    >
+      <div class="container-page">
+        <div class="max-w-4xl mx-auto text-center" data-reveal>
+          <h2 class="text-balance text-[clamp(1.85rem,1.1rem+2.4vw,3.15rem)]">
+            Human expertise + connected data + AI
+            <span class="block mt-2 italic text-moss">= shared intelligence.</span>
+          </h2>
+          <p class="mt-8 text-[1.05rem] md:text-[1.12rem] leading-relaxed text-moss max-w-2xl mx-auto">
+            Traditional agency relationships can create a gap between the people
+            managing a channel, the information sitting inside the business, and
+            the people making commercial decisions.
+          </p>
+          <p class="mt-4 text-[1.08rem] leading-relaxed">
+            Our aim would be to close that gap.
+          </p>
+        </div>
+
+        <div class="mt-14 grid md:grid-cols-2 gap-4 md:gap-5">
+          <article
+            class="bg-ivory/80 border border-putty rounded-lg p-8 md:p-9"
+            data-reveal
+          >
+            <p class="eyebrow">Traditional agency model</p>
+            <p
+              class="mt-5 font-serif text-[1.2rem] md:text-[1.35rem] leading-snug text-balance"
+            >
+              Business → Agency → Report → Business
+            </p>
+            <p class="mt-5 text-[0.98rem] leading-relaxed text-moss">
+              Information travels backwards and forwards. Context gets lost. The
+              agency and internal team can end up working from different
+              pictures of the business.
+            </p>
+          </article>
+
+          <article
+            class="bg-ivory border border-putty rounded-lg p-8 md:p-9 ring-1 ring-gold/30"
+            data-reveal
+            style="--reveal-delay: 80ms"
+          >
+            <p class="eyebrow">Embedded model</p>
+            <p
+              class="mt-5 font-serif text-[1.2rem] md:text-[1.35rem] leading-snug text-balance"
+            >
+              Internal Team ↔ Us ↔ Systems + Data
+            </p>
+            <p class="mt-5 text-[0.98rem] leading-relaxed text-moss">
+              The people managing the channel work much closer to the people,
+              data and systems informing the wider ecommerce strategy.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    {/* 5. What this could look like */}
+    <section class="section scroll-mt-16">
+      <div class="container-page">
+        <div class="max-w-2xl" data-reveal>
+          <h2 class="text-balance">The solution should follow the requirement.</h2>
+          <div class="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-moss">
+            <p>
+              We&rsquo;re not coming into this conversation with a predetermined
+              technical solution.
+            </p>
+            <p>
+              Depending on what already exists internally, the right approach
+              could be anything from connecting existing tools and APIs through
+              to building a dedicated data layer, dashboards or custom AI
+              workflows.
+            </p>
+            <p class="text-ink">
+              The important part is understanding
+              <strong class="font-medium">
+                what you want the system to help the team do
+              </strong>
+              before deciding how it should be built.
+            </p>
+          </div>
+        </div>
+
+        <ol
+          class="mt-12 md:mt-16 grid gap-px bg-putty/80 border border-putty rounded-lg overflow-hidden md:grid-cols-5"
+        >
+          {
+            steps.map((step, i) => (
+              <li
+                class="bg-ivory p-6 md:p-7 flex flex-col"
+                data-reveal
+                style={`--reveal-delay: ${i * 60}ms`}
+              >
+                <div class="flex items-center gap-3">
+                  <span class="stat-figure text-gold text-lg">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span class="h-px flex-1 bg-putty" />
+                </div>
+                <h3 class="mt-5 font-serif text-[1.25rem]">{step.title}</h3>
+                <p class="mt-3 text-moss text-[0.92rem] leading-relaxed">
+                  {step.body}
+                </p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    {/* 6. Questions */}
+    <section id="questions" class="section scroll-mt-16 border-t border-putty/70">
+      <div class="container-page">
+        <div class="max-w-2xl" data-reveal>
+          <h2 class="text-balance">What we&rsquo;d like to understand today</h2>
+          <p class="mt-5 text-[1.05rem] leading-relaxed text-moss">
+            Rather than spend the call pitching a predetermined solution, these
+            are the things we&rsquo;d like to understand better.
+          </p>
+        </div>
+
+        <ol class="mt-12 grid gap-4 md:grid-cols-2">
+          {
+            questions.map((q, i) => (
+              <li
+                class="border border-putty/80 rounded-lg p-7 md:p-9 bg-ivory"
+                data-reveal
+                style={`--reveal-delay: ${i * 60}ms`}
+              >
+                <p class="stat-figure text-gold text-[1.35rem]">{q.num}</p>
+                <h3 class="mt-4 font-serif text-[1.35rem] md:text-[1.5rem] text-balance leading-snug">
+                  {q.title}
+                </h3>
+                <p class="mt-4 text-[1rem] leading-relaxed text-moss">
+                  {q.body}
+                </p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    {/* 7. Closing */}
+    <section class="section scroll-mt-16 bg-champagne border-t border-putty/70">
+      <div class="container-page">
+        <div class="max-w-3xl mx-auto text-center" data-reveal>
+          <h2 class="text-balance text-[clamp(1.85rem,1.1rem+2.4vw,3.15rem)]">
+            Build around the business,
+            <span class="italic text-moss"> not around the agency model.</span>
+          </h2>
+          <p class="mt-8 text-[1.05rem] md:text-[1.12rem] leading-relaxed text-moss">
+            If there&rsquo;s a fit, our goal would be to create a way of working
+            where Amazon management, ecommerce expertise, internal data and AI
+            systems reinforce each other rather than operate separately.
+          </p>
+          <p
+            class="mt-12 pt-8 border-t border-putty text-[0.92rem] tracking-wide text-moss"
+          >
+            Today&rsquo;s goal: understand the requirement, explore the fit, and
+            work out what the right partnership could look like.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</WorkingDoc>
+
+<style>
+  .relation-node {
+    flex: 0 1 auto;
+    min-width: 10.5rem;
+    text-align: center;
+    padding: 1rem 1.4rem;
+    border: 1px solid var(--color-putty);
+    border-radius: var(--radius-md);
+    background: #fff;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+
+  .relation-join {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    color: var(--color-moss);
+    min-width: 3.5rem;
+  }
+
+  .relation-line {
+    display: none;
+    height: 1px;
+    width: 1.75rem;
+    background: var(--color-putty);
+  }
+
+  .relation-arrow {
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .relation-join {
+      flex: 1 1 0;
+      max-width: 7rem;
+      min-width: 4.5rem;
+    }
+    .relation-line {
+      display: block;
+      width: auto;
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .relation-join {
+      min-height: 1.75rem;
+      transform: rotate(90deg);
+    }
+    .relation-node {
+      min-width: 0;
+      width: 100%;
+      max-width: 18rem;
+      margin-inline: auto;
+    }
+  }
+</style>
+
+<script>
+  const nodes = [...document.querySelectorAll<HTMLElement>("[data-reveal]")];
+  const show = (el: Element) => el.classList.add("is-visible");
+
+  if (!("IntersectionObserver" in window)) {
+    nodes.forEach(show);
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          show(entry.target);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    for (const node of nodes) observer.observe(node);
+  }
+
+  window.setTimeout(() => nodes.forEach(show), 1500);
+</script>

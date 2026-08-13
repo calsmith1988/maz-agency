@@ -1,0 +1,72 @@
+---
+/**
+ * Bare layout for private working documents.
+ * No marketing nav, footer, cookie banner or tracking.
+ */
+import "@fontsource-variable/fraunces/index.css";
+import "@fontsource-variable/inter/index.css";
+import "~/styles/global.css";
+import { site } from "~/config/site";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = `${title} · ${site.brand}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+
+    <meta name="theme-color" content="#F8F5EF" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script is:inline>
+      document.documentElement.classList.add("js-anim");
+    </script>
+  </head>
+
+  <body class="min-h-dvh bg-ivory text-ink">
+    <a
+      href="#overview"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:text-ivory focus:px-3 focus:py-2"
+    >
+      Skip to content
+    </a>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+
+  .js-anim [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s ease var(--reveal-delay, 0ms);
+  }
+
+  .js-anim [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>

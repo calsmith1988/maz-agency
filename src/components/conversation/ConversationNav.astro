@@ -1,0 +1,104 @@
+---
+const links = [
+  { href: "#overview", label: "Overview" },
+  { href: "#team", label: "Team" },
+  { href: "#how-we-work", label: "How we work" },
+  { href: "#shared-intelligence", label: "Shared intelligence" },
+  { href: "#questions", label: "Questions" },
+];
+---
+
+<header
+  class="sticky top-0 z-40 bg-ivory/90 backdrop-blur-md border-b border-putty/50"
+  data-doc-nav
+>
+  <div
+    class="container-page flex items-center justify-between gap-6 h-14 md:h-16"
+  >
+    <div class="flex items-baseline gap-3 min-w-0">
+      <span
+        class="font-serif text-[1.35rem] md:text-[1.45rem] tracking-[0.18em] font-medium leading-none"
+        style="font-feature-settings: 'ss01';"
+      >
+        MAZ
+      </span>
+      <span
+        class="hidden sm:inline font-sans text-[0.62rem] tracking-[0.22em] uppercase text-moss truncate"
+      >
+        Super Ninja Call
+      </span>
+    </div>
+
+    <nav
+      class="flex items-center gap-4 md:gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mr-1 pr-1"
+      aria-label="On this page"
+    >
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="doc-nav-link shrink-0 text-[0.78rem] md:text-[0.85rem] text-moss hover:text-ink transition-colors py-1"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .doc-nav-link.is-active {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-gold);
+  }
+</style>
+
+<script>
+  const nav = document.querySelector("[data-doc-nav]");
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>("[data-doc-nav] a[href^='#']"),
+  ];
+  const sections = links
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((section): section is HTMLElement => Boolean(section));
+
+  const setActive = (id: string) => {
+    for (const link of links) {
+      const active = link.hash === `#${id}`;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    }
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible?.target.id) setActive(visible.target.id);
+    },
+    {
+      rootMargin: "-18% 0px -68% 0px",
+      threshold: [0, 0.15, 0.4],
+    },
+  );
+
+  for (const section of sections) observer.observe(section);
+
+  if (sections[0]) setActive(sections[0].id);
+
+  nav?.querySelectorAll<HTMLAnchorElement>("a[href^='#']").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = document.querySelector<HTMLElement>(link.hash);
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", link.hash);
+    });
+  });
+</script>
