@@ -70,6 +70,133 @@ const steps = [
   },
 ];
 
+const dashboardOptions: {
+  num: string;
+  title: string;
+  shared: boolean;
+  wiring: string;
+  fields: { label: string; value: string; accent?: boolean }[];
+  fitsIf: string;
+}[] = [
+  {
+    num: "01",
+    title: "Stay SaaS",
+    shared: false,
+    wiring: "Your channels \u2192 MerchantSpring \u2192 their dashboard, their AI",
+    fields: [
+      { label: "Ingredients", value: "MerchantSpring (or similar)" },
+      { label: "Login and users", value: "their seats" },
+      { label: "How custom", value: "their reports, their roadmap" },
+      { label: "Running cost", value: "$319\u2013699/month", accent: true },
+      {
+        label: "Covers natively",
+        value: "Amazon, eBay, Shopify, market intelligence",
+      },
+      {
+        label: "Does not cover",
+        value: "Meta / Google / TikTok ads, email, GA4",
+      },
+    ],
+    fitsIf: "the current shape is basically fine and just needs tidying",
+  },
+  {
+    num: "02",
+    title: "Retool",
+    shared: false,
+    wiring:
+      "Your channels \u2192 pipes \u2192 your data store \u2192 Retool (custom screens in a rented shell)",
+    fields: [
+      {
+        label: "Ingredients",
+        value: "Retool on your own data store (Postgres or BigQuery)",
+      },
+      {
+        label: "Login and users",
+        value: "Retool handles it; your team adds and removes staff",
+      },
+      {
+        label: "How custom",
+        value:
+          "custom screens and logic from their components; a sharp internal tool, not a branded app",
+      },
+      {
+        label: "Running cost",
+        value: "~$10\u201312 per user per month",
+        accent: true,
+      },
+    ],
+    fitsIf: "fastest route to live with the least moving parts to look after",
+  },
+  {
+    num: "03",
+    title: "Bespoke",
+    shared: false,
+    wiring:
+      "Your channels \u2192 pipes \u2192 your data store \u2192 custom app on your own hosting",
+    fields: [
+      {
+        label: "Ingredients",
+        value:
+          "a custom-built dashboard app, accelerated by Abaxar (Rich\u2019s pre-built dashboard foundation: cross-channel reporting, profit and TACoS modelling, and an AI layer that answers questions from your own numbers). Login handled by a dedicated identity service (Clerk or Cloudflare Access), administered by your team.",
+      },
+      {
+        label: "Login and users",
+        value:
+          "rented from a security specialist; your team administers staff access",
+      },
+      {
+        label: "How custom",
+        value: "anything, your branding, owned outright",
+      },
+      {
+        label: "Running cost",
+        value: "\u00a30\u201325/month for login, plus small hosting",
+        accent: true,
+      },
+    ],
+    fitsIf: "it should feel like your own product, and owning it outright matters",
+  },
+  {
+    num: "Shared",
+    title: "The feeds",
+    shared: true,
+    wiring:
+      "Amazon \u00b7 eBay \u00b7 site \u00b7 TikTok \u00b7 ads \u00b7 email \u2192 pipes \u2192 your data store",
+    fields: [
+      {
+        label: "Piped (Windsor.ai)",
+        value:
+          "covers Amazon, your site, TikTok Shop and TikTok Ads, email, GA4. No API setup queues. ~$299/month.",
+      },
+      {
+        label: "Direct APIs",
+        value:
+          "no monthly fee; each connection set up once in your own accounts; deepest Amazon fee detail.",
+      },
+      {
+        label: "eBay",
+        value:
+          "not covered by Windsor; arrives via a custom connector or a MerchantSpring feed.",
+      },
+      {
+        label: "Market intelligence",
+        value: "keep SKU Hero / MerchantSpring as a feed if it earns its keep.",
+      },
+      {
+        label: "Mixable",
+        value: "decided channel by channel, changeable any time.",
+      },
+    ],
+    fitsIf: "",
+  },
+];
+
+const dashboardDeciders = [
+  "How custom does it need to feel?",
+  "Who should answer for login and hosting?",
+  "How big are eBay and TikTok Shop for you?",
+];
+
 const questions = [
   {
     num: "01",
@@ -368,7 +495,111 @@ const questions = [
       </div>
     </section>
 
-    {/* 6. Questions */}
+    {/* 6. Dashboard build options */}
+    <section id="dashboard" class="section scroll-mt-16 border-t border-putty/70">
+      <div class="container-page">
+        <div class="max-w-2xl" data-reveal>
+          <h2 class="text-balance">The dashboard: how it could be built</h2>
+          <div class="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-moss">
+            <p>
+              Whichever route we choose, the data lands in a store Super Ninja
+              owns. The options differ in how much of the app around it is
+              rented, and who answers for login and hosting.
+            </p>
+            <p>
+              Nothing here is decided. This is the menu for our call.
+            </p>
+          </div>
+        </div>
+
+        <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 items-stretch">
+          {
+            dashboardOptions.map((option, i) => (
+              <li
+                class:list={[
+                  "flex flex-col rounded-lg border p-6 md:p-7",
+                  option.shared
+                    ? "bg-champagne border-putty ring-1 ring-gold/35"
+                    : "bg-ivory border-putty/80",
+                ]}
+                data-reveal
+                style={`--reveal-delay: ${i * 60}ms`}
+              >
+                {option.shared && (
+                  <span class="mb-4 inline-block h-[3px] w-10 bg-gold rounded-full" />
+                )}
+                <p
+                  class:list={[
+                    option.shared
+                      ? "text-[0.78rem] tracking-[0.12em] uppercase text-moss"
+                      : "stat-figure text-gold text-[1.2rem]",
+                  ]}
+                >
+                  {option.num}
+                </p>
+                <h3 class="mt-3 font-serif text-[1.4rem] md:text-[1.5rem]">
+                  {option.title}
+                </h3>
+                {option.shared && (
+                  <p class="mt-1.5 text-[0.78rem] tracking-[0.12em] uppercase text-moss leading-snug">
+                    options 2 and 3 both drink from this
+                  </p>
+                )}
+                <p class="mt-5 font-serif text-[1.05rem] leading-snug text-balance">
+                  {option.wiring}
+                </p>
+                <dl class="mt-6 space-y-4 flex-1">
+                  {option.fields.map((field) => (
+                    <div>
+                      <dt class="text-[0.72rem] tracking-[0.14em] uppercase text-moss">
+                        {field.label}
+                      </dt>
+                      <dd
+                        class:list={[
+                          "mt-1 text-[0.95rem] leading-relaxed",
+                          field.accent ? "text-gold" : "",
+                        ]}
+                      >
+                        {field.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                {option.fitsIf && (
+                  <p class="mt-7 pt-5 border-t border-putty/80 text-[0.95rem] leading-relaxed text-moss">
+                    <span class="block text-[0.72rem] tracking-[0.14em] uppercase mb-1.5">
+                      Fits if
+                    </span>
+                    {option.fitsIf}
+                  </p>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+
+        <div
+          class="mt-5 border border-putty rounded-lg p-7 md:p-8 bg-champagne/70"
+          data-reveal
+        >
+          <p class="eyebrow">What decides it</p>
+          <ol class="mt-6 grid gap-6 md:grid-cols-3">
+            {
+              dashboardDeciders.map((item, i) => (
+                <li class="flex flex-col gap-2">
+                  <span class="stat-figure text-gold text-lg">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p class="text-[1.02rem] leading-snug">{item}</p>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    {/* 7. Questions */}
     <section id="questions" class="section scroll-mt-16 border-t border-putty/70">
       <div class="container-page">
         <div class="max-w-2xl" data-reveal>
@@ -401,7 +632,7 @@ const questions = [
       </div>
     </section>
 
-    {/* 7. Closing */}
+    {/* 8. Closing */}
     <section class="section scroll-mt-16 bg-champagne border-t border-putty/70">
       <div class="container-page">
         <div class="max-w-3xl mx-auto text-center" data-reveal>
