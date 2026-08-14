@@ -156,7 +156,7 @@ const success = [
     class="doc-nav sticky top-0 z-40 bg-ivory/90 backdrop-blur-md border-b border-putty/50"
     data-doc-nav
   >
-    <div class="wrap flex items-center justify-between gap-6 h-14 md:h-16">
+    <div class="wrap wrap-nav flex items-center justify-between gap-4 md:gap-6 h-14 md:h-16">
       <div class="flex items-baseline gap-3 min-w-0">
         <span
           class="font-serif text-[1.35rem] md:text-[1.45rem] tracking-[0.18em] font-medium leading-none"
@@ -226,12 +226,15 @@ const success = [
         <span class="ai-label">Chat with this proposal</span>
         <div class="ai-links">
           <a data-ai="chatgpt" href="https://chatgpt.com" target="_blank" rel="noopener">
+            <img src="/icons/openai-icon.webp" alt="" width="18" height="18" />
             ChatGPT <span aria-hidden="true">↗</span>
           </a>
           <a data-ai="claude" href="https://claude.ai" target="_blank" rel="noopener">
+            <img src="/icons/claude-ai-icon.webp" alt="" width="18" height="18" />
             Claude <span aria-hidden="true">↗</span>
           </a>
           <a data-ai="grok" href="https://grok.com" target="_blank" rel="noopener">
+            <img src="/icons/grok-ai-icon.webp" alt="" width="18" height="18" />
             Grok <span aria-hidden="true">↗</span>
           </a>
         </div>
@@ -557,7 +560,7 @@ const success = [
       <p class="eyebrow" data-reveal>Investment</p>
       <div class="invest mt-6" data-reveal style="--reveal-delay: 80ms">
         <p class="eyebrow invest-eyebrow">Embedded Amazon Partnership</p>
-        <p class="invest-price stat-figure">£4,250</p>
+        <p class="invest-price stat-figure">£5,250</p>
         <p class="invest-per">per month · rolling monthly · 30 days' notice</p>
 
         <h3 class="invest-h3">Full Amazon Ads management</h3>
@@ -621,7 +624,7 @@ const success = [
         <p class="doc-p principle-strong">
           <strong>
             Anything we build in this partnership is built into Super Ninja's
-            own systems and stays yours, whatever happens to the relationship.
+            own systems and stays yours, throughout and beyond our work together.
           </strong>
         </p>
       </div>
@@ -639,9 +642,13 @@ const success = [
 <style>
   .wrap {
     width: 100%;
-    max-width: 49.5rem;
+    max-width: 58rem;
     margin-inline: auto;
-    padding-inline: clamp(1.25rem, 4vw, 1.5rem);
+    padding-inline: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  .wrap-nav {
+    max-width: 72rem;
   }
 
   .doc-section {
@@ -1034,8 +1041,8 @@ const success = [
   .ai-links a {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.4rem 0.9rem;
+    gap: 0.45rem;
+    padding: 0.4rem 0.9rem 0.4rem 0.5rem;
     border: 1px solid var(--color-putty);
     border-radius: 999px;
     background: var(--color-ivory);
@@ -1047,6 +1054,14 @@ const success = [
       border-color 0.3s ease,
       background 0.3s ease,
       color 0.3s ease;
+  }
+
+  .ai-links a img {
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 0.28rem;
+    object-fit: cover;
+    flex: none;
   }
 
   .ai-links a span {
