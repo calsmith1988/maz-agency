@@ -8,7 +8,9 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => !page.includes("/super-ninja-call"),
+      filter: (page) =>
+        !page.includes("/super-ninja-call") &&
+        !page.includes("/super-ninja-proposal"),
     }),
   ],
   image: {

@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Super Ninja × MAZ — Change log</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,450;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F5EF; --panel:#F3EFE7; --ink:#1E2A24; --muted:#5E675F; --line:#D8D0C4; --card:#EDE6DA;
+    --accent:#B59A6A; --gold:#8F7443; --good:#2E7D4F; --bad:#A94438; --organic:#3E7D5A;
+    --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;display:flex;min-height:100vh}
+
+  /* sidebar */
+  aside{width:208px;flex:0 0 208px;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:26px 0 18px;position:sticky;top:0;height:100vh}
+  .wordmark{font-family:var(--serif);font-weight:500;font-size:24px;letter-spacing:.14em;color:var(--gold);padding:0 24px 26px}
+  nav{flex:1}
+  nav a{display:block;padding:10px 24px;color:var(--ink);text-decoration:none;font-size:14.5px;border-left:3px solid transparent}
+  nav a.on{background:rgba(181,154,106,.16);border-left-color:var(--gold);color:var(--gold);font-weight:500}
+  nav a.live{cursor:pointer}
+  nav a.live:hover{background:rgba(181,154,106,.10)}
+  nav a.soon{color:var(--muted);cursor:default;opacity:.75}
+  .account{margin:0 14px;padding:10px 10px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink)}
+  .account .av{width:28px;height:28px;border-radius:8px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px}
+  .account .caret{margin-left:auto;color:var(--muted);font-size:11px}
+
+  /* main */
+  .main{flex:1;min-width:0;padding:30px 44px 70px}
+  .inner{max-width:1080px}
+  .preview-strip{font-size:12px;color:var(--muted);border:1px solid var(--line);background:#fff;border-radius:99px;display:inline-flex;align-items:center;gap:8px;padding:5px 14px;margin-bottom:22px}
+  .preview-strip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .eyebrow{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:8px}
+  .titlebar{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:8px}
+  h1{font-family:var(--serif);font-weight:450;font-size:clamp(34px,4.5vw,46px);letter-spacing:-.02em;line-height:1.05}
+  h2{font-family:var(--serif);font-weight:450;font-size:24px;letter-spacing:-.015em;margin-bottom:4px}
+  .sub{color:var(--muted);margin:6px 0 26px;font-size:15px;max-width:72ch}
+
+  /* segmented control */
+  .seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .seg button{border:none;background:transparent;padding:9px 18px;font-family:var(--sans);font-size:13.5px;color:var(--muted);cursor:pointer;border-right:1px solid var(--line);white-space:nowrap}
+  .seg button:last-child{border-right:none}
+  .seg button.on{background:var(--card);color:var(--ink);font-weight:500}
+  .seg.small button{padding:6px 13px;font-size:12.5px}
+
+  /* hero card */
+  .hero{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 28px;display:grid;grid-template-columns:250px 1fr 1fr 1fr;gap:26px;margin-bottom:26px}
+  @media(max-width:1080px){.hero{grid-template-columns:1fr 1fr}}
+  @media(max-width:680px){.hero{grid-template-columns:1fr}}
+  .badge{display:inline-block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:6px;background:var(--card);color:var(--muted)}
+  .badge.gold{background:rgba(181,154,106,.30);color:var(--gold)}
+  .hero h2{font-size:24px;line-height:1.18;margin:10px 0 8px}
+  .hero .meta{color:var(--muted);font-size:13.5px;margin-bottom:12px}
+  .hero .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+  .chip.kept{color:var(--good);border-color:rgba(46,125,79,.4)}
+  .chip.reverted{color:var(--bad);border-color:rgba(169,68,56,.4)}
+  .chip.watching{color:var(--muted)}
+  .chip.holdout{color:var(--gold);border-color:var(--accent);background:rgba(181,154,106,.14)}
+  .chip.experiment{color:#F8F5EF;background:var(--ink);border-color:var(--ink)}
+  .chip.building{color:var(--gold);border-color:var(--accent);background:rgba(181,154,106,.14)}
+  .chip.holding{color:var(--good);border-color:rgba(46,125,79,.4);background:rgba(46,125,79,.08)}
+  .chip.slipping{color:var(--bad);border-color:rgba(169,68,56,.4);background:rgba(169,68,56,.07)}
+  .hero .note{font-size:14px;color:var(--ink);max-width:30ch}
+  .spark .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:2px}
+  .spark .name{font-size:13px;color:var(--ink);font-weight:600}
+  .spark .name span{color:var(--muted);font-weight:400}
+  .spark .stat{font-size:14px;font-weight:600;color:var(--gold);white-space:nowrap}
+  .spark .stat.bad{color:var(--bad)}
+  .spark .stat.flat{color:var(--muted);font-weight:500}
+  .spark svg{width:100%;height:auto;display:block}
+  .spark .axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:2px 2px 0}
+
+  /* table */
+  .tablecard{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px}
+  th{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:14px 20px;border-bottom:1px solid var(--line)}
+  td{padding:15px 20px;border-bottom:1px solid rgba(30,42,36,.07);vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tbody tr{cursor:pointer}
+  tbody tr:hover{background:rgba(181,154,106,.08)}
+  tbody tr.sel{background:rgba(181,154,106,.16)}
+  td.when{white-space:nowrap;color:var(--ink)}
+  td.result{white-space:nowrap;font-weight:500}
+  tbody tr.sel td.result{color:var(--gold);font-weight:600}
+
+  /* surfaces */
+  .surface{background:#fff;border:1px solid var(--line);border-radius:14px;margin:0 0 18px;overflow:hidden}
+  .surface .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 18px;background:var(--card);border-bottom:1px solid var(--line)}
+  .surface .bar .t{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+  .surface .bar .k{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);align-items:center}
+  .surface .bar .k span{display:inline-flex;align-items:center;gap:5px}
+  .cellsw{display:inline-block;width:13px;height:13px;border-radius:3px}
+
+  /* transfer chart */
+  .transfer-body{padding:16px 18px 8px}
+  .tcaption{font-size:13px;color:var(--muted);padding:2px 2px 12px;max-width:80ch}
+  .transfer-top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+  .tstats{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:8px 2px 4px}
+  .tstats b{color:var(--ink);font-weight:600}
+  .tread{font-size:14px;color:var(--ink);max-width:78ch;padding:6px 2px 12px}
+  .tlegend{display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:0 2px 8px}
+  .tlegend span{display:inline-flex;align-items:center;gap:7px}
+  .tlegend .dot{width:12px;height:12px;border-radius:50%;background:var(--gold)}
+
+  /* rank heatmap */
+  table.trk{border-collapse:collapse;font-size:12.5px;min-width:880px;width:100%}
+  .trk th{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:9px 6px;text-align:center;border-bottom:1px solid var(--line);background:#fff;white-space:nowrap}
+  .trk th.lead{text-align:left;padding-left:18px}
+  .trk td{padding:0;text-align:center;border-bottom:1px solid rgba(30,42,36,.06)}
+  .trk td.lead{text-align:left;padding:7px 8px 7px 18px;white-space:nowrap;font-weight:500;font-size:13px}
+  .trk td.cell{min-width:42px;height:36px;position:relative;font-variant-numeric:tabular-nums;font-weight:600;font-size:12px}
+  .trk td.cell .pip{position:absolute;top:-5px;right:-4px;width:16px;height:16px;border-radius:50%;background:var(--gold);color:#F8F5EF;font-size:9.5px;font-weight:600;line-height:16px;text-align:center;cursor:pointer;box-shadow:0 0 0 2px #fff;z-index:2}
+  .trk td.cell .pip:hover{transform:scale(1.25)}
+  .trk td.delta{padding:0 12px;white-space:nowrap}
+  .d{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;font-variant-numeric:tabular-nums}
+  .d.up{background:rgba(46,125,79,.13);color:var(--good)}
+  .d.down{background:rgba(169,68,56,.11);color:var(--bad)}
+  .d.flat{color:var(--muted)}
+  .r1{background:#3E7D5A;color:#F4F1E9}
+  .r2{background:#84AF8E;color:#1E2A24}
+  .r3{background:#E0D492;color:#1E2A24}
+  .r4{background:#DBA97C;color:#1E2A24}
+  .r5{background:#C68472;color:#F4F1E9}
+  .r0{background:#F4F1EA;color:#B4B9B2}
+  .footnote{font-size:12.5px;color:var(--muted);margin-top:14px;max-width:82ch}
+
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;letter-spacing:.04em}
+
+  @media(max-width:760px){
+    body{flex-direction:column}
+    aside{width:100%;flex:none;height:auto;position:static;flex-direction:row;align-items:center;padding:12px 16px;gap:4px;overflow-x:auto}
+    .wordmark{padding:0 14px 0 0;font-size:19px}
+    nav{display:flex;flex:1}
+    nav a{padding:8px 12px;border-left:none;border-bottom:2px solid transparent;white-space:nowrap}
+    nav a.on{border-left:none;border-bottom-color:var(--gold);background:none}
+    .account{display:none}
+    .main{padding:22px 18px 50px}
+  }
+</style>
+</head>
+<body>
+<aside>
+  <div class="wordmark">MAZ</div>
+  <nav>
+    <a class="soon">Overview</a>
+    <a class="soon">Search terms</a>
+    <a id="nav-log" class="live on" onclick="switchView('log')">Change log</a>
+    <a id="nav-rank" class="live" onclick="switchView('rank')">Rank</a>
+    <a class="soon">Listings</a>
+  </nav>
+  <div class="account"><span class="av">R</span> Super Ninja · UK <span class="caret">▾</span></div>
+</aside>
+
+<div class="main"><div class="inner">
+  <div class="preview-strip">Concept preview · illustrative data · the real version runs on Super Ninja's own database</div>
+
+  <!-- ============ CHANGE LOG VIEW ============ -->
+  <div id="view-log">
+    <div class="eyebrow">Amazon · UK · last 12 weeks</div>
+    <div class="titlebar">
+      <h1>Change log</h1>
+      <div class="seg" id="filters">
+        <button class="on" onclick="setFilter('all',this)">All types</button>
+        <button onclick="setFilter('bid',this)">Bid</button>
+        <button onclick="setFilter('price',this)">Price</button>
+        <button onclick="setFilter('listing',this)">Listing</button>
+      </div>
+    </div>
+    <p class="sub">Every bid, price and listing edit, with what happened either side. Positions are labelled organic or sponsored everywhere they appear.</p>
+
+    <div class="hero" id="hero"></div>
+
+    <div class="tablecard"><div class="scroll">
+      <table>
+        <thead><tr><th>When</th><th>Type</th><th>Change</th><th>Result</th></tr></thead>
+        <tbody id="log"></tbody>
+      </table>
+    </div></div>
+    <p class="footnote">Windows compare the fourteen days either side of a change, excluding flagged event weeks, and recompute when Amazon restates recent history. Search query data arrives weekly; ad-attributed sales keep maturing for days, so immature days are never compared. Small movements are reported as within noise, never as results.</p>
+  </div>
+
+  <!-- ============ RANK VIEW ============ -->
+  <div id="view-rank" style="display:none">
+    <div class="eyebrow">Amazon · UK · last 12 weeks</div>
+    <div class="titlebar"><h1>Rank</h1></div>
+    <p class="sub">Sponsored wins the slot. Organic keeps it. This page shows the handover, term by term.</p>
+
+    <div class="surface">
+      <div class="bar">
+        <div class="t">Paid → organic handover</div>
+        <div class="seg small" id="ttabs">
+          <button class="on" onclick="setTerm('wasp',this)">wasp trap</button>
+          <button onclick="setTerm('sticky',this)">sticky fly paper</button>
+          <button onclick="setTerm('antk',this)">ant killer</button>
+        </div>
+      </div>
+      <div class="transfer-body">
+        <p class="tcaption">In the live version every tracked term has this chart, with a search box where these tabs are. These three are chosen for the preview because they show the three phases the chart exists to catch: one term building, one holding, one slipping.</p>
+        <div class="transfer-top">
+          <div class="tlegend">
+            <span><i class="cellsw" style="background:rgba(62,125,90,.65)"></i>Organic share of clicks</span>
+            <span><i class="cellsw" style="background:rgba(181,154,106,.6)"></i>Paid share of clicks</span>
+            <span><i class="dot"></i>Recorded change</span>
+          </div>
+          <span class="chip" id="tphase"></span>
+        </div>
+        <div id="tchart"></div>
+        <div class="tstats" id="tstats"></div>
+        <div class="tread" id="tread"></div>
+      </div>
+    </div>
+
+    <div class="surface">
+      <div class="bar">
+        <div class="t" id="trktitle">Organic rank · weekly</div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <div class="seg small" id="trkmode">
+            <button class="on" onclick="setMode('org',this)">Organic</button>
+            <button onclick="setMode('paid',this)">Sponsored</button>
+          </div>
+          <div class="k" style="display:flex;gap:12px;font-size:11.5px;color:var(--muted);align-items:center">
+            <span><i class="cellsw r1"></i>1–3</span>
+            <span><i class="cellsw r2"></i>4–6</span>
+            <span><i class="cellsw r3"></i>7–10</span>
+            <span><i class="cellsw r4"></i>11–15</span>
+            <span><i class="cellsw r5"></i>16+</span>
+            <span><i class="cellsw r0"></i>no ads</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll"><table class="trk">
+        <thead id="trkhead"></thead>
+        <tbody id="trkbody"></tbody>
+      </table></div>
+    </div>
+    <p class="footnote">Positions, organic and sponsored, come from the rank tracker you already run, folded into the same database. Share and click data comes from your own Search Query Performance feed, which measures what every real customer saw and did rather than one synthetic search. The join between the two is what this page is: position is the proxy, measured share is the truth, and the handover chart needs both.</p>
+    <p class="footnote"><strong>How it is pieced together.</strong> Everything is reshaped onto one spine: keyword, marketplace, week. The tracker's daily positions average into a weekly rank; fast, but an estimate from one synthetic search a day. Search Query Performance arrives weekly with the query's total impressions, clicks and purchases and your share of each; slower, but measured from every real customer. The ads reports say which of those clicks were bought and at what cost. Organic clicks are the remainder, total clicks minus paid clicks: no Amazon report contains that number, it only exists once the feeds share a database. The phases (building, holding, slipping) are plain rules over those columns, not a model. Three tables, one join key, one subtraction, running inside your own system.</p>
+  </div>
+
+  <footer>
+    <div>Super Ninja × MAZ · proposal appendix</div>
+    <div>Concept preview · illustrative data</div>
+  </footer>
+</div></div>
+
+<script>
+/* deterministic wobble so the page renders identically every load */
+function lcg(seed){ let s=seed>>>0; return function(){ s=(s*1664525+1013904223)>>>0; return s/4294967296; }; }
+function series(pre, post, vol, seed, n){
+  const r=lcg(seed), out=[];
+  for(let i=0;i<n;i++){
+    const level = i < n/2 ? pre : post;
+    const ramp = (i>=n/2 && i<n/2+3) ? pre+(post-pre)*((i-n/2+1)/3) : level;
+    out.push(ramp*(1+(r()-.5)*vol));
+  }
+  return out;
+}
+
+const changes = [
+  {n:1, date:"4 Aug 2026", type:"listing", who:"Super Ninja", status:"watching", ev:"window",
+   title:"Title edit, Fruit Fly Trap", meta:"Super Ninja · 4 Aug 2026 · added ‘indoor’ + size terms",
+   result:"Organic rank 11 → 9",
+   note:"Ten days in. Early movement, not yet a verdict; the entry flips when the window completes.",
+   panels:[
+     {name:"Search", sub:"impressions/clicks", stat:"", pre:3200, post:3650, seed:11},
+     {name:"Sales", sub:"£", stat:"+7%", cls:"flat", pre:420, post:452, seed:12},
+     {name:"Rank", sub:"organic", stat:"11 → 9", pre:11, post:9, seed:13, rank:true}]},
+  {n:2, date:"28 Jul 2026", type:"bid", who:"Calum", status:"kept", ev:"window",
+   title:"Raised bid on ‘sticky fly paper’", meta:"Calum · 28 Jul 2026 · £0.42 → £0.54",
+   result:"Sales +18%",
+   note:"Winning the page-1 slot on a converting term. Sponsored took the slot at once; organic is following it up the page.",
+   panels:[
+     {name:"Search", sub:"impressions/clicks", stat:"", pre:2400, post:3900, seed:21},
+     {name:"Sales", sub:"£", stat:"+18%", pre:380, post:450, seed:22},
+     {name:"Rank", sub:"organic solid · sponsored dashed", stat:"#8 organic", rank2:{opre:16,opost:8,ppre:8,ppost:2}, seed:23}]},
+  {n:3, date:"21 Jul 2026", type:"price", who:"MAZ", status:"kept", ev:"window",
+   title:"Wasp lure £8.99 → £7.49", meta:"MAZ · 21 Jul 2026 · peak-season share grab",
+   result:"Organic rank 6 → 4",
+   note:"Season peak captured; margin tracked alongside so the trade is visible, not assumed.",
+   panels:[
+     {name:"Search", sub:"impressions/clicks", stat:"", pre:5200, post:5900, seed:31},
+     {name:"Sales", sub:"£", stat:"+12%", pre:620, post:695, seed:32},
+     {name:"Rank", sub:"organic", stat:"6 → 4", pre:6, post:4, seed:33, rank:true}]},
+  {n:4, date:"14 Jul 2026", type:"bid", who:"Calum", status:"kept", ev:"window",
+   title:"Lowered bid on ‘ant bait’", meta:"Calum · 14 Jul 2026 · £0.31 → £0.28",
+   result:"Spend −12%",
+   note:"Same sales, less spend, organic rank held. The quiet wins get recorded too.",
+   panels:[
+     {name:"Spend", sub:"£/day", stat:"−12%", pre:210, post:185, seed:41},
+     {name:"Sales", sub:"£", stat:"within noise", cls:"flat", pre:300, post:298, seed:42},
+     {name:"Rank", sub:"organic", stat:"held", cls:"flat", pre:9, post:9, seed:43, rank:true}]},
+  {n:5, date:"7 Jul 2026", type:"listing", who:"Super Ninja", status:"kept", ev:"window",
+   title:"Bullet 3 rewrite, Fly Zapper", meta:"Super Ninja · 7 Jul 2026 · benefit-led copy",
+   result:"CTR +0.4pt",
+   note:"Small change, measured anyway. A log only works if everything goes in it.",
+   panels:[
+     {name:"Search", sub:"CTR", stat:"+0.4pt", pre:1900, post:2100, seed:51},
+     {name:"Sales", sub:"£", stat:"+6%", cls:"flat", pre:240, post:255, seed:52},
+     {name:"Rank", sub:"organic", stat:"13 → 12", cls:"flat", pre:13, post:12, seed:53, rank:true}]},
+  {n:6, date:"29 Jun 2026", type:"bid", who:"MAZ", status:"kept", ev:"holdout",
+   title:"Raised bids on ‘wasp trap’ terms", meta:"MAZ · 29 Jun 2026 · UK raised, DE held as control",
+   result:"Share +2.4pt vs control",
+   note:"UK share +2.4pt while the DE control moved +0.3pt over the same weeks. Sponsored jumped to #1 immediately; organic followed three weeks later. The handover chart on the Rank page tells this term's full story.",
+   panels:[
+     {name:"Search", sub:"impressions/clicks", stat:"", pre:4100, post:5200, seed:61},
+     {name:"Sales", sub:"£", stat:"+14%", pre:510, post:585, seed:62},
+     {name:"Rank", sub:"organic solid · sponsored dashed", stat:"8 → 5 organic", rank2:{opre:8,opost:5,ppre:5,ppost:1}, seed:63}]},
+  {n:7, date:"22 Jun 2026", type:"price", who:"Super Ninja", status:"reverted", ev:"window",
+   title:"Fruit Fly Trap £6.99 → £5.99", meta:"Super Ninja · 22 Jun 2026 · reverted 6 Jul",
+   result:"Margin −14% · reverted",
+   note:"Units up, profit down. Reverted with the numbers to prove it either way: a price test with a measured ending.",
+   panels:[
+     {name:"Units", sub:"per day", stat:"+9%", pre:58, post:63, seed:71},
+     {name:"Margin", sub:"£/unit", stat:"−14%", cls:"bad", pre:2.4, post:2.05, seed:72},
+     {name:"Rank", sub:"organic", stat:"held", cls:"flat", pre:12, post:12, seed:73, rank:true}]},
+  {n:8, date:"15 Jun 2026", type:"bid", who:"MAZ", status:"reverted", ev:"window",
+   title:"Brand-defence budgets +30%", meta:"MAZ · 15 Jun 2026 · trimmed back 29 Jun",
+   result:"No movement · reverted",
+   note:"Spend rose, nothing moved. Caught in two weeks and trimmed back: spend rising with no rank or share movement is the most expensive pattern to leave running.",
+   panels:[
+     {name:"Spend", sub:"£/day", stat:"+29%", cls:"bad", pre:260, post:335, seed:81},
+     {name:"Sales", sub:"£", stat:"within noise", cls:"flat", pre:520, post:528, seed:82},
+     {name:"Rank", sub:"organic", stat:"held", cls:"flat", pre:5, post:5, seed:83, rank:true}]},
+  {n:9, date:"8 Jun 2026", type:"listing", who:"Super Ninja", status:"kept", ev:"experiment",
+   title:"Main image test, Moth Trap", meta:"Super Ninja · 8 Jun 2026 · run as an Amazon experiment",
+   result:"CTR +21% · experiment",
+   note:"Randomised split on live traffic, so the significance comes from the experiment itself. The view files Amazon's result against the change.",
+   panels:[
+     {name:"Search", sub:"CTR", stat:"+21%", pre:1700, post:2100, seed:91},
+     {name:"Sales", sub:"£", stat:"+11%", pre:180, post:202, seed:92},
+     {name:"Rank", sub:"organic", stat:"9 → 7", pre:9, post:7, seed:93, rank:true}]}
+];
+
+const weeksShort = ["18/5","25/5","1/6","8/6","15/6","22/6","29/6","6/7","13/7","20/7","27/7","3/8"];
+const terms = [
+  {label:"fly trap indoor", org:[9,9,8,8,8,7,7,7,6,6,6,5], paid:[5,5,4,5,4,4,4,3,3,3,3,3], pips:{}},
+  {label:"fruit fly trap", org:[15,14,14,13,12,12,13,12,11,11,11,9], paid:[6,5,5,4,3,3,3,2,2,2,2,1], pips:{5:7,11:1}},
+  {label:"sticky fly paper", org:[14,14,13,13,12,12,11,11,10,10,8,8], paid:[8,8,7,7,7,6,6,6,5,5,2,2], pips:{10:2}},
+  {label:"wasp trap", org:[11,11,10,10,9,9,8,6,5,5,4,4], paid:[6,6,5,5,4,4,1,1,1,2,2,3], pips:{6:6}},
+  {label:"wasp lure", org:[8,8,7,7,7,6,6,6,6,4,4,4], paid:[4,4,4,3,3,3,3,3,2,2,2,2], pips:{9:3}},
+  {label:"ant bait", org:[7,7,7,6,7,6,6,6,5,5,5,5], paid:[3,3,3,3,3,3,3,4,4,4,4,4], pips:{8:4}},
+  {label:"ant killer", org:[9,9,10,10,11,11,12,13,13,14,15,16], paid:[3,3,4,4,6,0,0,0,0,0,0,0], pips:{}},
+  {label:"moth trap", org:[12,12,11,9,8,8,8,7,7,7,6,6], paid:[5,5,5,4,4,4,4,4,4,3,3,3], pips:{3:9}}
+];
+
+const transfer = {
+  wasp:{
+    org:[4,4,5,5,5,6,7,9,12,14,15,16], paid:[2,2,3,3,4,5,9,11,10,9,8,7],
+    pips:{6:6}, phase:"holding", phaseLabel:"Holding",
+    stats:"<span>Total share <b>6% → 23%</b></span><span>Organic now <b>70% of clicks won</b></span><span>Paid share <b>falling since mid-July</b></span>",
+    read:"The bid raise in June bought the slot; organic followed three weeks later and now holds it. Paid share is tapering while total share still climbs: the handover working as designed, and the moment to throttle further is visible rather than guessed."},
+  sticky:{
+    org:[2,2,2,3,3,3,4,4,5,6,7,8], paid:[1,1,2,2,3,3,4,5,6,8,10,10],
+    pips:{10:2}, phase:"building", phaseLabel:"Building",
+    stats:"<span>Total share <b>3% → 18%</b></span><span>Paid still <b>56% of clicks won</b></span><span>Watch <b>the organic curve, next 3 weeks</b></span>",
+    read:"Paid is still carrying most of the ground here. Organic is following about three weeks behind, the same lag the wasp-trap term showed before its handover. If the organic curve keeps climbing, bids start coming down in September."},
+  antk:{
+    org:[11,11,11,10,10,10,9,8,7,7,6,6], paid:[5,5,4,4,3,0,0,0,0,0,0,0],
+    pips:{}, phase:"slipping", phaseLabel:"Slipping",
+    stats:"<span>Total share <b>16% → 6%</b></span><span>Paid share <b>zero since June</b></span><span>Organic <b>−5pt since support stopped</b></span>",
+    read:"Paid support came off this term in June and organic has drifted down every week since: ground the ads were defending, being given back. The log makes the cost of stopping visible, not just the cost of spending."}
+};
+
+const statusLabel = {kept:"Kept", reverted:"Reverted", watching:"Watching"};
+const evLabel = {window:"Window", holdout:"Holdout", experiment:"Amazon test"};
+const typeLabel = {bid:"Bid", price:"Price", listing:"Listing"};
+let currentFilter="all", currentSel=2, currentMode="org", currentTerm="wasp";
+
+/* ---------- sparklines ---------- */
+function sparkSVG(p){
+  const n=28, W=230, H=104, T=16, B=6, L=(p.rank||p.rank2)?26:6, R=6;
+  const iw=W-L-R, ih=H-T-B;
+  const x=i=>L+i*(iw/(n-1));
+  let g="";
+  const mx=x(n/2-0.5);
+  if(p.rank||p.rank2){
+    const lo=1, hi=32;
+    const y=v=>T+((Math.max(lo,Math.min(hi,v))-lo)/(hi-lo))*ih;
+    [1,8,16,24,32].forEach(v=>{ g+=`<text x="${L-7}" y="${y(v)+3.5}" text-anchor="end" font-size="9.5" fill="#5E675F">${v}</text>`; });
+    g+=`<line x1="${mx}" y1="${T-2}" x2="${mx}" y2="${H-B}" stroke="#B59A6A" stroke-width="1.4"/>`;
+    g+=`<text x="${mx}" y="${T-6}" text-anchor="middle" font-size="9.5" fill="#8F7443">change</text>`;
+    if(p.rank2){
+      const d1=series(p.rank2.opre,p.rank2.opost,0,p.seed,n);
+      const d2=series(p.rank2.ppre,p.rank2.ppost,0,p.seed+1,n);
+      g+=`<path d="${d2.map((v,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ")}" fill="none" stroke="#B59A6A" stroke-width="1.7" stroke-dasharray="5 4"/>`;
+      g+=`<path d="${d1.map((v,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ")}" fill="none" stroke="#1E2A24" stroke-width="1.7"/>`;
+    } else {
+      const d=series(p.pre,p.post,0,p.seed,n);
+      g+=`<path d="${d.map((v,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ")}" fill="none" stroke="#1E2A24" stroke-width="1.7"/>`;
+    }
+  } else {
+    const data=series(p.pre,p.post,0.10,p.seed,n);
+    const lo=Math.min(...data)*0.94, hi=Math.max(...data)*1.06;
+    const y=v=>T+ih-((v-lo)/(hi-lo))*ih;
+    g+=`<line x1="${mx}" y1="${T-2}" x2="${mx}" y2="${H-B}" stroke="#B59A6A" stroke-width="1.4"/>`;
+    g+=`<text x="${mx}" y="${T-6}" text-anchor="middle" font-size="9.5" fill="#8F7443">change</text>`;
+    g+=`<path d="${data.map((v,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ")}" fill="none" stroke="#1E2A24" stroke-width="1.7" stroke-linejoin="round"/>`;
+  }
+  return `<svg viewBox="0 0 ${W} ${H+8}" aria-hidden="true"><rect x="0" y="${T-12}" width="${W}" height="${H-T+14}" fill="rgba(30,42,36,.025)" rx="6"/>${g}</svg>`;
+}
+
+/* ---------- hero ---------- */
+function buildHero(c){
+  document.getElementById("hero").innerHTML =
+    `<div>`+
+    `<span class="badge ${c.type==="bid"?"gold":""}">${typeLabel[c.type]}</span>`+
+    `<h2>${c.title}</h2>`+
+    `<div class="meta">${c.meta}</div>`+
+    `<div class="chips"><span class="chip ${c.status}">${statusLabel[c.status]}</span><span class="chip ${c.ev==="window"?"":c.ev}">${evLabel[c.ev]}</span></div>`+
+    `<div class="note">${c.note}</div>`+
+    `</div>`+
+    c.panels.map(p=>
+      `<div class="spark">`+
+      `<div class="head"><div class="name">${p.name} <span>— ${p.sub}</span></div>`+
+      (p.stat?`<div class="stat ${p.cls||""}">${p.stat}</div>`:"")+
+      `</div>`+
+      sparkSVG(p)+
+      `<div class="axis"><span>14d before</span><span>14d after</span></div>`+
+      `</div>`).join("");
+}
+
+/* ---------- table ---------- */
+function buildTable(){
+  const rows = changes.filter(c=>currentFilter==="all"||c.type===currentFilter);
+  document.getElementById("log").innerHTML = rows.map(c=>
+    `<tr id="row${c.n}" class="${c.n===currentSel?"sel":""}" onclick="select(${c.n})">`+
+    `<td class="when">${c.date.replace(" 2026","")}</td>`+
+    `<td><span class="badge ${c.n===currentSel?"gold":""}">${typeLabel[c.type]}</span></td>`+
+    `<td>${c.title}</td>`+
+    `<td class="result">${c.result}</td></tr>`
+  ).join("");
+}
+
+/* ---------- handover chart ---------- */
+function buildTransfer(){
+  const t = transfer[currentTerm];
+  const W=860,H=300,L=44,R=14,T=18,B=64;
+  const iw=W-L-R, ih=H-T-B, n=12;
+  const x=i=>L+i*(iw/(n-1));
+  const yMax=30;
+  const y=v=>T+ih-(Math.min(v,yMax)/yMax)*ih;
+  let g="";
+  [0,10,20,30].forEach(v=>{
+    g+=`<line x1="${L}" y1="${y(v)}" x2="${W-R}" y2="${y(v)}" stroke="rgba(30,42,36,.10)" stroke-width="1"/>`;
+    g+=`<text x="${L-9}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#5E675F">${v}%</text>`;
+  });
+  weeksShort.forEach((w,i)=>{ if(i%2===0) g+=`<text x="${x(i)}" y="${H-B+20}" text-anchor="middle" font-size="11" fill="#5E675F">${w}</text>`; });
+  const orgTop = t.org.map((v,i)=>[x(i),y(v)]);
+  const totTop = t.org.map((v,i)=>[x(i),y(v+t.paid[i])]);
+  const base = y(0);
+  const orgArea = "M"+orgTop.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L")+` L${x(n-1)},${base} L${x(0)},${base} Z`;
+  const paidArea = "M"+totTop.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L")+" L"+orgTop.slice().reverse().map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L")+" Z";
+  g+=`<path d="${orgArea}" fill="rgba(62,125,90,.55)"/>`;
+  g+=`<path d="${paidArea}" fill="rgba(181,154,106,.5)"/>`;
+  g+=`<path d="M${orgTop.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L")}" fill="none" stroke="#3E7D5A" stroke-width="2"/>`;
+  g+=`<path d="M${totTop.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L")}" fill="none" stroke="#8F7443" stroke-width="2"/>`;
+  const my=H-B+42;
+  Object.keys(t.pips).forEach(wk=>{
+    const nCh=t.pips[wk], xi=x(+wk);
+    g+=`<g class="marker" onclick="openChange(${nCh})" style="cursor:pointer">`+
+       `<line x1="${xi}" y1="${T}" x2="${xi}" y2="${my-11}" stroke="rgba(181,154,106,.45)" stroke-width="1"/>`+
+       `<circle cx="${xi}" cy="${my}" r="9" fill="#8F7443"/>`+
+       `<text x="${xi}" y="${my+3.5}" text-anchor="middle" font-size="10.5" font-weight="600" fill="#F8F5EF" pointer-events="none">${nCh}</text></g>`;
+  });
+  document.getElementById("tchart").innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Organic and paid share of clicks per week with recorded changes marked">${g}</svg>`;
+  const chip=document.getElementById("tphase");
+  chip.className="chip "+t.phase;
+  chip.textContent=t.phaseLabel;
+  document.getElementById("tstats").innerHTML=t.stats;
+  document.getElementById("tread").textContent=t.read;
+}
+
+/* ---------- rank heatmap ---------- */
+function band(r){ return r===0?"r0":r<=3?"r1":r<=6?"r2":r<=10?"r3":r<=15?"r4":"r5"; }
+function buildTracker(){
+  document.getElementById("trktitle").textContent = currentMode==="org" ? "Organic rank · weekly" : "Sponsored position · weekly";
+  document.getElementById("trkhead").innerHTML =
+    "<tr><th class=\"lead\">Search term</th>"+
+    weeksShort.map(w=>`<th>${w}</th>`).join("")+
+    "<th>&Delta; 12w</th></tr>";
+  document.getElementById("trkbody").innerHTML = terms.map(t=>{
+    const ranks = currentMode==="org" ? t.org : t.paid;
+    const first=ranks[0], last=ranks[ranks.length-1];
+    let dHtml;
+    if(first===0||last===0){ dHtml=`<span class="d flat">·</span>`; }
+    else{
+      const diff=first-last;
+      const dCls=diff>0?"up":(diff<0?"down":"flat");
+      dHtml=`<span class="d ${dCls}">${diff>0?"+"+diff:diff<0?diff:"0"}</span>`;
+    }
+    return "<tr><td class=\"lead\">"+t.label+"</td>"+
+      ranks.map((r,i)=>{
+        const pip = t.pips[i]!==undefined ? `<span class="pip" onclick="openChange(${t.pips[i]})" title="Open change ${t.pips[i]}">${t.pips[i]}</span>` : "";
+        return `<td class="cell ${band(r)}">${r===0?"·":r}${pip}</td>`;
+      }).join("")+
+      `<td class="delta">${dHtml}</td></tr>`;
+  }).join("");
+}
+
+/* ---------- interactions ---------- */
+function select(n){
+  currentSel=n;
+  buildHero(changes.find(c=>c.n===n));
+  buildTable();
+}
+function openChange(n){
+  switchView("log");
+  select(n);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function setFilter(f, btn){
+  currentFilter=f;
+  document.querySelectorAll("#filters button").forEach(b=>b.classList.toggle("on", b===btn));
+  const visible = changes.filter(c=>f==="all"||c.type===f);
+  if(!visible.some(c=>c.n===currentSel) && visible.length) currentSel=visible[0].n;
+  buildHero(changes.find(c=>c.n===currentSel));
+  buildTable();
+}
+function setMode(m, btn){
+  currentMode=m;
+  document.querySelectorAll("#trkmode button").forEach(b=>b.classList.toggle("on", b===btn));
+  buildTracker();
+}
+function setTerm(t, btn){
+  currentTerm=t;
+  document.querySelectorAll("#ttabs button").forEach(b=>b.classList.toggle("on", b===btn));
+  buildTransfer();
+}
+function switchView(v){
+  document.getElementById("view-log").style.display = v==="log"?"":"none";
+  document.getElementById("view-rank").style.display = v==="rank"?"":"none";
+  document.getElementById("nav-log").classList.toggle("on", v==="log");
+  document.getElementById("nav-rank").classList.toggle("on", v==="rank");
+}
+
+buildTracker();
+buildTransfer();
+select(2);
+</script>
+</body>
+</html>

@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /super-ninja-call
 
 Sitemap: https://maz.agency/sitemap-index.xml

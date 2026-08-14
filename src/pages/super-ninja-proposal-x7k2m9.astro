@@ -1,0 +1,1213 @@
+---
+import WorkingDoc from "~/layouts/WorkingDoc.astro";
+
+const navLinks = [
+  { href: "#overview", label: "Overview" },
+  { href: "#opportunity", label: "Opportunity" },
+  { href: "#approach", label: "Approach" },
+  { href: "#team", label: "Team" },
+  { href: "#investment", label: "Investment" },
+  { href: "#principle", label: "Principle" },
+];
+
+const heard = [
+  "Bring key Amazon data into your own system",
+  "Keep the high-level view simple",
+  "Drill down when something needs attention",
+  "Focus on the search terms that matter most",
+  "Compare performance against the wider market",
+  "Understand where PPC spend should increase or decrease",
+  "Track important competitor and listing changes",
+  "Reduce the need to jump between different tools",
+];
+
+const amazonFirst = [
+  "Take over the Amazon Ads accounts",
+  "Complete a full account audit",
+  "Review campaigns, search terms, targets and competitors",
+  "Understand the strategy and goals for each key product",
+  "Find areas where performance can improve",
+  "Reduce wasted spend",
+  "Increase investment where there is room to grow",
+  "Manage bids, budgets and placements",
+  "Build and adjust campaigns where needed",
+  "Monitor the search terms that matter most",
+];
+
+const learnFirst = [
+  "Which KPIs matter most",
+  "Which search terms need the closest attention",
+  "What should appear in the main view",
+  "What should sit one level deeper",
+  "Which market benchmarks are useful",
+  "Which Amazon reports need to feed the system",
+  "Which tools are still adding value",
+  "Where the current workflow creates extra work",
+  "What information would help us make faster PPC decisions",
+];
+
+const superNinjaBrings = [
+  "Deep product knowledge",
+  "Commercial context",
+  "Existing data",
+  "Internal systems",
+  "The new database",
+  "Existing tools and workflows",
+];
+
+const mazBrings = [
+  "Amazon Ads expertise",
+  "Daily PPC management",
+  "Experience across many Amazon accounts",
+  "Amazon reporting knowledge",
+  "Existing PPC processes",
+  "Internal tools",
+  "Amazon API experience",
+  "Data and AI experience",
+  "The ability to test and adapt quickly",
+];
+
+const direction = [
+  "An Amazon Ads audit tool",
+  "Amazon Advertising API integrations",
+  "Amazon Selling Partner API work",
+  "An AI agent that can pull Amazon Ads reports and investigate account data",
+  "New ways to analyse and summarise account performance",
+];
+
+const aiHelps = [
+  "Pull information together faster",
+  "Summarise large reports",
+  "Find patterns",
+  "Flag unusual changes",
+  "Investigate performance",
+  "Compare different datasets",
+  "Reduce repetitive analysis",
+];
+
+const closerWorking = [
+  "Direct communication",
+  "Regular working sessions",
+  "Fast feedback",
+  "Shared context",
+  "Clear reasons behind changes",
+  "Close work with the internal data team where needed",
+  "Fewer handovers between different people and systems",
+];
+
+const team = [
+  {
+    role: "Founder & Amazon Strategist",
+    name: "Calum",
+    bio: "Leads Amazon strategy, account direction and the wider partnership.",
+  },
+  {
+    role: "Amazon Ads Manager",
+    name: "Genny",
+    bio: "Handles the day-to-day management and optimisation of the Amazon Ads accounts.",
+  },
+  {
+    role: "Operations",
+    name: "Eir",
+    bio: "Supports the team with reporting and data preparation.",
+  },
+  {
+    role: "Data, AI & Systems",
+    name: "Rich",
+    bio: "Leads the data and AI build layer within the team. His focus is turning ecommerce data into useful systems, from APIs and dashboards through to internal tools, automation and AI. For Super Ninja, this gives the wider team the ability to move from an Amazon or PPC requirement to a working technical solution much faster.",
+  },
+];
+
+const investCore = [
+  "Account takeover and full audit",
+  "Daily optimisation and campaign management",
+  "Search term, bid, budget and placement management",
+  "Strategic oversight, reporting and analysis",
+  "Direct communication with the team",
+];
+
+const investEmbedded = [
+  "Closer strategic access to Calum",
+  "Technical and ecommerce support from Rich",
+  "Collaboration with Super Ninja's internal data team",
+  "Amazon reporting and API guidance",
+  "Input into PPC dashboard requirements",
+  "Integration with existing tools and processes",
+  "Rapid testing and prototyping where useful",
+  "Ongoing development of data, AI and automation workflows",
+];
+
+const success = [
+  "Clear focus on the Amazon areas that matter most",
+  "Better visibility of performance",
+  "Less time moving between tools",
+  "PPC needs feeding into the internal data project",
+  "Better use of Super Ninja's own data",
+  "Faster answers, faster decisions, faster action",
+  "Strong communication between both teams",
+];
+---
+
+<WorkingDoc
+  title="Super Ninja Proposal"
+  description="Embedded Amazon Partnership — Amazon Ads management, with closer collaboration across data, tools and systems."
+>
+  <header
+    class="doc-nav sticky top-0 z-40 bg-ivory/90 backdrop-blur-md border-b border-putty/50"
+    data-doc-nav
+  >
+    <div class="wrap flex items-center justify-between gap-6 h-14 md:h-16">
+      <div class="flex items-baseline gap-3 min-w-0">
+        <span
+          class="font-serif text-[1.35rem] md:text-[1.45rem] tracking-[0.18em] font-medium leading-none"
+        >
+          MAZ
+        </span>
+        <span
+          class="hidden sm:inline font-sans text-[0.62rem] tracking-[0.22em] uppercase text-moss truncate"
+        >
+          Proposal · August 2026
+        </span>
+      </div>
+
+      <nav
+        class="flex items-center gap-4 md:gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mr-1 pr-1"
+        aria-label="On this page"
+      >
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="doc-nav-link shrink-0 text-[0.78rem] md:text-[0.85rem] text-moss hover:text-ink transition-colors py-1"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <button class="pdf-btn shrink-0" type="button" data-print>
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M8 2v8m0 0 3-3m-3 3L5 7" />
+          <path d="M2.5 11.5v1a1.5 1.5 0 0 0 1.5 1.5h8a1.5 1.5 0 0 0 1.5-1.5v-1" />
+        </svg>
+        <span class="hidden md:inline">Download&nbsp;PDF</span>
+        <span class="md:hidden">PDF</span>
+      </button>
+    </div>
+    <span class="progress" aria-hidden="true">
+      <span class="progress-fill" data-progress></span>
+    </span>
+  </header>
+
+  <main class="pb-8">
+    {/* Hero */}
+    <section id="overview" class="wrap scroll-mt-16 pt-14 md:pt-20 pb-4">
+      <div data-reveal>
+        <p class="eyebrow">Super Ninja × MAZ</p>
+        <h1 class="mt-4 text-balance">Embedded Amazon Partnership</h1>
+        <p class="mt-5 text-[1.1rem] md:text-[1.18rem] leading-relaxed text-moss max-w-[52ch]">
+          Amazon Ads management, with closer collaboration across data, tools
+          and systems.
+        </p>
+      </div>
+
+      <div class="ai-row" data-reveal style="--reveal-delay: 140ms">
+        <span class="ai-label">Chat with this proposal</span>
+        <div class="ai-links">
+          <a data-ai="chatgpt" href="https://chatgpt.com" target="_blank" rel="noopener">
+            ChatGPT <span aria-hidden="true">↗</span>
+          </a>
+          <a data-ai="claude" href="https://claude.ai" target="_blank" rel="noopener">
+            Claude <span aria-hidden="true">↗</span>
+          </a>
+          <a data-ai="grok" href="https://grok.com" target="_blank" rel="noopener">
+            Grok <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <span class="ai-hint">Opens with the proposal loaded, ready for questions.</span>
+      </div>
+    </section>
+
+    {/* The opportunity */}
+    <section id="opportunity" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">The opportunity</p>
+        <p class="doc-p mt-5">
+          Our first conversation started with Amazon Ads. But it became clear
+          that you are looking for more than a standard agency relationship.
+          You want the people managing Amazon to work closely with your team,
+          your data and the systems you are building.
+        </p>
+        <p class="doc-p">We think there is a strong fit. Our goal is simple:</p>
+      </div>
+      <p class="statement" data-reveal style="--reveal-delay: 90ms">
+        Manage Amazon well today, while helping create a better way to manage
+        it tomorrow.
+      </p>
+    </section>
+
+    {/* What we heard */}
+    <section id="heard" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">What we heard</p>
+        <p class="doc-p mt-5">Super Ninja already has a clear direction. You want to:</p>
+      </div>
+      <ul class="doc-list" data-reveal style="--reveal-delay: 70ms">
+        {heard.map((item) => <li>{item}</li>)}
+      </ul>
+      <div data-reveal>
+        <p class="doc-p">
+          Your internal database is an important part of that plan. We are not
+          proposing to replace it. We are also not proposing another platform
+          that Super Ninja needs to adopt.
+        </p>
+        <p class="doc-p">
+          Instead, we want to work with the systems you are building and help
+          make them useful for the day-to-day management of Amazon.
+        </p>
+      </div>
+    </section>
+
+    {/* Amazon comes first */}
+    <section id="amazon-first" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">Amazon comes first</p>
+        <p class="doc-p mt-5">
+          The first job is still Amazon Ads management. We already have the
+          team, processes and tools in place to take this on. From the start,
+          we will:
+        </p>
+      </div>
+      <ul class="doc-list" data-reveal style="--reveal-delay: 70ms">
+        {amazonFirst.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="doc-p" data-reveal>
+        We will start with what already exists. That may include Super Ninja's
+        own systems, MerchantSpring, SKUhero and the tools we use internally at
+        MAZ. There is no need to rebuild the way Amazon is managed before we
+        start managing it.
+      </p>
+    </section>
+
+    {/* Learn first. Then improve. */}
+    <section id="learn" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">Learn first. Then improve.</p>
+        <p class="doc-p mt-5">
+          Once we are inside the account, we will quickly get a better feel for
+          what the team really needs. This matters. It is easy to build a
+          dashboard with lots of data. It is much harder to build one that
+          makes the next decision clear.
+        </p>
+        <p class="doc-p">
+          As we manage the account, we can work with Rutmer and the internal
+          data team to understand:
+        </p>
+      </div>
+      <ul class="doc-list" data-reveal style="--reveal-delay: 70ms">
+        {learnFirst.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="doc-p" data-reveal>
+        We do not need to know every answer before we begin. The best way to
+        understand the requirements is to manage the account and learn from the
+        real workflow.
+      </p>
+    </section>
+
+    {/* Finding the middle ground */}
+    <section id="middle-ground" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">Finding the middle ground</p>
+        <p class="doc-p mt-5">
+          We do not expect Super Ninja to change its way of working to fit MAZ.
+          At the same time, we already have systems and processes that work
+          well across the Amazon accounts we manage. The aim is to bring the
+          best parts of both together.
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 my-8">
+        <div class="card p-7 pb-4" data-reveal>
+          <h3 class="mb-3">Super Ninja brings</h3>
+          <ul class="doc-list doc-list--card">
+            {superNinjaBrings.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="card p-7 pb-4" data-reveal style="--reveal-delay: 80ms">
+          <h3 class="mb-3">MAZ brings</h3>
+          <ul class="doc-list doc-list--card">
+            {mazBrings.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div data-reveal>
+        <p class="doc-p">
+          We then find the operating model that works best for Super Ninja.
+          Some things may stay in existing tools. Some may move into the
+          internal dashboard. Some may come from MAZ systems. Other parts may
+          need to change over time.
+        </p>
+        <p class="doc-p">
+          There is no need to force everything into one solution from day one.
+        </p>
+      </div>
+    </section>
+
+    {/* Already moving in this direction */}
+    <section id="direction" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">We are already moving in this direction</p>
+        <p class="doc-p mt-5">
+          MAZ is already investing in better ways to manage Amazon. Our
+          internal work includes:
+        </p>
+      </div>
+      <ul class="doc-list" data-reveal style="--reveal-delay: 70ms">
+        {direction.map((item) => <li>{item}</li>)}
+      </ul>
+      <div data-reveal>
+        <p class="doc-p">
+          We have also helped another 8-figure ecommerce brand shape its own
+          Amazon dashboard. Our input included which metrics should be shown,
+          which Amazon API endpoints were needed, attribution windows,
+          reporting limits, and how different Amazon datasets should be
+          understood.
+        </p>
+        <p class="doc-p">
+          This work is ongoing. As our own tools and processes improve, Super
+          Ninja can benefit from that learning too. The same applies in the
+          other direction. Working closely with Super Ninja's systems may show
+          us better ways to manage Amazon across our own business.
+        </p>
+        <p class="doc-p">That shared learning is part of the value of the partnership.</p>
+      </div>
+    </section>
+
+    {/* Data first. AI where it helps. */}
+    <section id="data-ai" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">Data first. AI where it helps.</p>
+        <p class="doc-p mt-5">
+          We are both excited by what AI can do. But AI is not the goal. Better
+          decisions are the goal.
+        </p>
+        <p class="doc-p">
+          For Amazon, the first step is having the right data and a clear way
+          to use it. AI can then sit on top of that. It may help us:
+        </p>
+      </div>
+      <ul class="doc-list" data-reveal style="--reveal-delay: 70ms">
+        {aiHelps.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="doc-p" data-reveal>
+        But we do not see AI replacing the people who understand the products,
+        the market and the strategy. The most important decisions should stay
+        close to the people who know the business best.
+      </p>
+      <p class="statement" data-reveal>
+        Good data + Amazon expertise + useful AI = better decisions.
+      </p>
+    </section>
+
+    {/* How we would start */}
+    <section id="approach" class="doc-section wrap">
+      <p class="eyebrow" data-reveal>How we would start</p>
+
+      <div class="stages mt-10">
+        <div class="stage" data-reveal>
+          <p class="eyebrow stage-eyebrow">
+            <span class="stage-num stat-figure">1</span> · Take over + learn
+          </p>
+          <p class="doc-p mt-3">
+            We take over Amazon Ads management. We audit the account. We
+            understand the products, priorities and current strategy. We use
+            the tools already available. We learn how Super Ninja currently
+            works.
+          </p>
+        </div>
+
+        <div class="stage" data-reveal style="--reveal-delay: 60ms">
+          <p class="eyebrow stage-eyebrow">
+            <span class="stage-num stat-figure">2</span> · Integrate + define
+          </p>
+          <p class="doc-p mt-3">
+            As we manage the account, the real data needs become clearer. We
+            work with the Super Ninja team to define what PPC needs from the
+            wider system. This may include areas such as search term
+            performance, market volume, organic rank, CTR, conversion rate,
+            Top of Search visibility, advertising spend, sales, profitability,
+            competitor data and listing changes.
+          </p>
+          <p class="doc-p">
+            We focus on information that helps us make decisions. Not data for
+            the sake of more data.
+          </p>
+          <div class="build my-7">
+            <p class="eyebrow build-eyebrow">One early build we already see</p>
+            <p class="doc-p mt-3">
+              <strong>A change and impact view.</strong> Changes on one axis
+              (bids, prices, content), outcomes on the other (search term
+              performance, sales), so "what did that change do" stops being a
+              spreadsheet afternoon.
+            </p>
+            <p class="doc-p mb-1">
+              A first version can exist within the first weeks, built on Super
+              Ninja's own database, and it compounds: every change recorded
+              makes the next answer sharper. It also becomes the tool our own
+              Amazon team works from.
+            </p>
+            <a
+              class="build-link"
+              href="/super-ninja-impact-preview-x7k2m9.html"
+              target="_blank"
+              rel="noopener"
+            >
+              Explore an interactive concept preview
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="stage" data-reveal style="--reveal-delay: 60ms">
+          <p class="eyebrow stage-eyebrow">
+            <span class="stage-num stat-figure">3</span> · Refine
+          </p>
+          <p class="doc-p mt-3">
+            From there, we improve how the teams, tools and systems work
+            together. We keep what works. We change what does not. Where
+            something is missing, we work together to find the best solution.
+          </p>
+          <p class="doc-p">
+            The aim is not to build a perfect system in month one. The aim is
+            to keep improving the way Amazon is managed.
+          </p>
+        </div>
+
+        <div class="stage" data-reveal style="--reveal-delay: 60ms">
+          <p class="eyebrow stage-eyebrow">
+            <span class="stage-num stat-figure">4</span> · Add intelligence
+          </p>
+          <p class="doc-p mt-3">
+            Once the data and workflow are in place, we can test AI and
+            automation where there is a clear use case. If something saves time
+            or improves the quality of a decision, we keep it. If it does not,
+            we do not.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* A closer way of working */}
+    <section id="working" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">A closer way of working</p>
+        <p class="doc-p mt-5">
+          This partnership is designed to be more collaborative than a normal
+          agency relationship. We want the people managing Amazon to have
+          direct access to the people inside Super Ninja who understand the
+          business. And we want Super Ninja to have access to the people
+          actually doing the Amazon work.
+        </p>
+      </div>
+      <ul class="doc-list" data-reveal style="--reveal-delay: 70ms">
+        {closerWorking.map((item) => <li>{item}</li>)}
+      </ul>
+      <div class="loop" data-reveal>
+        <span class="loop-old">
+          Instead of: Super Ninja → Agency → Report → Super Ninja
+        </span>
+        Super Ninja ↔ MAZ ↔ Data &amp; Systems
+      </div>
+    </section>
+
+    {/* Your MAZ team */}
+    <section id="team" class="doc-section wrap scroll-mt-16">
+      <p class="eyebrow" data-reveal>Your MAZ team</p>
+      <div class="grid gap-5 sm:grid-cols-2 mt-7">
+        {
+          team.map((member, i) => (
+            <div
+              class="card member p-7"
+              data-reveal
+              style={`--reveal-delay: ${i * 70}ms`}
+            >
+              <p class="member-role">{member.role}</p>
+              <h3 class="text-[1.3rem]">{member.name}</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-moss">
+                {member.bio}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    {/* Investment */}
+    <section id="investment" class="doc-section wrap scroll-mt-16">
+      <p class="eyebrow" data-reveal>Investment</p>
+      <div class="invest mt-6" data-reveal style="--reveal-delay: 80ms">
+        <p class="eyebrow invest-eyebrow">Embedded Amazon Partnership</p>
+        <p class="invest-price stat-figure">£4,250</p>
+        <p class="invest-per">per month · rolling monthly · 30 days' notice</p>
+
+        <h3 class="invest-h3">Full Amazon Ads management</h3>
+        <ul class="doc-list doc-list--invest">
+          {investCore.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <h3 class="invest-h3">Embedded strategy, data and systems support</h3>
+        <ul class="doc-list doc-list--invest">
+          {investEmbedded.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    {/* Flexible by design */}
+    <section id="flexible" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">Flexible by design</p>
+        <p class="doc-p mt-5">
+          The final operating model is not yet clear. We think that is a good
+          reason to stay flexible rather than try to define everything now. The
+          agreement runs monthly with 30 days' notice.
+        </p>
+        <p class="doc-p">The first stage is:</p>
+      </div>
+      <div class="flow" data-reveal style="--reveal-delay: 80ms">
+        Take over → Learn → Integrate → Improve
+      </div>
+      <p class="doc-p" data-reveal>
+        From there, we continue to shape the partnership around what works.
+      </p>
+    </section>
+
+    {/* What success looks like */}
+    <section id="success" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">What success looks like</p>
+        <p class="doc-p mt-5">
+          Strong Amazon Ads performance is the starting point. Beyond that, we
+          want to create a better way of working. Success means:
+        </p>
+      </div>
+      <ul class="doc-list" data-reveal style="--reveal-delay: 70ms">
+        {success.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="doc-p" data-reveal>Most of all:</p>
+      <h2 class="closing" data-reveal style="--reveal-delay: 80ms">
+        Less distance between data and action.
+      </h2>
+    </section>
+
+    {/* The principle */}
+    <section id="principle" class="doc-section wrap scroll-mt-16">
+      <div data-reveal>
+        <p class="eyebrow">The principle</p>
+        <p class="doc-p mt-5">
+          We do not want to fit Super Ninja into our agency model. We want to
+          combine the best parts of your systems and ours. Then build the right
+          Amazon operating model together.
+        </p>
+        <p class="doc-p principle-strong">
+          <strong>
+            Anything we build in this partnership is built into Super Ninja's
+            own systems and stays yours, whatever happens to the relationship.
+          </strong>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer
+    class="wrap border-t border-putty mt-14 pt-7 pb-16 flex flex-wrap justify-between gap-x-6 gap-y-2 text-[0.82rem] tracking-[0.06em] text-moss"
+  >
+    <span>MAZ · wearemaz.com</span>
+    <span>Prepared for Super Ninja · August 2026</span>
+  </footer>
+</WorkingDoc>
+
+<style>
+  .wrap {
+    width: 100%;
+    max-width: 49.5rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 1.5rem);
+  }
+
+  .doc-section {
+    padding-top: clamp(3rem, 2rem + 3vw, 4rem);
+    margin-top: clamp(2.5rem, 1.5rem + 3vw, 3.5rem);
+    border-top: 1px solid var(--color-putty);
+    scroll-margin-top: 4.5rem;
+  }
+
+  .doc-p {
+    max-width: 62ch;
+    margin-bottom: 0.85rem;
+    line-height: 1.65;
+  }
+
+  /* --- Lists: gold dot + hairline dividers --- */
+  .doc-list {
+    list-style: none;
+    margin: 1.1rem 0 1.4rem;
+    padding: 0;
+  }
+
+  .doc-list li {
+    position: relative;
+    padding: 0.55rem 0 0.55rem 1.65rem;
+    border-bottom: 1px solid var(--color-putty);
+    max-width: 60ch;
+    line-height: 1.55;
+  }
+
+  .doc-list li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 1.1em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    transition: transform 0.3s ease;
+  }
+
+  .doc-list li:hover::before {
+    transform: scale(1.35);
+  }
+
+  .doc-list--card li {
+    border-bottom-color: color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+
+  /* --- Statement + closing lines with gold draw-in underline --- */
+  .statement {
+    font-family: var(--font-serif);
+    font-weight: 450;
+    font-size: clamp(1.5rem, 1rem + 1.8vw, 2rem);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin: 1.6rem 0;
+    max-width: 26ch;
+    text-wrap: balance;
+  }
+
+  .closing {
+    font-size: clamp(1.75rem, 1.1rem + 2.4vw, 2.5rem);
+    line-height: 1.15;
+    margin: 1.6rem 0 1.1rem;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  .statement::after,
+  .closing::after {
+    content: "";
+    display: block;
+    margin-top: 0.9rem;
+    width: 3.5rem;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--color-gold);
+    transform-origin: left center;
+  }
+
+  :global(html.js-anim) .statement::after,
+  :global(html.js-anim) .closing::after {
+    transform: scaleX(0);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
+  }
+
+  :global(html.js-anim) .statement:global(.is-visible)::after,
+  :global(html.js-anim) .closing:global(.is-visible)::after {
+    transform: scaleX(1);
+  }
+
+  /* --- Cards (comparison columns + team) with hover lift --- */
+  .card {
+    background: var(--color-champagne);
+    border-radius: var(--radius-md);
+    border: 1px solid color-mix(in srgb, var(--color-putty) 60%, transparent);
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 34px -22px rgba(30, 42, 36, 0.45);
+    }
+  }
+
+  .member-role {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- Stage timeline --- */
+  .stages {
+    position: relative;
+    padding-left: 1.9rem;
+  }
+
+  .stages::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 0.55rem;
+    bottom: 0.4rem;
+    width: 1px;
+    background: var(--color-putty);
+  }
+
+  .stage {
+    position: relative;
+    padding-bottom: 1.9rem;
+  }
+
+  .stage:last-child {
+    padding-bottom: 0;
+  }
+
+  .stage::before {
+    content: "";
+    position: absolute;
+    left: -1.9rem;
+    top: 0.28rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--color-ivory);
+    border: 2px solid var(--color-gold);
+  }
+
+  .stage-eyebrow {
+    color: var(--color-ink);
+  }
+
+  .stage-num {
+    color: var(--color-gold);
+    font-size: 1.05rem;
+    letter-spacing: 0;
+  }
+
+  /* --- Early-build callout --- */
+  .build {
+    background: var(--color-champagne);
+    border-left: 3px solid var(--color-gold);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 1.4rem 1.7rem 1.1rem;
+  }
+
+  .build-eyebrow {
+    color: var(--color-gold-dark);
+  }
+
+  .build-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0.5rem 0 0.4rem;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--color-gold);
+    border-radius: 999px;
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      background 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .build-link span {
+    transition: transform 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .build-link:hover {
+      background: var(--color-gold);
+      color: var(--color-ivory);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px -14px rgba(30, 42, 36, 0.55);
+    }
+
+    .build-link:hover span {
+      transform: translateX(3px);
+    }
+  }
+
+  @media print {
+    .build-link {
+      display: none;
+    }
+  }
+
+  /* --- Loop + flow lines --- */
+  .loop,
+  .flow {
+    font-family: var(--font-serif);
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    text-align: center;
+    margin: 2.1rem 0;
+  }
+
+  .loop {
+    font-size: clamp(1.35rem, 1rem + 1.6vw, 1.85rem);
+  }
+
+  .flow {
+    font-size: clamp(1.25rem, 0.95rem + 1.4vw, 1.6rem);
+  }
+
+  .loop-old {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-moss);
+    margin-bottom: 0.85rem;
+  }
+
+  /* --- Investment card --- */
+  .invest {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-ink);
+    color: var(--color-ivory);
+    border-radius: var(--radius-lg);
+    padding: clamp(2rem, 1.5rem + 2vw, 2.9rem) clamp(1.6rem, 1.2rem + 2vw, 2.6rem);
+  }
+
+  .invest::before {
+    content: "";
+    position: absolute;
+    top: -90px;
+    right: -90px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgba(181, 154, 106, 0.3),
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  .invest-eyebrow {
+    color: rgba(248, 245, 239, 0.65);
+  }
+
+  .invest-price {
+    font-size: clamp(2.4rem, 1.6rem + 3.4vw, 3.4rem);
+    margin: 0.4rem 0 0.3rem;
+    color: var(--color-ivory);
+  }
+
+  .invest-per {
+    color: rgba(248, 245, 239, 0.65);
+    font-size: 0.92rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .invest-h3 {
+    color: var(--color-ivory);
+    font-size: 1.15rem;
+    margin-top: 1.4rem;
+  }
+
+  .doc-list--invest {
+    margin-bottom: 0.4rem;
+  }
+
+  .doc-list--invest li {
+    border-bottom-color: rgba(248, 245, 239, 0.14);
+    color: rgba(248, 245, 239, 0.92);
+    font-size: 0.95rem;
+  }
+
+  .principle-strong strong {
+    font-weight: 600;
+  }
+
+  /* --- Sticky nav extras --- */
+  .doc-nav-link.is-active {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-gold);
+  }
+
+  .progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    display: block;
+  }
+
+  .progress-fill {
+    display: block;
+    height: 100%;
+    background: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.1s linear;
+  }
+
+  .pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--color-gold);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .pdf-btn:hover {
+      background: var(--color-gold);
+      color: var(--color-ivory);
+    }
+  }
+
+  /* --- Chat-with-doc row --- */
+  .ai-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem 1rem;
+    margin-top: 2rem;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--color-putty);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-champagne) 55%, transparent);
+    max-width: fit-content;
+  }
+
+  .ai-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+    font-weight: 500;
+  }
+
+  .ai-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .ai-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--color-putty);
+    border-radius: 999px;
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      border-color 0.3s ease,
+      background 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .ai-links a span {
+    font-size: 0.75em;
+    color: var(--color-moss);
+    transition: color 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .ai-links a:hover {
+      border-color: var(--color-gold);
+      background: var(--color-gold);
+      color: var(--color-ivory);
+    }
+
+    .ai-links a:hover span {
+      color: var(--color-ivory);
+    }
+  }
+
+  .ai-hint {
+    flex-basis: 100%;
+    font-size: 0.8rem;
+    color: var(--color-moss);
+  }
+
+  /* --- Print --- */
+  @media print {
+    .doc-nav {
+      display: none;
+    }
+
+    .doc-section {
+      padding-top: 1.4rem;
+      margin-top: 1.2rem;
+      break-inside: avoid;
+    }
+
+    .invest {
+      background: var(--color-ink) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .ai-row {
+      display: none;
+    }
+
+    /* Scroll-reveal must never hide content on paper */
+    :global(html.js-anim) :global([data-reveal]) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    :global(html.js-anim) .statement::after,
+    :global(html.js-anim) .closing::after {
+      transform: scaleX(1) !important;
+    }
+  }
+</style>
+
+<script>
+  /* Reveal on scroll */
+  const nodes = [...document.querySelectorAll<HTMLElement>("[data-reveal]")];
+  const show = (el: Element) => el.classList.add("is-visible");
+
+  if (!("IntersectionObserver" in window)) {
+    nodes.forEach(show);
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          show(entry.target);
+          revealObserver.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    for (const node of nodes) revealObserver.observe(node);
+  }
+
+  window.setTimeout(() => nodes.forEach(show), 1500);
+
+  /* Chat-with-doc links: prefill each AI with a prompt pointing at this page */
+  const docUrl = location.origin + location.pathname;
+  const aiPrompt = encodeURIComponent(
+    `Please read this proposal: ${docUrl}\n\nIt is an "Embedded Amazon Partnership" proposal from MAZ (an Amazon Ads agency) for Super Ninja. Fetch the page and read it in full, then give me a brief summary of what is being proposed, and help me evaluate it by answering my questions.`,
+  );
+  const aiUrls: Record<string, string> = {
+    chatgpt: `https://chatgpt.com/?hints=search&q=${aiPrompt}`,
+    claude: `https://claude.ai/new?q=${aiPrompt}`,
+    grok: `https://grok.com/?q=${aiPrompt}`,
+  };
+  document
+    .querySelectorAll<HTMLAnchorElement>("[data-ai]")
+    .forEach((link) => {
+      const url = aiUrls[link.dataset.ai ?? ""];
+      if (url) link.href = url;
+    });
+
+  /* Download / print to PDF */
+  document
+    .querySelector<HTMLButtonElement>("[data-print]")
+    ?.addEventListener("click", () => {
+      nodes.forEach(show);
+      window.print();
+    });
+
+  /* Reading progress bar */
+  const fill = document.querySelector<HTMLElement>("[data-progress]");
+  const updateProgress = () => {
+    if (!fill) return;
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    fill.style.transform = `scaleX(${max > 0 ? doc.scrollTop / max : 0})`;
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress, { passive: true });
+  updateProgress();
+
+  /* Active nav link highlighting */
+  const navAnchors = [
+    ...document.querySelectorAll<HTMLAnchorElement>(
+      "[data-doc-nav] a[href^='#']",
+    ),
+  ];
+  const sections = navAnchors
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((section): section is HTMLElement => Boolean(section));
+
+  const setActive = (id: string) => {
+    for (const link of navAnchors) {
+      const active = link.hash === `#${id}`;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    }
+  };
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible?.target.id) setActive(visible.target.id);
+    },
+    { rootMargin: "-18% 0px -68% 0px", threshold: [0, 0.15, 0.4] },
+  );
+
+  for (const section of sections) sectionObserver.observe(section);
+  if (sections[0]) setActive(sections[0].id);
+
+  navAnchors.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = document.querySelector<HTMLElement>(link.hash);
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", link.hash);
+    });
+  });
+</script>
