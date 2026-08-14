@@ -157,7 +157,7 @@ const success = [
     data-doc-nav
   >
     <div class="wrap wrap-nav flex items-center justify-between gap-4 md:gap-6 h-14 md:h-16">
-      <div class="flex items-baseline gap-3 min-w-0">
+      <div class="flex items-baseline gap-3 shrink-0">
         <span
           class="font-serif text-[1.35rem] md:text-[1.45rem] tracking-[0.18em] font-medium leading-none"
         >
@@ -171,7 +171,7 @@ const success = [
       </div>
 
       <nav
-        class="flex items-center gap-4 md:gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mr-1 pr-1"
+        class="doc-nav-links flex items-center gap-4 md:gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-w-0"
         aria-label="On this page"
       >
         {
@@ -478,6 +478,9 @@ const success = [
               Explore an interactive concept preview
               <span aria-hidden="true">→</span>
             </a>
+            <p class="print-preview-note">
+              Interactive concept preview — see appendix.
+            </p>
           </div>
         </div>
 
@@ -629,6 +632,19 @@ const success = [
         </p>
       </div>
     </section>
+
+    <section class="print-appendix wrap" aria-label="Appendix">
+      <p class="eyebrow">Appendix</p>
+      <h2 class="mt-4">Interactive concept preview</h2>
+      <p class="doc-p mt-5">
+        A change and impact view. Every bid, price and listing edit, with what
+        happened either side — so "what did that change do" stops being a
+        spreadsheet afternoon. The live version is interactive; open it here:
+      </p>
+      <p class="print-url">
+        https://www.wearemaz.com/super-ninja-impact-preview-x7k2m9.html
+      </p>
+    </section>
   </main>
 
   <footer
@@ -649,6 +665,18 @@ const success = [
 
   .wrap-nav {
     max-width: 72rem;
+  }
+
+  .doc-nav-links {
+    padding-left: 1.15rem;
+    padding-right: 0.35rem;
+  }
+
+  @media (min-width: 768px) {
+    .doc-nav-links {
+      padding-left: 0.25rem;
+      padding-right: 0;
+    }
   }
 
   .doc-section {
@@ -863,10 +891,9 @@ const success = [
     }
   }
 
-  @media print {
-    .build-link {
-      display: none;
-    }
+  .print-preview-note,
+  .print-appendix {
+    display: none;
   }
 
   /* --- Loop + flow lines --- */
@@ -1108,6 +1135,29 @@ const success = [
 
     .ai-row {
       display: none;
+    }
+
+    .build-link {
+      display: none;
+    }
+
+    .print-preview-note {
+      display: block;
+      margin: 0.6rem 0 0.2rem;
+      font-size: 0.92rem;
+      color: var(--color-moss);
+    }
+
+    .print-appendix {
+      display: block;
+      break-before: page;
+    }
+
+    .print-url {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      word-break: break-all;
+      color: var(--color-ink);
     }
 
     /* Scroll-reveal must never hide content on paper */
