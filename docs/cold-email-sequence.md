@@ -39,10 +39,15 @@ team AI access, and almost nobody thinks it has stuck.
 
 Hey {{first_name}},
 
-We've been folding AI into our own ecommerce work too. Has it actually stuck
-with your team yet, or is it still mostly experiments?
+We use AI across our ecommerce work too. Has it actually stuck with your
+team yet, or are they still mostly just chatting with it?
 
 Calum
+
+**Alternative first lines (same plain register):**
+
+- "We've been putting AI to work in our own ecommerce ops too."
+- "We've been building AI into how we run ecommerce accounts too."
 
 **Alternative (with a `{{product}}` enrichment field, for Amazon-heavy
 lists):**
