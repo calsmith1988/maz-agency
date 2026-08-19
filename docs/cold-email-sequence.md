@@ -79,13 +79,14 @@ they receive reports rather than build them, so the tip targets that.
 Hey {{first_name}} -
 
 Have you tried dropping the weekly report you get — trading, marketplace,
-whatever lands in your inbox — into Claude, and asking: "what decisions is
-this meant to support, and what's missing to actually make them?"
+whatever lands in your inbox — into Claude, and asking what decisions it's
+meant to support and what's missing to make them?
 
-Five minutes. It usually surfaces the questions you'd been half-asking
-anyway. Works on board decks too.
+One warning: it can only reason with what's in the report. If it starts
+guessing, that tells you something too — the data your team works from has
+gaps.
 
-Let me know if you want the exact prompt we use.
+Let me know if you want a hand doing it properly.
 
 - Calum
 
@@ -110,7 +111,7 @@ counts and example quotes?
 Most teams can feel what the top complaint is. This shows it, with numbers.
 Same move works for support tickets and listing Q&A.
 
-Happy to share the prompt if useful.
+Let me know if you want help setting it up.
 
 - Calum
 
@@ -132,7 +133,7 @@ Then give an AI the raw exports and that logic, and ask it for the output.
 Most teams realise they've just prototyped an internal tool — no developer
 involved.
 
-Let me know if you want an example to copy.
+Happy to show you one we built.
 
 - Calum
 
@@ -170,6 +171,10 @@ The reply conversation is where the offer lives. The shape of it:
 - Their situation, in their words first. The likely admission: the team has
   AI access, usage is patchy, nothing structural has changed. That is the
   offer's opening line: **an AI licence isn't an AI strategy.**
+- The prompting trap, if it comes up: people think better prompting gets
+  better answers. It doesn't — if the right data isn't going in, AI lies to
+  you confidently. That's why the framework puts Data before Logic and
+  Output, and why prompts are never the deliverable.
 - The reframe: the gap isn't tools, it's knowing where and how to apply them.
   The people closest to the problems (marketplace, trading, inventory, CX)
   already know which reports are painful and which tools they wish existed.
