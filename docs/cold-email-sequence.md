@@ -30,28 +30,60 @@ continuation, not a switch.
 
 ## Email 1 — the peer opener (Day 1)
 
-This one is built per-prospect. The subject is a real, specific observation
-with a trailing dash; the body is two sentences and a first name.
+The kit's opener leans on a real observation. Sending from an Instantly list
+with no per-prospect signal, there are two versions.
 
-**Subject patterns:**
+### Version A — light enrichment (preferred)
 
-- `Just saw your Sponsored Brands ad for {{product}} -`
-- `Just saw {{brand}}'s new listing on amazon.co.uk -`
-- `Noticed {{product}} moved up for "{{keyword}}" -`
+Add one custom field to the list: `{{product}}` — the brand's hero product,
+found by searching their brand name on Amazon (~30 seconds per prospect; a VA
+or a simple script can fill a few hundred rows in an afternoon). That one
+field makes the subject a true observation.
+
+**Subject:** `saw {{product}} on amazon -`
 
 **Body:**
 
 Hey {{first_name}},
 
-I manage Amazon accounts too. How's {{product}} converting since
-{{the thing you observed — the new main image / the price change / Prime Day}}?
+I run Amazon accounts too. Is {{product}} still your main seller, or has
+something overtaken it?
 
-- Calum
+Calum
 
-**Notes:** the observation must be real — an ad you actually saw, a listing
-change you actually noticed. The question should be answerable in one line,
-close to yes/no. Never "how's business going?". No signature block, no
-company name, nothing else.
+### Version B — no enrichment
+
+The "thing" becomes something true for the whole segment. Subjects stay
+lowercase with a trailing dash so they read like an internal note. Two
+variants to A/B test in Instantly:
+
+**Variant 1 — CPC (safer, everyone has a one-line answer ready):**
+
+**Subject:** `your amazon ads -`
+
+Hey {{first_name}},
+
+I run Amazon accounts too. Are CPCs in your category as rough this year as
+they've been everywhere else?
+
+Calum
+
+**Variant 2 — AI (fewer but better replies; self-selects the embedded-partner
+buyer):**
+
+**Subject:** `quick amazon + ai question -`
+
+Hey {{first_name}},
+
+We've been folding AI into how we run Amazon accounts too. Has it actually
+stuck with your team yet, or is it still mostly experiments?
+
+Calum
+
+**Notes:** the question should be answerable in one line, close to yes/no.
+Never "how's business going?". No signature block, no company name, nothing
+else. Plain text, no links, no images — for the framework and for
+deliverability.
 
 ---
 
