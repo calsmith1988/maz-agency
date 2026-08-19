@@ -67,24 +67,31 @@ else.
 
 ---
 
-## Email 2 — tip: your exports + AI (Day ~5)
+## Email 2 — tip: interrogate the report you receive (Day ~5)
 
-**Subject:** claude + your search term report -
+Audience is senior (heads of ecom, marketing directors, founders, CMOs) —
+they receive reports rather than build them, so the tip targets that.
+
+**Subject:** ask claude what your weekly report isn't telling you
 
 **Body:**
 
 Hey {{first_name}} -
 
-Have you tried exporting a 60-day search term report and dropping it into
-Claude? Ask it: "which terms is spend rising on while conversion falls, and
-what is that costing per week?"
+Have you tried dropping the weekly report you get — trading, marketplace,
+whatever lands in your inbox — into Claude, and asking: "what decisions is
+this meant to support, and what's missing to actually make them?"
 
-Five minutes, and it works with any export — business reports, returns data,
-whatever you've got.
+Five minutes. It usually surfaces the questions you'd been half-asking
+anyway. Works on board decks too.
 
 Let me know if you want the exact prompt we use.
 
 - Calum
+
+**Note:** if a reply raises data privacy ("can I paste internal reports into
+Claude?"), that's a hook, not an objection — data handling and safe setup is
+part of what the workshop covers.
 
 ---
 
@@ -117,9 +124,9 @@ Happy to share the prompt if useful.
 
 Hey {{first_name}} -
 
-Pick one weekly report someone builds by hand. Write down four things: where
-the data lives, the logic they apply, what the output looks like, and who
-acts on it.
+Pick one report your team builds by hand every week. Ask whoever builds it
+four things: where the data lives, the logic they apply, what the output
+looks like, and who acts on it.
 
 Then give an AI the raw exports and that logic, and ask it for the output.
 Most teams realise they've just prototyped an internal tool — no developer
