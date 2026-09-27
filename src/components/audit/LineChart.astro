@@ -1,0 +1,108 @@
+---
+import "./chart.css";
+
+interface Series {
+  name: string;
+  values: number[];
+  color: string;
+  dashed?: boolean;
+}
+
+interface Props {
+  labels: string[];
+  series: Series[];
+  unit?: string;
+  suffix?: string;
+  partialFrom?: number;
+  caption?: string;
+  ariaLabel: string;
+}
+
+const { labels, series, unit = "", suffix = "", partialFrom, caption, ariaLabel } =
+  Astro.props;
+
+const width = 640;
+const height = 260;
+const pad = { top: 16, right: 16, bottom: 34, left: 48 };
+const innerW = width - pad.left - pad.right;
+const innerH = height - pad.top - pad.bottom;
+
+const rawMax = Math.max(...series.flatMap((s) => s.values));
+const step = niceStep(rawMax / 4);
+const max = Math.ceil(rawMax / step) * step;
+const ticks = Array.from({ length: Math.round(max / step) + 1 }, (_, i) => i * step);
+
+const x = (i: number) => pad.left + (labels.length === 1 ? innerW / 2 : (i * innerW) / (labels.length - 1));
+const y = (v: number) => pad.top + innerH - (v / max) * innerH;
+
+function niceStep(raw: number): number {
+  const pow = 10 ** Math.floor(Math.log10(raw));
+  const n = raw / pow;
+  return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * pow;
+}
+
+const fmt = (v: number) => `${unit}${v.toLocaleString("en-GB")}${suffix}`;
+const labelEvery = labels.length > 10 ? 2 : 1;
+---
+
+<figure class="chart">
+  <div class="chart-legend" aria-hidden="true">
+    {
+      series.map((s) => (
+        <span class="chart-key">
+          <span
+            class:list={["chart-swatch", s.dashed && "chart-swatch--dashed"]}
+            style={`--c: ${s.color}`}
+          />
+          {s.name}
+        </span>
+      ))
+    }
+  </div>
+  <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={ariaLabel}>
+    {
+      ticks.map((t) => (
+        <g>
+          <line x1={pad.left} x2={width - pad.right} y1={y(t)} y2={y(t)} class="chart-grid" />
+          <text x={pad.left - 8} y={y(t) + 4} text-anchor="end" class="chart-tick">
+            {fmt(t)}
+          </text>
+        </g>
+      ))
+    }
+    {
+      partialFrom !== undefined && (
+        <rect
+          x={x(partialFrom) - innerW / (labels.length - 1) / 2}
+          y={pad.top}
+          width={innerW / (labels.length - 1) / 2 + pad.right}
+          height={innerH}
+          class="chart-partial"
+        />
+      )
+    }
+    {
+      labels.map((label, i) =>
+        (labels.length - 1 - i) % labelEvery === 0 ? (
+          <text x={x(i)} y={height - 12} text-anchor="middle" class="chart-tick">
+            {label}
+          </text>
+        ) : null,
+      )
+    }
+    {
+      series.map((s) => (
+        <polyline
+          points={s.values.map((v, i) => `${x(i)},${y(v)}`).join(" ")}
+          fill="none"
+          stroke={s.color}
+          stroke-width="2.25"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          stroke-dasharray={s.dashed ? "5 4" : undefined}
+        />
+      ))
+    }
+  </svg>
+  {caption && <figcaption class="chart-caption">{caption}</figcaption>}
+</figure>

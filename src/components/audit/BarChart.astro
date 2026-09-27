@@ -1,0 +1,150 @@
+---
+import "./chart.css";
+
+interface Series {
+  name: string;
+  values: number[];
+  color: string;
+}
+
+interface Props {
+  labels: string[];
+  series: Series[];
+  stacked?: boolean;
+  unit?: string;
+  suffix?: string;
+  partialFrom?: number;
+  highlight?: number[];
+  caption?: string;
+  ariaLabel: string;
+}
+
+const {
+  labels,
+  series,
+  stacked = false,
+  unit = "",
+  suffix = "",
+  partialFrom,
+  highlight = [],
+  caption,
+  ariaLabel,
+} = Astro.props;
+
+const width = 640;
+const height = 260;
+const pad = { top: 16, right: 12, bottom: 34, left: 48 };
+const innerW = width - pad.left - pad.right;
+const innerH = height - pad.top - pad.bottom;
+
+const totals = labels.map((_, i) =>
+  stacked
+    ? series.reduce((sum, s) => sum + Math.max(0, s.values[i] ?? 0), 0)
+    : Math.max(...series.map((s) => s.values[i] ?? 0)),
+);
+const rawMax = Math.max(...totals);
+const step = niceStep(rawMax / 4);
+const max = Math.ceil(rawMax / step) * step;
+const ticks = Array.from({ length: Math.round(max / step) + 1 }, (_, i) => i * step);
+
+const slot = innerW / labels.length;
+const groupW = slot * 0.68;
+const barW = stacked ? groupW : groupW / series.length;
+const y = (v: number) => pad.top + innerH - (v / max) * innerH;
+const h = (v: number) => (Math.max(0, v) / max) * innerH;
+
+function niceStep(raw: number): number {
+  const pow = 10 ** Math.floor(Math.log10(raw));
+  const n = raw / pow;
+  return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * pow;
+}
+
+const fmt = (v: number) => `${unit}${v.toLocaleString("en-GB")}${suffix}`;
+const labelEvery = labels.length > 10 ? 2 : 1;
+
+const bars = labels.flatMap((_, i) => {
+  const left = pad.left + i * slot + (slot - groupW) / 2;
+  let base = 0;
+  return series.map((s, si) => {
+    const v = s.values[i] ?? 0;
+    const bar = {
+      x: stacked ? left : left + si * barW,
+      y: stacked ? y(base + Math.max(0, v)) : y(Math.max(0, v)),
+      w: Math.max(1, barW - (stacked ? 0 : 2)),
+      h: h(v),
+      color: s.color,
+      faded: partialFrom !== undefined && i >= partialFrom,
+      strong: highlight.includes(i),
+      title: `${labels[i]} · ${s.name}: ${fmt(v)}`,
+    };
+    base += Math.max(0, v);
+    return bar;
+  });
+});
+---
+
+<figure class="chart">
+  <div class="chart-legend" aria-hidden="true">
+    {
+      series.map((s) => (
+        <span class="chart-key">
+          <span class="chart-swatch chart-swatch--block" style={`--c: ${s.color}`} />
+          {s.name}
+        </span>
+      ))
+    }
+  </div>
+  <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={ariaLabel}>
+    {
+      ticks.map((t) => (
+        <g>
+          <line x1={pad.left} x2={width - pad.right} y1={y(t)} y2={y(t)} class="chart-grid" />
+          <text x={pad.left - 8} y={y(t) + 4} text-anchor="end" class="chart-tick">
+            {fmt(t)}
+          </text>
+        </g>
+      ))
+    }
+    {
+      highlight.map((i) => (
+        <rect
+          x={pad.left + i * slot + 1}
+          y={pad.top}
+          width={slot - 2}
+          height={innerH}
+          class="chart-highlight"
+        />
+      ))
+    }
+    {
+      bars.map((b) => (
+        <rect
+          x={b.x}
+          y={b.y}
+          width={b.w}
+          height={b.h}
+          fill={b.color}
+          opacity={b.faded ? 0.5 : 1}
+          rx="1.5"
+        >
+          <title>{b.title}</title>
+        </rect>
+      ))
+    }
+    {
+      labels.map((label, i) =>
+        (labels.length - 1 - i) % labelEvery === 0 ? (
+          <text
+            x={pad.left + i * slot + slot / 2}
+            y={height - 12}
+            text-anchor="middle"
+            class="chart-tick"
+          >
+            {label}
+          </text>
+        ) : null,
+      )
+    }
+  </svg>
+  {caption && <figcaption class="chart-caption">{caption}</figcaption>}
+</figure>

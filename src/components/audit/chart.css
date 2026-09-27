@@ -1,0 +1,69 @@
+.chart {
+  margin: 0;
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--color-moss);
+}
+
+.chart-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.chart-swatch {
+  width: 1.1rem;
+  height: 0;
+  border-top: 2.5px solid var(--c);
+}
+
+.chart-swatch--dashed {
+  border-top-style: dashed;
+}
+
+.chart-swatch--block {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 0;
+  border-radius: 2px;
+  background: var(--c);
+}
+
+.chart-grid {
+  stroke: var(--color-putty);
+  stroke-width: 1;
+}
+
+.chart-tick {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  fill: var(--color-moss);
+}
+
+.chart-partial {
+  fill: color-mix(in srgb, var(--color-champagne) 70%, transparent);
+}
+
+.chart-highlight {
+  fill: color-mix(in srgb, var(--color-gold) 16%, transparent);
+}
+
+.chart-caption {
+  margin-top: 0.55rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-moss);
+}

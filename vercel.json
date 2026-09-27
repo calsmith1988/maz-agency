@@ -31,6 +31,12 @@
       ]
     },
     {
+      "source": "/super-ninja-audit-q4v8n3",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
       "source": "/super-ninja-impact-preview-x7k2m9",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }

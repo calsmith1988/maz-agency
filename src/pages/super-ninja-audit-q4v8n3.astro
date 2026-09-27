@@ -1,0 +1,1961 @@
+---
+import WorkingDoc from "~/layouts/WorkingDoc.astro";
+import BarChart from "~/components/audit/BarChart.astro";
+import LineChart from "~/components/audit/LineChart.astro";
+
+const INK = "#1E2A24";
+const GOLD = "#B59A6A";
+const MOSS = "#8C958D";
+
+const navLinks = [
+  { href: "#overview", label: "Opening" },
+  { href: "#view", label: "Our view" },
+  { href: "#findings", label: "Findings" },
+  { href: "#ads", label: "Ads" },
+  { href: "#decisions", label: "Decisions" },
+  { href: "#plan", label: "30 · 60 · 90" },
+];
+
+const agenda = [
+  { num: "1", title: "Opening", time: "5 min", who: "Calum" },
+  { num: "2", title: "Our view", time: "5 min", who: "Calum" },
+  { num: "3", title: "Findings in detail", time: "10–20 min", who: "Calum" },
+  { num: "4", title: "Amazon Ads findings", time: "10–15 min", who: "Genny" },
+  { num: "5", title: "How we make decisions", time: "10 min", who: "Calum" },
+  { num: "6", title: "The next 30 · 60 · 90 days", time: "8 min", who: "Calum + Genny" },
+];
+
+const monthLabels = [
+  "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26",
+  "Feb 26", "Mar 26", "Apr 26", "May 26", "Jun 26", "Jul 26", "Aug 26", "Sep 26*",
+];
+const fromJul = monthLabels.slice(1);
+
+const marketSales = {
+  UK: [301, 702, 1490, 982, 565, 342, 207, 165, 151, 207, 256, 299, 445, 1176, 1784, 1195],
+  DE: [273, 472, 680, 524, 483, 360, 226, 207, 172, 201, 210, 311, 560, 590, 648, 722],
+  US: [254, 452, 365, 492, 439, 218, 130, 126, 94, 179, 284, 356, 491, 531, 519, 440],
+};
+
+const markets = [
+  { name: "United Kingdom", sales: "35%", spend: "26%", tacos: "8.7%", note: "The engine. Most sales, least spend per pound of sales." },
+  { name: "Germany", sales: "24%", spend: "28%", tacos: "13.8%", note: "The most balanced portfolio. Sells through winter." },
+  { name: "United States", sales: "20%", spend: "27%", tacos: "15.2%", note: "The biggest search market, and the most ad-dependent." },
+];
+
+const principles = [
+  { title: "Protect what's working", body: "Never disrupt a profitable product, campaign or term to fix something else." },
+  { title: "Cut obvious waste", body: "Irrelevant searches, spend with no sales, and budget in the wrong place." },
+  { title: "Grow deliberately", body: "Scale what already works before broadening. One clear test at a time." },
+];
+
+const view = [
+  {
+    num: "01",
+    tag: "United Kingdom",
+    title: "Growth is real and profitable, but more of it is now paid for.",
+    stat: "+54%",
+    statLabel: "profit, Jul–Aug YoY",
+    body: "Ad spend more than doubled. Profit followed. But organic sales in August were flat year on year, and the share of sales we pay for has jumped.",
+  },
+  {
+    num: "02",
+    tag: "United States",
+    title: "Spend has outrun profit.",
+    stat: "+2%",
+    statLabel: "profit on +75% spend",
+    body: "Extra spend bought impressions, not market share. CPCs are up 43%, and monthly profit has fallen every month since June.",
+  },
+  {
+    num: "03",
+    tag: "Germany",
+    title: "The most improved market. August showed where it leaks.",
+    stat: "+77%",
+    statLabel: "profit, Jun–Aug YoY",
+    body: "Margins are up sharply. But in peak month the best product lost half its ad traffic while weaker products kept their budgets.",
+  },
+  {
+    num: "04",
+    tag: "Fungus gnat",
+    title: "Germany's winter engine is under-used.",
+    stat: "1.9×",
+    statLabel: "fungus gnat vs fruit fly searches (DE)",
+    body: "Germans search for fungus gnat fixes about twice as often as fruit fly traps. We take about 13% of those purchases, against 63% for fruit fly.",
+  },
+  {
+    num: "05",
+    tag: "Portfolio",
+    title: "Two markets run on one product, and the tail loses money.",
+    stat: "93%",
+    statLabel: "of US sales are fruit fly",
+    body: "Germany's new launches prove diversification works. Meanwhile several small products lose money in most months.",
+  },
+];
+
+const ukFound = [
+  "Jul–Aug sales up 35% (£1.65M → £2.24M) and profit up 54% (£652k → £1.01M). Every extra £1 of ad spend returned about £3.70 of profit.",
+  "Ad spend up 132% (£72k → £168k). Cost per click up 54% (£0.60 → £0.92). On the 4-pack it went from £0.44 to £1.10.",
+  "Organic sales in August were 3% below last year (£803k → £781k). Organic share of sales fell from 71% to 58% in August and from 87% to 55% in September.",
+  "September 2025 was a natural experiment: ads were cut to about £570 a day, both hero products stayed at #1–2 in category, and 87% of sales came organically.",
+  "We already take about 80% of all purchases on “fruit fly trap”. The next leg of growth is the generic “fly trap / catcher / killer” demand: 2.7M searches in July, where our share climbed from 5% to 14% across the season.",
+];
+const ukMatters = "The UK is the profit engine. Spending more has worked so far, but a growing share of sales we used to earn for free is now being bought. If some of that spend is replacing organic sales rather than adding to them, we are paying twice for the same customer.";
+const ukDo = [
+  "Protect the hero campaigns through the rest of the season. No sudden cuts.",
+  "Run a controlled, stepped Top of Search reduction on terms where we already rank #1 organically. One campaign at a time, with rank watched daily.",
+  "Build separate campaigns for generic “fly” demand with their own bids, and negate electric / UV / zapper terms that are not our product.",
+  "Judge the UK on total sales and profit per day, not ad sales.",
+];
+const ukMeasure = ["Organic share of sales", "Profit per day", "CPC on hero terms", "Organic rank on hero terms", "Purchase share on generic “fly” searches"];
+
+const usFound = [
+  "Jul–Aug sales up 29% ($816k → $1.05M) while ad spend rose 75% ($100k → $175k). Profit rose 2% ($205k → $210k). Margin fell from 25% to 20%.",
+  "The extra $75k of spend produced $233k of extra sales and about $5k of extra profit. In August the extra spend lost money.",
+  "Monthly profit peaked in June ($125k on $62k spend) and fell as spend kept climbing ($95k on $90k in August). September is tracking 11% below last year's profit per day on 17% more sales.",
+  "CPC up 43% ($1.64 → $2.35). Impressions up 170%, clicks up only 23%.",
+  "Our impression share on fruit fly searches rose by half (5.2% → 7.9%) while purchase share fell from 12.4% to 9.1%. The spend bought visibility, not share.",
+  "One SKU carries it: the 4-pack takes 83% of ad spend at 47% ACOS and ranks #9–20 in category, not #1. The 6-pack ($18.90) and 12-pack ($37.95) convert at 12–15% ACOS on less than 1% of spend each.",
+];
+const usMatters = "The US is the largest fruit fly market we sell into by a distance, and we hold only about 10% of it. Growth there is worth having, but not at a rate where every extra dollar of sales makes almost nothing. Right now we are funding Amazon's CPC inflation, not building share.";
+const usDo = [
+  "Set a profit-based ACOS ceiling per SKU and bring the 4-pack's generic terms back under it: bids first, then Top of Search modifiers.",
+  "Stop buying impression share where purchase share isn't following.",
+  "Move incremental budget into the 6-pack and 12-pack, which earn more per order and already convert efficiently.",
+  "Review the August price drop on the 4-pack ($13.96 → $12.95) alongside the ad plan.",
+];
+const usMeasure = ["Weekly contribution profit", "TACOS", "Purchase share on “fruit fly traps for indoors”", "CPC", "Share of spend outside the 4-pack"];
+
+const deFound = [
+  "Jun–Aug sales up 26% (€1.25M → €1.58M) and profit up 77% (€357k → €631k). Margin rose from 28.5% to 40%. In Jul–Aug, organic share of sales rose from 59% to 68%.",
+  "Over the last 12 months the 4-pack delivers 41% of sales on 30% of spend at 24% ACOS. The 2-pack delivers 20% of sales on 29% of spend at 42% ACOS.",
+  "In August 2026, the 4-pack's ad clicks halved year on year (33k → 16k) and its sales fell 26% (€327k → €241k). The 2-pack's spend more than doubled (€13k → €31k) at 42% ACOS, and the fungus gnat trap spent €8k at 76% ACOS.",
+  "Germany was the only one of the three markets where August sales fell year on year (−5%).",
+  "When the 4-pack's budget was pushed in September (€47k in 23 days), it delivered at 25% ACOS and sales recovered. September is running 80% ahead of last year.",
+];
+const deMatters = "Germany shows what good looks like: rising margin, growing organic share and a product range that sells through winter. The August dip was not a demand problem. It was allocation: the most efficient product was under-funded in the most valuable month.";
+const deDo = [
+  "Allocate by product return. The 4-pack is funded first in peak; the 2-pack runs to a tighter ACOS ceiling.",
+  "Fix the 2-pack campaign that runs out of budget by 4pm with bids, not a bigger budget.",
+  "Watch spend share against sales share for every major SKU, every week.",
+];
+const deMeasure = ["Spend share vs sales share by SKU", "4-pack impression share on “Fruchtfliegenfalle”", "ACOS by SKU", "Profit per day in peak"];
+
+const fgFound = [
+  "Fungus gnat is 14% of Germany's sales (€560k over 12 months), against about 6% in the UK and US. In January it was 49% of all German sales, and the 30-pack ranked #1 in category from November to April.",
+  "Search demand: March–August, Germany averaged ~176k fungus gnat searches a month, 1.9× its fruit fly searches. In the US it's 0.36×, in the UK 0.25×.",
+  "Our share of German fungus gnat purchases is about 10–20%, against 63% for fruit fly. Around a third of the searches are for nematodes, a product we don't sell.",
+  "Ads run flat all year instead of following demand. Summer spend of €10–12k a month ran at 62–78% ACOS, cost per click more than doubled (€0.78 → €1.77), and the product made almost no profit from June to August.",
+  "The 60-pack sold €84k over 12 months with no advertising at all.",
+  "In the US, the fungus gnat trap ranks ~#200, the price has been cut from $7.98 to $5.88, and it is losing money. That's an economics problem, not an ads problem.",
+];
+const fgMatters = "Fungus gnat is what makes Germany a year-round business: off-season sales hold at 39% of peak, against 15% in the UK. The demand is there, and it's bigger than the fruit fly market. We are only taking a small share of it, and we're spending the budget at the wrong time of year.";
+const fgDo = [
+  "Build a seasonal fungus gnat plan for Germany: pull back May–August, build from September, push October–March.",
+  "Advertise the 60-pack and test bundles for heavier users.",
+  "Treat nematode demand as a product question for Super Ninja: stock it, bundle it, or leave it.",
+  "US: fix pack size and price before spending more.",
+];
+const fgMeasure = ["DE purchase share on “Trauermücken” / “Gelbtafeln” searches", "Winter profit", "ACOS by season", "Off-season sales as % of peak"];
+
+const pfFound = [
+  "Fruit fly traps are 85% of UK sales, 93% of US sales and 75% of German sales.",
+  "Off-season sales (Nov–Feb) as a share of peak (Jul–Aug): UK 15%, US 27%, Germany 39%.",
+  "Germany's new launches work: the ant spray did €113k in its first season (March–September) at a ~30% margin, and cockroach sales were up 223% in Jul–Aug.",
+  "Several small products lose money in most months: UK mosquito spray (−18% margin), German silverfish (−3%) and moth (−8%), US fungus gnat and cockroach (~0%).",
+  "German silverfish demand is large (“silberfische bekämpfen”: 177k searches Jun–Sep) but we take 0.3% of purchases. Germans search for bait boxes (“Köderdose”), not sticky traps.",
+  "The UK has no ant product, while UK ant searches reached ~140k a month in spring.",
+];
+const pfMatters = "Concentration makes the UK and US highly seasonal and exposed to one listing. The tail won't move the headline numbers, but every loss-making product takes budget and attention from the ones that work.";
+const pfDo = [
+  "Triage every tail product: scale, fix or stop.",
+  "Port proven German launches (ant spray) to the UK for spring 2027.",
+  "Match product format to local search behaviour, for example a bait-box format for German silverfish.",
+];
+const pfMeasure = ["Profit by product", "Share of sales outside fruit fly", "Off-season revenue"];
+
+const findings = [
+  { id: "f-uk", num: "01", tag: "United Kingdom", title: "Growth is real and profitable, but more of it is now paid for.", found: ukFound, matters: ukMatters, todo: ukDo, measure: ukMeasure },
+  { id: "f-us", num: "02", tag: "United States", title: "Spend has outrun profit.", found: usFound, matters: usMatters, todo: usDo, measure: usMeasure },
+  { id: "f-de", num: "03", tag: "Germany", title: "The most improved market. August showed where it leaks.", found: deFound, matters: deMatters, todo: deDo, measure: deMeasure },
+  { id: "f-fg", num: "04", tag: "Fungus gnat", title: "Germany's winter engine is under-used.", found: fgFound, matters: fgMatters, todo: fgDo, measure: fgMeasure },
+  { id: "f-pf", num: "05", tag: "Portfolio", title: "Two markets run on one product, and the tail loses money.", found: pfFound, matters: pfMatters, todo: pfDo, measure: pfMeasure },
+];
+
+const ukOrganic = [139, 329, 803, 644, 268, 170, 107, 84, 78, 105, 134, 156, 237, 605, 781, 494];
+const ukAd = [88, 199, 319, 94, 158, 88, 50, 40, 36, 50, 58, 69, 98, 282, 566, 410];
+
+const usProfit = [105, 100, 130, 90, 59, 33, 29, 21, 44, 78, 96, 125, 115, 95, 89];
+const usSpend = [51, 49, 62, 64, 19, 17, 17, 14, 22, 29, 40, 62, 85, 90, 65];
+
+const deSkus = [
+  { name: "4-pack", sales: 41.4, spend: 30.2, acos: "24%" },
+  { name: "2-pack", sales: 20.4, spend: 29.2, acos: "42%" },
+  { name: "Gnat 30-pack", sales: 11.5, spend: 23.1, acos: "44%" },
+];
+const usSkus = [
+  { name: "4-pack", sales: 65.3, spend: 83.5, acos: "47%" },
+  { name: "6-pack", sales: 11.8, spend: 0.8, acos: "12%" },
+  { name: "12-pack", sales: 6.7, spend: 0.9, acos: "15%" },
+];
+
+const fgSales = [22.5, 19.7, 21.3, 31.9, 62.8, 73.4, 88.5, 66.7, 52.2, 40.0, 38.5, 37.2, 26.0, 21.4, 14.8];
+const fgSpend = [2.9, 3.3, 3.5, 5.7, 10.4, 10.3, 15.1, 10.1, 7.3, 7.3, 8.6, 11.9, 10.5, 8.0, 3.7];
+
+const demand = [
+  { market: "Germany", fg: 176, ff: 94, ratio: "1.9×", share: "~13%", ffShare: "63%" },
+  { market: "United States", fg: 190, ff: 533, ratio: "0.36×", share: "~3%", ffShare: "11%" },
+  { market: "United Kingdom", fg: 42, ff: 168, ratio: "0.25×", share: "~17%", ffShare: "70%" },
+];
+
+const concentration = [
+  { market: "United States", ff: 93, offPeak: "27%" },
+  { market: "United Kingdom", ff: 85, offPeak: "15%" },
+  { market: "Germany", ff: 75, offPeak: "39%" },
+];
+
+const cpc = [
+  { market: "United Kingdom", from: "£0.60", to: "£0.92", change: "+54%", impr: "+169%", clicks: "+52%" },
+  { market: "United States", from: "$1.64", to: "$2.35", change: "+43%", impr: "+170%", clicks: "+23%" },
+  { market: "Germany", from: "€1.22", to: "€1.61", change: "+32%", impr: "+43%", clicks: "−17%" },
+];
+
+const adFindings = [
+  {
+    num: "A1",
+    title: "Paying for traffic we already own.",
+    found: [
+      "UK: the main 2-pack broad campaign carries 50% Top of Search on terms that already rank #1–2 organically.",
+      "Germany: “Fruchtfliegenfalle” (organic #1) is targeted across several campaigns at 75–100% Top of Search. The 4-pack exact campaign runs at 100%.",
+      "US: the 4-pack “fruit fly killer” campaign runs 75% Top of Search at 71% ACOS ($12.4k spend).",
+    ],
+    matters: "Top of Search premiums on terms we already win push CPC up for traffic that would largely arrive anyway. It lines up with CPC rising 32–54% year on year in all three markets, and with the UK's falling organic share.",
+    todo: [
+      "Step Top of Search down gradually on #1-ranked hero terms, one campaign at a time. Trim, don't kill.",
+      "Hold for 5–7 days between steps and check organic rank, total sales and CPC before the next step.",
+    ],
+    measure: ["CPC", "Organic rank", "Total sales on the term", "TACOS"],
+  },
+  {
+    num: "A2",
+    title: "Budget sits with the wrong products.",
+    found: [
+      "US: one ASIN (the 4-pack) takes ~91% of spend at 43% ACOS and a $2.50 CPC. ASINs with 9.7% of spend deliver 22.3% of sales.",
+      "Germany: the 2-pack uses 38.6% of spend for 34.3% of sales (2.7× ROAS); the 4-pack uses 37.6% for 50.7% (4.1× ROAS).",
+      "Germany: the 30-pack yellow sticky traps take 12.2% of spend at 60% ACOS.",
+      "UK: ~£8.6k sits in campaigns above 50% ACOS, including one at 149%.",
+    ],
+    matters: "This is the same pattern the 15-month view shows: spend share running ahead of sales share on the weaker SKUs, and the strongest SKUs held back.",
+    todo: [
+      "Reallocate incremental budget by SKU return: German 4-pack, US 6- and 12-pack, proven secondaries.",
+      "Cap the over-target products with bids before touching budgets.",
+    ],
+    measure: ["Spend share vs sales share by SKU", "ACOS by SKU", "Profit by SKU"],
+  },
+  {
+    num: "A3",
+    title: "Leakage from broad and irrelevant searches.",
+    found: [
+      "UK: in the 2-pack broad campaign, electric / UV and “fly max” searches spent £131 with 131 clicks and 0 orders. The wider leak is estimated at ~£3.4k and 2,000+ clicks (11 Jul – 9 Sep).",
+      "UK: broad match takes 12.5% of SP spend but delivers 6.5% of sales at 35% ACOS. “redtop fly trap”: 32 clicks, 0 orders.",
+      "Germany: zero-order searches spent €149 across 202 clicks, led by “ninja” and wasp terms.",
+      "US: the wasp nest decoy runs at 99–153% ACOS.",
+    ],
+    matters: "Each leak is small on its own, but together they add up. They also sit in exactly the generic “fly” space the UK now wants to grow into, so they need fixing before we push harder there.",
+    todo: [
+      "Negate electric, UV, zapper, “fly max” and brand-confused terms. Review “redtop fly trap”.",
+      "Give generic “fly” searches their own campaigns so their performance is visible and controlled.",
+    ],
+    measure: ["Zero-order spend", "Share of spend above 50% ACOS", "Broad match ACOS"],
+  },
+  {
+    num: "A4",
+    title: "Proven segments are under-funded.",
+    found: [
+      "UK: SP product (ASIN) targeting takes 11.2% of spend for 18.4% of sales at 9.2× ROAS, from 21k orders.",
+      "US: the low-bid auto campaign spent $87 for $1,833 of sales (21× ROAS, 126 orders).",
+      "UK: the 4-pack exact campaign (7.5× ROAS) runs out of budget during the day. The US “fruit fly traps for indoors” campaign (18% ACOS) is next in line for the same protection.",
+    ],
+    matters: "These are the cheapest sales in the account. Growth should come from here before we pay more for the same top-of-page clicks.",
+    todo: [
+      "Scale ASIN and low-bid auto campaigns, and harvest their best searches into exact.",
+      "Use budget rules only on campaigns that are below target ACOS and capping out.",
+    ],
+    measure: ["Share of spend in efficient segments", "Incremental ACOS", "Orders from harvested terms"],
+  },
+];
+
+const agreement = [
+  { genny: "Top of Search on #1-ranked terms", data: "CPC +32–54% in all three markets. UK organic share down from 71% to 58% in August." },
+  { genny: "DE 4-pack beats the 2-pack", data: "Confirmed across 14 months: 24% vs 42% ACOS, and a higher margin (~45% vs ~37%)." },
+  { genny: "US concentration in one SKU", data: "US profit flat on +75% spend. The 6- and 12-pack are efficient and barely funded." },
+  { genny: "DE yellow sticky traps at 60% ACOS", data: "Summer overspend (62–78% ACOS). The winter picture is the opposite: budget should move, not disappear." },
+];
+
+const checklist = [
+  "Structure and naming: can you tell match type, targeting, ad type and product from the campaign name?",
+  "Match-type coverage: exact, phrase, broad, auto and product targeting, each doing a clear job.",
+  "Budget use: winners that cap out vs campaigns sitting on unspent budget.",
+  "Placement modifiers: Top of Search premiums only where the numbers support them.",
+  "Bid cadence: not so many changes that nothing can be read, not so few that bids drift.",
+  "Negatives and harvesting: search terms that convert get their own targets; those that don't get blocked.",
+];
+
+const levers = [
+  { title: "Bids", body: "Precise, per target. Always the first lever." },
+  { title: "Negatives", body: "Block searches that meet the negation criteria." },
+  { title: "Placements", body: "Only when most targets in a campaign underperform." },
+  { title: "Bidding strategy", body: "“Down only” to cut CPCs across a campaign." },
+  { title: "Budget", body: "Last resort. It cuts winners and losers alike." },
+];
+
+const metrics = [
+  { level: "The business", items: "Profit · total sales · market share" },
+  { level: "The market", items: "TACOS · organic share of sales · off-season revenue" },
+  { level: "The product", items: "Spend share vs sales share · ACOS vs break-even · rank" },
+  { level: "The search term", items: "Impression share vs purchase share · CPC · CTR and CVR vs market" },
+];
+
+const seasons = [
+  { phase: "Pre-season", months: "Mar–May", focus: "Build rank before demand arrives, on tight bids: in 2026, pre-season clicks were the most expensive of the year. Launch new products." },
+  { phase: "Peak", months: "Jun–Sep", focus: "Protect heroes, lift caps on proven winners, watch profit per day." },
+  { phase: "Post-peak", months: "Oct–Nov", focus: "Trim and harvest organic. September 2025 showed how much the UK holds on its own." },
+  { phase: "Off-season", months: "Dec–Feb", focus: "Germany's fungus gnat season. Everywhere else, keep a lean floor." },
+];
+
+const rules = [
+  { when: "We rank #1 organically on a term", then: "Trim Top of Search in steps and watch rank. Never switch it off overnight." },
+  { when: "A product's spend share runs ahead of its sales share", then: "Move incremental budget to the product earning more per pound." },
+  { when: "Impression share rises but purchase share doesn't", then: "Stop buying impressions. Fix relevance, price or listing first." },
+  { when: "Profit per day falls while spend rises", then: "Step back to the last profitable spend level, then scale more slowly." },
+];
+
+const plan = [
+  {
+    num: "1",
+    title: "Days 1–30",
+    subtitle: "Learn, validate, stabilise, quick wins",
+    items: [
+      "Agree break-even and target ACOS per SKU and market with Super Ninja.",
+      "Negate the confirmed leaks (UK electric / UV / fly max; DE “ninja” and wasp terms).",
+      "US: bring the 4-pack's generic terms back under a profit-based ACOS ceiling.",
+      "Germany: rebalance 4-pack vs 2-pack. Fix the 2-pack cap-outs with bids.",
+      "Build the German fungus gnat winter plan, live from early October.",
+      "Set up a weekly review: marketplace → product → search term.",
+    ],
+    measure: "Profit per day back above last year in the US. Zero-order spend down. DE spend share in line with sales share.",
+  },
+  {
+    num: "2",
+    title: "Days 30–60",
+    subtitle: "Optimise, test, refine, prioritise",
+    items: [
+      "Stepped Top of Search tests on UK and German hero terms, with rank tracking.",
+      "Launch 6- and 12-pack campaigns in the US.",
+      "Separate generic “fly” campaigns in the UK, then Germany.",
+      "German fungus gnat push live; 60-pack advertised.",
+      "Tail triage: decide scale, fix or stop for each loss-making product.",
+    ],
+    measure: "CPC down on hero terms with rank held. US share outside the 4-pack rising. DE fungus gnat purchase share rising.",
+  },
+  {
+    num: "3",
+    title: "Days 60–90",
+    subtitle: "Improve workflows, tighten the model, build momentum",
+    items: [
+      "Roll out what worked across markets (product targeting, low-bid auto).",
+      "A seasonal budget calendar per market and product for 2027.",
+      "Weekly decision view built on Super Ninja's own data layer.",
+      "Product inputs for 2027: UK ant spray, German silverfish format, nematodes.",
+      "Pre-season plan for March–May 2027.",
+    ],
+    measure: "TACOS stable or falling while total sales grow. Organic share recovering in the UK. A clear 2027 plan.",
+  },
+];
+
+const dataNotes = [
+  "Monthly exports June 2025 to 23 September 2026 (US and German child-ASIN data from July 2025). September 2026 is a partial month, marked with *.",
+  "Marketplace comparisons are in USD. Market and product figures are in local currency (£, $, €), so exchange rates don't distort year-on-year changes.",
+  "Search Query Performance covers March to September 2026 (UK from April). Weekly data is mapped to months, so edges can overlap by a few days.",
+  "Profit is the product-level profit as reported in the exports.",
+];
+---
+
+<WorkingDoc
+  title="Super Ninja Audit"
+  description="Amazon account audit for Super Ninja: what's carrying the account, where it's leaking, and how we'd run it for the next 90 days."
+>
+  <header
+    class="doc-nav sticky top-0 z-40 bg-ivory/90 backdrop-blur-md border-b border-putty/50"
+    data-doc-nav
+  >
+    <div class="wrap wrap-nav flex items-center justify-between gap-4 md:gap-6 h-14 md:h-16">
+      <div class="flex items-baseline gap-3 shrink-0">
+        <span
+          class="font-serif text-[1.35rem] md:text-[1.45rem] tracking-[0.18em] font-medium leading-none"
+        >
+          MAZ
+        </span>
+        <span
+          class="hidden sm:inline font-sans text-[0.62rem] tracking-[0.22em] uppercase text-moss truncate"
+        >
+          Audit · September 2026
+        </span>
+      </div>
+
+      <nav
+        class="doc-nav-links flex items-center gap-4 md:gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-w-0"
+        aria-label="On this page"
+      >
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="doc-nav-link shrink-0 text-[0.78rem] md:text-[0.85rem] text-moss hover:text-ink transition-colors py-1"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <button class="pdf-btn shrink-0" type="button" data-print>
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M8 2v8m0 0 3-3m-3 3L5 7" />
+          <path d="M2.5 11.5v1a1.5 1.5 0 0 0 1.5 1.5h8a1.5 1.5 0 0 0 1.5-1.5v-1" />
+        </svg>
+        <span class="hidden md:inline">Download&nbsp;PDF</span>
+        <span class="md:hidden">PDF</span>
+      </button>
+    </div>
+    <span class="progress" aria-hidden="true">
+      <span class="progress-fill" data-progress></span>
+    </span>
+  </header>
+
+  <main class="pb-8">
+    {/* 1. Opening */}
+    <section id="overview" class="wrap scroll-mt-16 pt-14 md:pt-20 pb-4">
+      <div data-reveal>
+        <p class="eyebrow">Super Ninja × MAZ · Account audit</p>
+        <h1 class="mt-4 text-balance">What's carrying Super Ninja, and where it's leaking</h1>
+        <p class="mt-5 text-[1.1rem] md:text-[1.18rem] leading-relaxed text-moss max-w-[54ch]">
+          We looked at 15 months of sales, profit, advertising and search data
+          across the UK, Germany and the US. This is what matters most, and how
+          we would act on it.
+        </p>
+      </div>
+
+      <ol class="agenda" data-reveal style="--reveal-delay: 120ms">
+        {
+          agenda.map((item) => (
+            <li>
+              <span class="agenda-num stat-figure">{item.num}</span>
+              <span class="agenda-title">{item.title}</span>
+              <span class="agenda-meta">
+                {item.time} · {item.who}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section id="account" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">1 · Opening · 5 min · The account</p>
+        <p class="doc-p mt-5">
+          Over the last twelve months (September 2025 to August 2026), Super
+          Ninja sold <strong>$18.9M</strong> across 12 stores. The UK, Germany
+          and the US make up <strong>79% of sales</strong> and
+          <strong>82% of ad spend</strong>, so that's where we have focused.
+        </p>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-3 my-8">
+        {
+          markets.map((m, i) => (
+            <div class="card p-6" data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+              <p class="member-role">{m.name}</p>
+              <div class="kpis">
+                <div>
+                  <p class="kpi stat-figure">{m.sales}</p>
+                  <p class="kpi-label">of sales</p>
+                </div>
+                <div>
+                  <p class="kpi stat-figure">{m.spend}</p>
+                  <p class="kpi-label">of ad spend</p>
+                </div>
+                <div>
+                  <p class="kpi stat-figure">{m.tacos}</p>
+                  <p class="kpi-label">TACOS</p>
+                </div>
+              </div>
+              <p class="mt-4 text-[0.92rem] leading-relaxed text-moss">{m.note}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="evidence" data-reveal>
+        <p class="eyebrow evidence-eyebrow">Monthly sales by marketplace (USD, thousands)</p>
+        <LineChart
+          labels={monthLabels}
+          unit="$"
+          suffix="k"
+          partialFrom={15}
+          ariaLabel="Monthly sales by marketplace, June 2025 to September 2026"
+          series={[
+            { name: "United Kingdom", values: marketSales.UK, color: INK },
+            { name: "Germany", values: marketSales.DE, color: GOLD },
+            { name: "United States", values: marketSales.US, color: MOSS, dashed: true },
+          ]}
+          caption="A sharp summer peak in the UK. The US runs flatter and later. Germany holds up through winter. *September 2026 covers the 1st–23rd."
+        />
+      </div>
+    </section>
+
+    <section id="approach" class="doc-section wrap">
+      <div data-reveal>
+        <p class="eyebrow">How we think</p>
+        <p class="doc-p mt-5">
+          We look at the account on two levels. The strategic layer decides
+          where the business should grow and what it can afford. The PPC layer
+          makes the changes that move it there. Each one feeds the other.
+        </p>
+      </div>
+      <div class="flow" data-reveal style="--reveal-delay: 80ms">
+        Strategy → PPC execution → Results → Learn and adjust
+      </div>
+
+      <p class="eyebrow mt-10" data-reveal>How we would manage it</p>
+      <div class="stages mt-8">
+        {
+          principles.map((p, i) => (
+            <div class="stage" data-reveal style={`--reveal-delay: ${i * 60}ms`}>
+              <p class="eyebrow stage-eyebrow">
+                <span class="stage-num stat-figure">{i + 1}</span> · {p.title}
+              </p>
+              <p class="doc-p mt-3">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="statement" data-reveal>
+        We judge advertising on profit and total sales, not on ad sales alone.
+      </p>
+    </section>
+
+    {/* 2. Our view */}
+    <section id="view" class="doc-section wrap scroll-mt-16">
+      <div data-reveal>
+        <p class="eyebrow">2 · Our view · 5 min</p>
+        <h2 class="mt-4 text-balance">Five things that matter most</h2>
+      </div>
+      <ol class="view-list mt-8">
+        {
+          view.map((v, i) => (
+            <li class="card view-card p-6 md:p-7" data-reveal style={`--reveal-delay: ${i * 50}ms`}>
+              <div class="view-head">
+                <span class="stat-figure view-num">{v.num}</span>
+                <span class="member-role !mb-0">{v.tag}</span>
+              </div>
+              <div class="view-body">
+                <div>
+                  <h3 class="text-[1.2rem] md:text-[1.3rem] leading-snug text-balance">
+                    <a href={`#${findings[i].id}`} class="view-link">{v.title}</a>
+                  </h3>
+                  <p class="mt-2 text-[0.95rem] leading-relaxed text-moss">{v.body}</p>
+                </div>
+                <div class="view-stat">
+                  <p class="stat-figure view-stat-num">{v.stat}</p>
+                  <p class="kpi-label">{v.statLabel}</p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    {/* 3. Findings */}
+    <section id="findings" class="doc-section wrap scroll-mt-16">
+      <div data-reveal>
+        <p class="eyebrow">3 · Findings in detail · 10–20 min</p>
+        <h2 class="mt-4 text-balance">What we found, and what we'd do about it</h2>
+        <p class="doc-p mt-5">
+          Each finding follows the same shape: what we found, why it matters,
+          what we would do, how we would measure it, and the evidence.
+        </p>
+      </div>
+
+      {
+        findings.map((f) => (
+          <article id={f.id} class="finding scroll-mt-16">
+            <div data-reveal>
+              <p class="eyebrow finding-eyebrow">
+                <span class="stat-figure finding-num">{f.num}</span> · {f.tag}
+              </p>
+              <h3 class="finding-title text-balance">{f.title}</h3>
+            </div>
+
+            <p class="part-label" data-reveal>What we found</p>
+            <ul class="doc-list" data-reveal>
+              {f.found.map((item) => <li>{item}</li>)}
+            </ul>
+
+            <div class="evidence" data-reveal>
+              <p class="eyebrow evidence-eyebrow">Evidence</p>
+
+              {f.id === "f-uk" && (
+                <BarChart
+                  labels={monthLabels}
+                  stacked
+                  unit="£"
+                  suffix="k"
+                  partialFrom={15}
+                  highlight={[2, 3, 14, 15]}
+                  ariaLabel="UK monthly organic versus ad-attributed sales"
+                  series={[
+                    { name: "Organic sales", values: ukOrganic, color: INK },
+                    { name: "Ad-attributed sales", values: ukAd, color: GOLD },
+                  ]}
+                  caption="UK sales (£k). August and September highlighted: organic sales flat or lower year on year, while ad-attributed sales rose sharply (+77% in August). September 2025 ran on ~£570 a day of ads."
+                />
+              )}
+
+              {f.id === "f-us" && (
+                <BarChart
+                  labels={fromJul}
+                  unit="$"
+                  suffix="k"
+                  partialFrom={14}
+                  highlight={[11, 12, 13]}
+                  ariaLabel="US monthly profit versus ad spend"
+                  series={[
+                    { name: "Profit", values: usProfit, color: INK },
+                    { name: "Ad spend", values: usSpend, color: GOLD },
+                  ]}
+                  caption="US profit and ad spend ($k). From June to August 2026, spend rose from $62k to $90k while profit fell from $125k to $95k."
+                />
+              )}
+
+              {f.id === "f-us" && (
+                <div class="split mt-8">
+                  <p class="split-title">Share of US ad spend vs share of sales (12 months)</p>
+                  {usSkus.map((s) => (
+                    <div class="split-row">
+                      <span class="split-name">{s.name}</span>
+                      <div class="split-bars">
+                        <span class="split-bar split-bar--sales" style={`--w: ${s.sales}%`}>
+                          <span>{s.sales}% sales</span>
+                        </span>
+                        <span class="split-bar split-bar--spend" style={`--w: ${s.spend}%`}>
+                          <span>{s.spend}% spend</span>
+                        </span>
+                      </div>
+                      <span class="split-acos">ACOS {s.acos}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {f.id === "f-de" && (
+                <div class="split">
+                  <p class="split-title">Share of German ad spend vs share of sales (12 months)</p>
+                  {deSkus.map((s) => (
+                    <div class="split-row">
+                      <span class="split-name">{s.name}</span>
+                      <div class="split-bars">
+                        <span class="split-bar split-bar--sales" style={`--w: ${s.sales}%`}>
+                          <span>{s.sales}% sales</span>
+                        </span>
+                        <span class="split-bar split-bar--spend" style={`--w: ${s.spend}%`}>
+                          <span>{s.spend}% spend</span>
+                        </span>
+                      </div>
+                      <span class="split-acos">ACOS {s.acos}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {f.id === "f-de" && (
+                <div class="stat-row mt-8">
+                  <div>
+                    <p class="stat-figure stat-big">33k → 16k</p>
+                    <p class="kpi-label">4-pack ad clicks, Aug 2025 → Aug 2026</p>
+                  </div>
+                  <div>
+                    <p class="stat-figure stat-big">€13k → €31k</p>
+                    <p class="kpi-label">2-pack ad spend, same months (42% ACOS)</p>
+                  </div>
+                  <div>
+                    <p class="stat-figure stat-big">−26%</p>
+                    <p class="kpi-label">4-pack sales in August</p>
+                  </div>
+                </div>
+              )}
+
+              {f.id === "f-fg" && (
+                <BarChart
+                  labels={fromJul}
+                  unit="€"
+                  suffix="k"
+                  partialFrom={14}
+                  highlight={[11, 12, 13]}
+                  ariaLabel="Germany fungus gnat monthly sales and ad spend"
+                  series={[
+                    { name: "Fungus gnat sales", values: fgSales, color: INK },
+                    { name: "Ad spend", values: fgSpend, color: GOLD },
+                  ]}
+                  caption="Germany fungus gnat (€k). Sales peak November–March. Summer 2026 ad spend (highlighted) stayed near winter levels while sales halved, at 62–78% ACOS."
+                />
+              )}
+
+              {f.id === "f-fg" && (
+                <div class="table-wrap mt-8">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Market</th>
+                        <th>Fungus gnat searches / month</th>
+                        <th>Fruit fly searches / month</th>
+                        <th>Ratio</th>
+                        <th>Our fungus gnat purchase share</th>
+                        <th>Our fruit fly purchase share</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {demand.map((d) => (
+                        <tr>
+                          <td>{d.market}</td>
+                          <td>{d.fg}k</td>
+                          <td>{d.ff}k</td>
+                          <td class="accent">{d.ratio}</td>
+                          <td>{d.share}</td>
+                          <td>{d.ffShare}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p class="chart-caption">
+                    Search Query Performance, March–August 2026 averages (UK from April). Winter months, when fungus gnat peaks, are not yet in the data.
+                  </p>
+                </div>
+              )}
+
+              {f.id === "f-pf" && (
+                <div class="split">
+                  <p class="split-title">Fruit fly share of sales, and off-season sales as % of peak</p>
+                  {concentration.map((c) => (
+                    <div class="split-row">
+                      <span class="split-name">{c.market}</span>
+                      <div class="split-bars">
+                        <span class="split-bar split-bar--sales" style={`--w: ${c.ff}%`}>
+                          <span>{c.ff}% fruit fly</span>
+                        </span>
+                      </div>
+                      <span class="split-acos">Off-season {c.offPeak}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div class="grid gap-5 md:grid-cols-2 mt-8">
+              <div data-reveal>
+                <p class="part-label">Why it matters</p>
+                <p class="doc-p mt-3">{f.matters}</p>
+              </div>
+              <div data-reveal style="--reveal-delay: 60ms">
+                <p class="part-label">What we'd do</p>
+                <ul class="doc-list doc-list--tight">
+                  {f.todo.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+            </div>
+
+            <div class="measure" data-reveal>
+              <p class="part-label">How we measure it</p>
+              <ul class="chips">
+                {f.measure.map((m) => <li>{m}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </section>
+
+    {/* 4. Amazon Ads findings */}
+    <section id="ads" class="doc-section wrap scroll-mt-16">
+      <div data-reveal>
+        <p class="eyebrow">4 · Amazon Ads findings · 10–15 min · Genny</p>
+        <h2 class="mt-4 text-balance">Where spend is leaking, and where it can work harder</h2>
+        <p class="doc-p mt-5">
+          Genny reviewed campaigns, search terms and placements for 11 July to
+          9 September 2026. Her campaign-level view and our 15-month view point
+          the same way. The PPC findings explain <em>how</em> the high-level
+          patterns happen.
+        </p>
+      </div>
+
+      <div class="evidence" data-reveal>
+        <p class="eyebrow evidence-eyebrow">The backdrop: paying more for less relevant traffic</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Jul–Aug, year on year</th>
+                <th>CPC</th>
+                <th>Change</th>
+                <th>Impressions</th>
+                <th>Clicks</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                cpc.map((c) => (
+                  <tr>
+                    <td>{c.market}</td>
+                    <td>
+                      {c.from} → {c.to}
+                    </td>
+                    <td class="accent">{c.change}</td>
+                    <td>{c.impr}</td>
+                    <td>{c.clicks}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        <p class="chart-caption">
+          Impressions rose far faster than clicks in every market, and click-through rate fell by 42–55%. The accounts are paying more per click and reaching broader, lower-intent placements.
+        </p>
+      </div>
+
+      {
+        adFindings.map((a) => (
+          <article class="ad-finding card p-6 md:p-8" data-reveal>
+            <p class="eyebrow finding-eyebrow">
+              <span class="stat-figure finding-num">{a.num}</span> · PPC finding
+            </p>
+            <h3 class="mt-3 text-[1.3rem] md:text-[1.45rem] text-balance">{a.title}</h3>
+
+            <p class="part-label mt-6">What we found</p>
+            <ul class="doc-list doc-list--card">
+              {a.found.map((item) => <li>{item}</li>)}
+            </ul>
+
+            <div class="grid gap-5 md:grid-cols-2 mt-4">
+              <div>
+                <p class="part-label">Why it matters</p>
+                <p class="doc-p mt-3 text-[0.97rem]">{a.matters}</p>
+              </div>
+              <div>
+                <p class="part-label">What we'd do</p>
+                <ul class="doc-list doc-list--card doc-list--tight">
+                  {a.todo.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+            </div>
+
+            <p class="part-label mt-4">How we measure it</p>
+            <ul class="chips chips--card">
+              {a.measure.map((m) => <li>{m}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+
+      <div class="mt-12" data-reveal>
+        <p class="eyebrow">Bringing the two together</p>
+        <div class="table-wrap mt-5">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Genny's finding (Jul–Sep)</th>
+                <th>What the 15-month view adds</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                agreement.map((row) => (
+                  <tr>
+                    <td>{row.genny}</td>
+                    <td>{row.data}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="build my-10" data-reveal>
+        <p class="eyebrow build-eyebrow">One adjustment</p>
+        <p class="doc-p mt-3">
+          The German 2-pack campaign runs out of budget by around 4pm. The
+          instinct is a budget rule. The 15-month view says the 2-pack is the
+          weaker SKU (42% ACOS against 24% for the 4-pack). So we fix its bids
+          and give the headroom to the 4-pack.
+        </p>
+      </div>
+
+      <div data-reveal>
+        <p class="eyebrow">What we check in every account</p>
+      </div>
+      <ul class="doc-list" data-reveal style="--reveal-delay: 70ms">
+        {checklist.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    {/* 5. How we make decisions */}
+    <section id="decisions" class="doc-section wrap scroll-mt-16">
+      <div data-reveal>
+        <p class="eyebrow">5 · How we make decisions · 10 min</p>
+        <h2 class="mt-4 text-balance">Every change answers one question</h2>
+      </div>
+      <p class="statement" data-reveal>Does this make more profitable sales?</p>
+
+      <div data-reveal>
+        <p class="eyebrow mt-10">What we watch, top down</p>
+      </div>
+      <div class="metric-stack mt-6" data-reveal style="--reveal-delay: 70ms">
+        {
+          metrics.map((m, i) => (
+            <div class="metric-row" style={`--indent: ${i}`}>
+              <span class="metric-level">{m.level}</span>
+              <span class="metric-items">{m.items}</span>
+            </div>
+          ))
+        }
+      </div>
+      <p class="doc-p mt-6" data-reveal>
+        ACOS tells us how efficient a click or a campaign is. TACOS and organic
+        share tell us whether advertising is growing the business or just
+        replacing sales we would have had anyway. Profit is the final word.
+      </p>
+
+      <div data-reveal>
+        <p class="eyebrow mt-12">When a product is over target, we pull levers in this order</p>
+      </div>
+      <ol class="levers mt-6" data-reveal style="--reveal-delay: 70ms">
+        {
+          levers.map((l, i) => (
+            <li>
+              <span class="stat-figure lever-num">{String(i + 1).padStart(2, "0")}</span>
+              <span class="lever-title">{l.title}</span>
+              <span class="lever-body">{l.body}</span>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="doc-p mt-6" data-reveal>
+        Before any of that, we diagnose. Stock, price, reviews and listing
+        changes move rank and conversion more often than bids do, so we rule
+        them out first.
+      </p>
+
+      <div data-reveal>
+        <p class="eyebrow mt-12">A seasonal operating model</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 mt-6">
+        {
+          seasons.map((s, i) => (
+            <div class="card p-6" data-reveal style={`--reveal-delay: ${i * 60}ms`}>
+              <p class="member-role">{s.months}</p>
+              <h3 class="text-[1.2rem]">{s.phase}</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-moss">{s.focus}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div data-reveal>
+        <p class="eyebrow mt-12">Rules we'd apply to Super Ninja</p>
+      </div>
+      <div class="table-wrap mt-5" data-reveal style="--reveal-delay: 70ms">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>We</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rules.map((r) => (
+                <tr>
+                  <td>{r.when}</td>
+                  <td>{r.then}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {/* 6. 30 / 60 / 90 */}
+    <section id="plan" class="doc-section wrap scroll-mt-16">
+      <div data-reveal>
+        <p class="eyebrow">6 · How we'd run Super Ninja · 8 min</p>
+        <h2 class="mt-4 text-balance">The next 30, 60 and 90 days</h2>
+      </div>
+
+      <div class="stages mt-10">
+        {
+          plan.map((p, i) => (
+            <div class="stage" data-reveal style={`--reveal-delay: ${i * 60}ms`}>
+              <p class="eyebrow stage-eyebrow">
+                <span class="stage-num stat-figure">{p.num}</span> · {p.title} · {p.subtitle}
+              </p>
+              <ul class="doc-list doc-list--tight mt-3">
+                {p.items.map((item) => <li>{item}</li>)}
+              </ul>
+              <p class="plan-measure">
+                <span class="part-label">How we'll know</span>
+                {p.measure}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <h2 class="closing" data-reveal>
+        Clear decisions, and a strong operating plan.
+      </h2>
+      <p class="doc-p" data-reveal>
+        The goal of this audit isn't to show how much analysis we did. It's to
+        show we can turn it into the right next move for each market.
+      </p>
+    </section>
+
+    <section class="doc-section wrap" aria-label="Notes on the data">
+      <div data-reveal>
+        <p class="eyebrow">Notes on the data</p>
+      </div>
+      <ul class="doc-list doc-list--notes" data-reveal>
+        {dataNotes.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  </main>
+
+  <footer
+    class="wrap border-t border-putty mt-14 pt-7 pb-16 flex flex-wrap justify-between gap-x-6 gap-y-2 text-[0.82rem] tracking-[0.06em] text-moss"
+  >
+    <span>MAZ · wearemaz.com</span>
+    <span>Prepared for Super Ninja · September 2026</span>
+  </footer>
+</WorkingDoc>
+
+<style>
+  .wrap {
+    width: 100%;
+    max-width: 58rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  .wrap-nav {
+    max-width: 72rem;
+  }
+
+  .doc-nav-links {
+    padding-left: 1.15rem;
+    padding-right: 0.35rem;
+  }
+
+  @media (min-width: 768px) {
+    .doc-nav-links {
+      padding-left: 0.25rem;
+      padding-right: 0;
+    }
+  }
+
+  .doc-section {
+    position: relative;
+    padding-top: clamp(3rem, 2rem + 3vw, 4rem);
+    margin-top: clamp(2.5rem, 1.5rem + 3vw, 3.5rem);
+    scroll-margin-top: 4.5rem;
+  }
+
+  .doc-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-putty);
+    transform-origin: left center;
+  }
+
+  :global(html.js-anim) .doc-section::after {
+    transform: scaleX(0);
+    transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  :global(html.js-anim) .doc-section:has(.is-visible)::after {
+    transform: scaleX(1);
+  }
+
+  .doc-p {
+    max-width: 62ch;
+    margin-bottom: 0.85rem;
+    line-height: 1.65;
+  }
+
+  /* --- Agenda --- */
+  .agenda {
+    list-style: none;
+    padding: 0;
+    margin: 2.4rem 0 0;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--color-putty);
+  }
+
+  .agenda li {
+    display: grid;
+    grid-template-columns: 2rem 1fr auto;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-putty);
+  }
+
+  .agenda-num {
+    color: var(--color-gold);
+    font-size: 1.05rem;
+  }
+
+  .agenda-title {
+    font-family: var(--font-serif);
+    font-size: 1.08rem;
+  }
+
+  .agenda-meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+    text-align: right;
+  }
+
+  /* --- Lists: gold dot + hairline dividers --- */
+  .doc-list {
+    list-style: none;
+    margin: 1.1rem 0 1.4rem;
+    padding: 0;
+  }
+
+  .doc-list li {
+    position: relative;
+    padding: 0.55rem 0 0.55rem 1.65rem;
+    border-bottom: 1px solid var(--color-putty);
+    max-width: 66ch;
+    line-height: 1.55;
+  }
+
+  .doc-list li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 1.1em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    transition: transform 0.3s ease;
+  }
+
+  .doc-list li:hover::before {
+    transform: scale(1.35);
+  }
+
+  .doc-list--tight {
+    margin-top: 0.6rem;
+  }
+
+  .doc-list--tight li {
+    font-size: 0.97rem;
+  }
+
+  .doc-list--card li {
+    border-bottom-color: color-mix(in srgb, var(--color-ink) 10%, transparent);
+    font-size: 0.97rem;
+  }
+
+  .doc-list--notes li {
+    font-size: 0.9rem;
+    color: var(--color-moss);
+  }
+
+  :global(html.js-anim) .doc-list[data-reveal] li {
+    opacity: 0;
+    transform: translateY(7px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  :global(html.js-anim) .doc-list[data-reveal].is-visible li {
+    opacity: 1;
+    transform: none;
+  }
+
+  :global(html.js-anim) .doc-list[data-reveal].is-visible li:nth-child(1) { transition-delay: 40ms; }
+  :global(html.js-anim) .doc-list[data-reveal].is-visible li:nth-child(2) { transition-delay: 80ms; }
+  :global(html.js-anim) .doc-list[data-reveal].is-visible li:nth-child(3) { transition-delay: 120ms; }
+  :global(html.js-anim) .doc-list[data-reveal].is-visible li:nth-child(4) { transition-delay: 160ms; }
+  :global(html.js-anim) .doc-list[data-reveal].is-visible li:nth-child(5) { transition-delay: 200ms; }
+  :global(html.js-anim) .doc-list[data-reveal].is-visible li:nth-child(6) { transition-delay: 240ms; }
+
+  /* --- Statement + closing lines with gold draw-in underline --- */
+  .statement {
+    font-family: var(--font-serif);
+    font-weight: 450;
+    font-size: clamp(1.5rem, 1rem + 1.8vw, 2rem);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin: 1.6rem 0;
+    max-width: 28ch;
+    text-wrap: balance;
+  }
+
+  .closing {
+    font-size: clamp(1.75rem, 1.1rem + 2.4vw, 2.5rem);
+    line-height: 1.15;
+    margin: 2.4rem 0 1.1rem;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  .statement::after,
+  .closing::after {
+    content: "";
+    display: block;
+    margin-top: 0.9rem;
+    width: 3.5rem;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--color-gold);
+    transform-origin: left center;
+  }
+
+  :global(html.js-anim) .statement::after,
+  :global(html.js-anim) .closing::after {
+    transform: scaleX(0);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
+  }
+
+  :global(html.js-anim) .statement:global(.is-visible)::after,
+  :global(html.js-anim) .closing:global(.is-visible)::after {
+    transform: scaleX(1);
+  }
+
+  .flow {
+    font-family: var(--font-serif);
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    text-align: center;
+    margin: 2.1rem 0;
+    font-size: clamp(1.2rem, 0.95rem + 1.3vw, 1.55rem);
+  }
+
+  :global(html.js-anim) .flow {
+    letter-spacing: 0.018em;
+  }
+
+  :global(html.js-anim) .flow.is-visible {
+    letter-spacing: -0.01em;
+    transition: letter-spacing 1.15s ease;
+  }
+
+  /* --- Cards --- */
+  .card {
+    background: var(--color-champagne);
+    border-radius: var(--radius-md);
+    border: 1px solid color-mix(in srgb, var(--color-putty) 60%, transparent);
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 34px -22px rgba(30, 42, 36, 0.45);
+    }
+  }
+
+  .member-role {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+
+  .kpi {
+    font-size: clamp(1.3rem, 1rem + 0.8vw, 1.6rem);
+    color: var(--color-ink);
+  }
+
+  .kpi-label {
+    margin-top: 0.3rem;
+    font-size: 0.74rem;
+    line-height: 1.35;
+    color: var(--color-moss);
+  }
+
+  /* --- Our view --- */
+  .view-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .view-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .view-num {
+    color: var(--color-gold);
+    font-size: 1.2rem;
+  }
+
+  .view-body {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  @media (min-width: 640px) {
+    .view-body {
+      grid-template-columns: minmax(0, 1fr) 10rem;
+      align-items: start;
+    }
+  }
+
+  .view-link {
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(var(--color-gold), var(--color-gold));
+    background-size: 0 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s ease;
+  }
+
+  .view-link:hover {
+    background-size: 100% 1px;
+  }
+
+  .view-stat {
+    border-left: 2px solid var(--color-gold);
+    padding-left: 0.9rem;
+  }
+
+  .view-stat-num {
+    font-size: clamp(1.8rem, 1.3rem + 1.4vw, 2.3rem);
+  }
+
+  /* --- Findings --- */
+  .finding {
+    margin-top: clamp(3rem, 2rem + 3vw, 4.5rem);
+    padding-top: clamp(2rem, 1.5rem + 2vw, 2.8rem);
+    border-top: 1px dashed var(--color-putty);
+  }
+
+  .finding-eyebrow {
+    color: var(--color-ink);
+  }
+
+  .finding-num {
+    color: var(--color-gold);
+    font-size: 1.05rem;
+    letter-spacing: 0;
+  }
+
+  .finding-title {
+    margin-top: 0.8rem;
+    font-size: clamp(1.45rem, 1.05rem + 1.5vw, 2rem);
+    line-height: 1.15;
+    max-width: 30ch;
+  }
+
+  .part-label {
+    display: block;
+    margin-top: 1.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+    font-weight: 600;
+  }
+
+  .grid .part-label,
+  .measure .part-label {
+    margin-top: 0;
+  }
+
+  .evidence {
+    margin: 1.8rem 0 0.4rem;
+    padding: clamp(1.2rem, 1rem + 1vw, 1.7rem);
+    background: #fff;
+    border: 1px solid var(--color-putty);
+    border-radius: var(--radius-md);
+  }
+
+  .evidence-eyebrow {
+    margin-bottom: 1rem;
+  }
+
+  .measure {
+    margin-top: 1.4rem;
+  }
+
+  .chips {
+    list-style: none;
+    padding: 0;
+    margin: 0.7rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .chips li {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--color-gold);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    background: var(--color-ivory);
+  }
+
+  .chips--card li {
+    background: color-mix(in srgb, var(--color-ivory) 70%, transparent);
+  }
+
+  /* --- Split bars (spend share vs sales share) --- */
+  .split-title {
+    font-size: 0.85rem;
+    color: var(--color-moss);
+    margin-bottom: 0.9rem;
+  }
+
+  .split-row {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr) 6.5rem;
+    gap: 0.8rem;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-putty) 70%, transparent);
+  }
+
+  .split-name {
+    font-family: var(--font-serif);
+    font-size: 0.98rem;
+  }
+
+  .split-bars {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .split-bar {
+    position: relative;
+    display: block;
+    height: 1.35rem;
+    width: max(calc(var(--w) * 0.72), 0.35rem);
+    border-radius: 3px;
+  }
+
+  .split-bar span {
+    position: absolute;
+    left: calc(100% + 0.45rem);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-size: 0.74rem;
+    color: var(--color-moss);
+  }
+
+  .split-bar--sales {
+    background: var(--color-ink);
+  }
+
+  .split-bar--spend {
+    background: var(--color-gold);
+  }
+
+  .split-acos {
+    font-size: 0.8rem;
+    color: var(--color-moss);
+    text-align: right;
+  }
+
+  @media (max-width: 560px) {
+    .split-row {
+      grid-template-columns: 4.8rem minmax(0, 1fr);
+    }
+
+    .split-acos {
+      grid-column: 2;
+      text-align: left;
+    }
+  }
+
+  .stat-row {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  @media (min-width: 640px) {
+    .stat-row {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .stat-big {
+    font-size: clamp(1.35rem, 1.05rem + 1vw, 1.7rem);
+  }
+
+  /* --- Tables --- */
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .data-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+    padding: 0.5rem 0.75rem 0.6rem 0;
+    border-bottom: 1px solid var(--color-ink);
+    vertical-align: bottom;
+  }
+
+  .data-table td {
+    padding: 0.65rem 0.75rem 0.65rem 0;
+    border-bottom: 1px solid var(--color-putty);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .data-table td.accent {
+    color: var(--color-gold-dark);
+    font-weight: 600;
+  }
+
+  /* --- Ad findings --- */
+  .ad-finding {
+    margin-top: 1.4rem;
+  }
+
+  @media (hover: hover) {
+    .ad-finding:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  /* --- Callout --- */
+  .build {
+    background: var(--color-champagne);
+    border-left: 3px solid var(--color-gold);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 1.4rem 1.7rem 1.1rem;
+  }
+
+  .build-eyebrow {
+    color: var(--color-gold-dark);
+  }
+
+  /* --- Decisions --- */
+  .metric-stack {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.85rem 1.1rem;
+    margin-left: calc(var(--indent) * 1.1rem);
+    background: var(--color-champagne);
+    border-radius: var(--radius-md);
+  }
+
+  .metric-level {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+    font-weight: 600;
+  }
+
+  .metric-items {
+    font-family: var(--font-serif);
+    font-size: 1.02rem;
+  }
+
+  @media (max-width: 560px) {
+    .metric-row {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+      margin-left: 0;
+    }
+  }
+
+  .levers {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+    background: var(--color-putty);
+    border: 1px solid var(--color-putty);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .levers {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  .levers li {
+    background: var(--color-ivory);
+    padding: 1.1rem 1.1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .levers li:last-child {
+    background: color-mix(in srgb, var(--color-champagne) 60%, var(--color-ivory));
+  }
+
+  .lever-num {
+    color: var(--color-gold);
+    font-size: 1.1rem;
+  }
+
+  .lever-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+  }
+
+  .lever-body {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--color-moss);
+  }
+
+  .plan-measure {
+    max-width: 62ch;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--color-moss);
+  }
+
+  .plan-measure .part-label {
+    margin: 0 0 0.3rem;
+  }
+
+  /* --- Stage timeline --- */
+  .stages {
+    position: relative;
+    padding-left: 1.9rem;
+  }
+
+  .stages::before,
+  .stages::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 0.55rem;
+    bottom: 0.4rem;
+    width: 1px;
+  }
+
+  .stages::before {
+    background: var(--color-putty);
+  }
+
+  .stages::after {
+    background: var(--color-gold);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1.35s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+  }
+
+  .stages:has(.is-visible)::after {
+    transform: scaleY(1);
+  }
+
+  .stage {
+    position: relative;
+    padding-bottom: 1.9rem;
+  }
+
+  .stage:last-child {
+    padding-bottom: 0;
+  }
+
+  .stage::before {
+    content: "";
+    position: absolute;
+    left: -1.9rem;
+    top: 0.28rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--color-ivory);
+    border: 2px solid var(--color-gold);
+    transition:
+      background 0.45s ease,
+      box-shadow 0.45s ease;
+  }
+
+  .stage.is-visible::before {
+    background: var(--color-gold);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-gold) 22%, transparent);
+  }
+
+  .stage-eyebrow {
+    color: var(--color-ink);
+  }
+
+  .stage-num {
+    color: var(--color-gold);
+    font-size: 1.05rem;
+    letter-spacing: 0;
+  }
+
+  /* --- Sticky nav extras --- */
+  .doc-nav {
+    transition: box-shadow 0.35s ease;
+  }
+
+  .doc-nav.is-scrolled {
+    box-shadow: 0 10px 28px -20px rgba(30, 42, 36, 0.4);
+  }
+
+  .doc-nav-link {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+    transition:
+      color 0.25s ease,
+      text-decoration-color 0.25s ease;
+  }
+
+  .doc-nav-link.is-active {
+    color: var(--color-ink);
+    text-decoration-color: var(--color-gold);
+  }
+
+  .progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    display: block;
+  }
+
+  .progress-fill {
+    display: block;
+    height: 100%;
+    background: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.1s linear;
+  }
+
+  .pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--color-gold);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .pdf-btn:hover {
+      background: var(--color-gold);
+      color: var(--color-ivory);
+    }
+  }
+
+  /* --- Print --- */
+  @media print {
+    .doc-nav {
+      display: none;
+    }
+
+    .doc-section {
+      padding-top: 1.4rem;
+      margin-top: 1.2rem;
+    }
+
+    .finding,
+    .ad-finding,
+    .evidence {
+      break-inside: avoid;
+    }
+
+    :global(html.js-anim) :global([data-reveal]) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    :global(html.js-anim) .statement::after,
+    :global(html.js-anim) .closing::after,
+    :global(html.js-anim) .doc-section::after {
+      transform: scaleX(1) !important;
+    }
+
+    .stages::after {
+      transform: scaleY(1) !important;
+    }
+
+    :global(html.js-anim) .doc-list[data-reveal] li {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  /* Reveal on scroll */
+  const nodes = [...document.querySelectorAll<HTMLElement>("[data-reveal]")];
+  const show = (el: Element) => el.classList.add("is-visible");
+
+  if (!("IntersectionObserver" in window)) {
+    nodes.forEach(show);
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          show(entry.target);
+          revealObserver.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    for (const node of nodes) revealObserver.observe(node);
+  }
+
+  window.setTimeout(() => nodes.forEach(show), 1500);
+
+  /* Download / print to PDF */
+  document
+    .querySelector<HTMLButtonElement>("[data-print]")
+    ?.addEventListener("click", () => {
+      nodes.forEach(show);
+      window.print();
+    });
+
+  /* Reading progress bar */
+  const fill = document.querySelector<HTMLElement>("[data-progress]");
+  const navBar = document.querySelector<HTMLElement>("[data-doc-nav]");
+  const updateProgress = () => {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    if (fill) fill.style.transform = `scaleX(${max > 0 ? doc.scrollTop / max : 0})`;
+    navBar?.classList.toggle("is-scrolled", doc.scrollTop > 8);
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress, { passive: true });
+  updateProgress();
+
+  /* Active nav link highlighting */
+  const navAnchors = [
+    ...document.querySelectorAll<HTMLAnchorElement>("[data-doc-nav] a[href^='#']"),
+  ];
+  const sections = navAnchors
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((section): section is HTMLElement => Boolean(section));
+
+  const setActive = (id: string) => {
+    for (const link of navAnchors) {
+      const active = link.hash === `#${id}`;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    }
+  };
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible?.target.id) setActive(visible.target.id);
+    },
+    { rootMargin: "-18% 0px -68% 0px", threshold: [0, 0.15, 0.4] },
+  );
+
+  for (const section of sections) sectionObserver.observe(section);
+  if (sections[0]) setActive(sections[0].id);
+
+  navAnchors.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = document.querySelector<HTMLElement>(link.hash);
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", link.hash);
+    });
+  });
+</script>

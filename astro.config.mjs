@@ -10,7 +10,8 @@ export default defineConfig({
     sitemap({
       filter: (page) =>
         !page.includes("/super-ninja-call") &&
-        !page.includes("/super-ninja-proposal"),
+        !page.includes("/super-ninja-proposal") &&
+        !page.includes("/super-ninja-audit"),
     }),
   ],
   image: {
