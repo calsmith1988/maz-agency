@@ -14,15 +14,17 @@ const navLinks = [
   { href: "#ads", label: "Ads" },
   { href: "#decisions", label: "Decisions" },
   { href: "#plan", label: "30 · 60 · 90" },
+  { href: "#scope", label: "Scope" },
 ];
 
 const agenda = [
   { num: "1", title: "Opening", time: "5 min", who: "Calum" },
   { num: "2", title: "Our view", time: "5 min", who: "Calum" },
-  { num: "3", title: "Findings in detail", time: "10–20 min", who: "Calum" },
-  { num: "4", title: "Amazon Ads findings", time: "10–15 min", who: "Genny" },
-  { num: "5", title: "How we make decisions", time: "10 min", who: "Calum" },
-  { num: "6", title: "The next 30 · 60 · 90 days", time: "8 min", who: "Calum + Genny" },
+  { num: "3", title: "Findings in detail", time: "10 min", who: "Calum" },
+  { num: "4", title: "Amazon Ads findings", time: "10–12 min", who: "Genny" },
+  { num: "5", title: "How we make decisions", time: "12 min", who: "Calum" },
+  { num: "6", title: "The next 30 · 60 · 90 days", time: "6 min", who: "Calum + Genny" },
+  { num: "7", title: "Scope and cost", time: "5 min", who: "Calum" },
 ];
 
 const monthLabels = [
@@ -38,147 +40,156 @@ const marketSales = {
 };
 
 const markets = [
-  { name: "United Kingdom", sales: "35%", spend: "26%", tacos: "8.7%", note: "The engine. Most sales, least spend per pound of sales." },
-  { name: "Germany", sales: "24%", spend: "28%", tacos: "13.8%", note: "The most balanced portfolio. Sells through winter." },
-  { name: "United States", sales: "20%", spend: "27%", tacos: "15.2%", note: "The biggest search market, and the most ad-dependent." },
+  { name: "United Kingdom", sales: "37%", spend: "27%", tacos: "8.7%", note: "The most sales, and the lowest ad spend for each pound of sales." },
+  { name: "Germany", sales: "25%", spend: "29%", tacos: "13.8%", note: "The widest product range. Keeps selling through winter." },
+  { name: "United States", sales: "21%", spend: "27%", tacos: "15.2%", note: "The biggest search market, and the most reliant on ads." },
+];
+
+const terms = [
+  { term: "ACOS", meaning: "Ad spend as a share of the sales those ads brought in. Lower is cheaper." },
+  { term: "TACOS", meaning: "Ad spend as a share of all sales, with or without ads." },
+  { term: "CPC", meaning: "Cost per click: what we pay each time someone clicks an ad." },
+  { term: "Organic sales", meaning: "Sales not linked to an ad click, as reported by Amazon." },
 ];
 
 const principles = [
-  { title: "Protect what's working", body: "Never disrupt a profitable product, campaign or term to fix something else." },
-  { title: "Cut obvious waste", body: "Irrelevant searches, spend with no sales, and budget in the wrong place." },
-  { title: "Grow deliberately", body: "Scale what already works before broadening. One clear test at a time." },
+  { title: "Protect what works", body: "Don't break a profitable product, campaign or search term to fix something else." },
+  { title: "Cut clear waste", body: "Searches that aren't for our product, spend with no sales, and budget in the wrong place." },
+  { title: "Grow step by step", body: "Grow what already works first. Test one change at a time." },
 ];
 
 const view = [
   {
     num: "01",
     tag: "United Kingdom",
-    title: "Growth is real and profitable, but more of it is now paid for.",
+    title: "UK sales and profit grew strongly, but more of the sales now come through ads.",
     stat: "+54%",
-    statLabel: "profit, Jul–Aug YoY",
-    body: "Ad spend more than doubled. Profit followed. But organic sales in August were flat year on year, and the share of sales we pay for has jumped.",
+    statLabel: "profit, Jul–Aug vs last year",
+    body: "Ad spend more than doubled and profit rose 54%. But organic sales were flat in August, so a bigger share of sales now comes through ads.",
   },
   {
     num: "02",
     tag: "United States",
-    title: "Spend has outrun profit.",
+    title: "US ad spend rose 75%, but profit rose only 2%.",
     stat: "+2%",
-    statLabel: "profit on +75% spend",
-    body: "Extra spend bought impressions, not market share. CPCs are up 43%, and monthly profit has fallen every month since June.",
+    statLabel: "profit on 75% more ad spend, Jul–Aug",
+    body: "Sales grew, but profit barely moved. Profit fell from June to August. It picked up in September, but is still below last year.",
   },
   {
     num: "03",
     tag: "Germany",
-    title: "The most improved market. August showed where it leaks.",
+    title: "Germany improved the most. August shows where the budget could work harder.",
     stat: "+77%",
-    statLabel: "profit, Jun–Aug YoY",
-    body: "Margins are up sharply. But in peak month the best product lost half its ad traffic while weaker products kept their budgets.",
+    statLabel: "profit, Jun–Aug vs last year",
+    body: "In August, the 4-pack earned the most per euro of ad spend, yet got half the ad clicks it had a year earlier. The 2-pack got more spend.",
   },
   {
     num: "04",
     tag: "Fungus gnat",
-    title: "Germany's winter engine is under-used.",
+    title: "Fungus gnat traps are Germany's winter business, and we're missing much of it.",
     stat: "1.9×",
-    statLabel: "fungus gnat vs fruit fly searches (DE)",
-    body: "Germans search for fungus gnat fixes about twice as often as fruit fly traps. We take about 13% of those purchases, against 63% for fruit fly.",
+    statLabel: "fungus gnat vs fruit fly searches in Germany (indicative)",
+    body: "Germans search for fungus gnat fixes about twice as often as for fruit fly traps. We take about 13% of those purchases, against 63% on fruit fly.",
   },
   {
     num: "05",
-    tag: "Portfolio",
-    title: "Two markets run on one product, and the tail loses money.",
+    tag: "Product range",
+    title: "Fruit fly traps make most of the sales, and some smaller products lose money.",
     stat: "93%",
-    statLabel: "of US sales are fruit fly",
-    body: "Germany's new launches prove diversification works. Meanwhile several small products lose money in most months.",
+    statLabel: "of US sales are fruit fly traps",
+    body: "Germany's newer products show that a wider range can work. Several smaller products lose money in most months.",
   },
 ];
 
 const ukFound = [
-  "Jul–Aug sales up 35% (£1.65M → £2.24M) and profit up 54% (£652k → £1.01M). Every extra £1 of ad spend returned about £3.70 of profit.",
-  "Ad spend up 132% (£72k → £168k). Cost per click up 54% (£0.60 → £0.92). On the 4-pack it went from £0.44 to £1.10.",
-  "Organic sales in August were 3% below last year (£803k → £781k). Organic share of sales fell from 71% to 58% in August and from 87% to 55% in September.",
-  "September 2025 was a natural experiment: ads were cut to about £570 a day, both hero products stayed at #1–2 in category, and 87% of sales came organically.",
-  "We already take about 80% of all purchases on “fruit fly trap”. The next leg of growth is the generic “fly trap / catcher / killer” demand: 2.7M searches in July, where our share climbed from 5% to 14% across the season.",
+  "July–August sales rose 35% on last year (£1.65M to £2.24M). Profit rose 54% (£652k to £1.01M).",
+  "Ad spend rose 132% (£72k to £168k), about £96k more. Profit rose by more than £350k. These figures don't show how much of that profit came from the extra ads.",
+  "The average CPC rose 54% (£0.60 to £0.92). On the 4-pack it went from £0.44 to £1.10.",
+  "Organic sales fell 3% in August (£803k to £781k). Their share of total sales fell from 71% to 58% in August, and from 87% to 55% in September.",
+  "September 2025 is a useful comparison. Ads ran at about £570 a day, both main products stayed #1–2 in their category, and 87% of sales were organic. But demand and competition were different then, so it doesn't tell us what would happen if we cut ads now.",
+  "We already take about 80% of purchases on “fruit fly trap” searches. General “fly trap”, “fly catcher” and “fly killer” searches are five to ten times bigger at peak. Our share of purchases there rose from 5% to 14% over the season.",
 ];
-const ukMatters = "The UK is the profit engine. Spending more has worked so far, but a growing share of sales we used to earn for free is now being bought. If some of that spend is replacing organic sales rather than adding to them, we are paying twice for the same customer.";
+const ukMatters = "The UK makes the most profit, and more ad spend has paid off so far. But a bigger share of sales now comes through ads. We can't yet tell how much of that is extra, and how much we would have sold anyway. We would test it, one campaign at a time.";
 const ukDo = [
-  "Protect the hero campaigns through the rest of the season. No sudden cuts.",
-  "Run a controlled, stepped Top of Search reduction on terms where we already rank #1 organically. One campaign at a time, with rank watched daily.",
-  "Build separate campaigns for generic “fly” demand with their own bids, and negate electric / UV / zapper terms that are not our product.",
-  "Judge the UK on total sales and profit per day, not ad sales.",
+  "Keep the main campaigns running through the rest of the season. No sudden cuts.",
+  "Where we already rank #1 without ads, lower the top-of-search boost in small steps, one campaign at a time. Watch sales and rank every day.",
+  "Give general “fly” searches their own campaigns and bids. Block electric, UV and zapper searches, which aren't our product.",
+  "Judge the UK on total sales and profit per day, not just ad sales.",
 ];
-const ukMeasure = ["Organic share of sales", "Profit per day", "CPC on hero terms", "Organic rank on hero terms", "Purchase share on generic “fly” searches"];
+const ukMeasure = ["Profit per day", "Total sales", "CPC on main search terms", "How often our ads show on main terms", "Rank on main terms", "Organic share (as a guide)"];
 
 const usFound = [
-  "Jul–Aug sales up 29% ($816k → $1.05M) while ad spend rose 75% ($100k → $175k). Profit rose 2% ($205k → $210k). Margin fell from 25% to 20%.",
-  "The extra $75k of spend produced $233k of extra sales and about $5k of extra profit. In August the extra spend lost money.",
-  "Monthly profit peaked in June ($125k on $62k spend) and fell as spend kept climbing ($95k on $90k in August). September is tracking 11% below last year's profit per day on 17% more sales.",
-  "CPC up 43% ($1.64 → $2.35). Impressions up 170%, clicks up only 23%.",
-  "Our impression share on fruit fly searches rose by half (5.2% → 7.9%) while purchase share fell from 12.4% to 9.1%. The spend bought visibility, not share.",
-  "One SKU carries it: the 4-pack takes 83% of ad spend at 47% ACOS and ranks #9–20 in category, not #1. The 6-pack ($18.90) and 12-pack ($37.95) convert at 12–15% ACOS on less than 1% of spend each.",
+  "July–August sales rose 29% on last year ($816k to $1.05M). Ad spend rose 75% ($100k to $175k). Profit rose 2% ($205k to $210k), so margin fell from 25% to 20%.",
+  "Put simply: about $75k more ad spend, $233k more sales, but only $5k more profit. In August alone, spend was higher and profit was lower than a year earlier.",
+  "Monthly profit fell from June ($125k) to August ($95k) while spend rose. September has picked up: profit per day is about 27% above August. It is still about 11% below September 2025, on 17% more sales.",
+  "The average CPC rose 43% ($1.64 to $2.35). Our ads were shown 170% more often, but clicks rose only 23%.",
+  "On the fruit fly searches we track, our ads were seen more often (5.2% to 7.9% of views), but our share of purchases fell (12.4% to 9.1%).",
+  "One product carries the account. The 4-pack takes 83% of ad spend at 47% ACOS, and ranks #9–20 in its category. The 6-pack ($18.90) and 12-pack ($37.95) run at 12–15% ACOS, on less than 1% of spend each.",
 ];
-const usMatters = "The US is the largest fruit fly market we sell into by a distance, and we hold only about 10% of it. Growth there is worth having, but not at a rate where every extra dollar of sales makes almost nothing. Right now we are funding Amazon's CPC inflation, not building share.";
+const usMatters = "The US has the most fruit fly searches of any market, and we take about 10% of purchases on the ones we track. Growth there is worth having, but not if extra sales add almost no profit. The figures don't prove the ads caused this. Prices, costs and the mix of products sold may also have changed.";
 const usDo = [
-  "Set a profit-based ACOS ceiling per SKU and bring the 4-pack's generic terms back under it: bids first, then Top of Search modifiers.",
-  "Stop buying impression share where purchase share isn't following.",
-  "Move incremental budget into the 6-pack and 12-pack, which earn more per order and already convert efficiently.",
-  "Review the August price drop on the 4-pack ($13.96 → $12.95) alongside the ad plan.",
+  "Set a maximum ACOS for each product, based on its profit. Bring the 4-pack's general search terms back under it: bids first, then top-of-search boosts.",
+  "Stop paying to be seen more where it isn't bringing more purchases.",
+  "Test more spend on the 6-pack and 12-pack. Judge it on profit across the whole fruit fly range, not just that pack's ACOS.",
+  "Review the August price drop on the 4-pack ($13.96 to $12.95) alongside the ad plan.",
 ];
-const usMeasure = ["Weekly contribution profit", "TACOS", "Purchase share on “fruit fly traps for indoors”", "CPC", "Share of spend outside the 4-pack"];
+const usMeasure = ["Weekly profit", "TACOS", "Share of purchases on “fruit fly traps for indoors”", "CPC"];
 
 const deFound = [
-  "Jun–Aug sales up 26% (€1.25M → €1.58M) and profit up 77% (€357k → €631k). Margin rose from 28.5% to 40%. In Jul–Aug, organic share of sales rose from 59% to 68%.",
-  "Over the last 12 months the 4-pack delivers 41% of sales on 30% of spend at 24% ACOS. The 2-pack delivers 20% of sales on 29% of spend at 42% ACOS.",
-  "In August 2026, the 4-pack's ad clicks halved year on year (33k → 16k) and its sales fell 26% (€327k → €241k). The 2-pack's spend more than doubled (€13k → €31k) at 42% ACOS, and the fungus gnat trap spent €8k at 76% ACOS.",
-  "Germany was the only one of the three markets where August sales fell year on year (−5%).",
-  "When the 4-pack's budget was pushed in September (€47k in 23 days), it delivered at 25% ACOS and sales recovered. September is running 80% ahead of last year.",
+  "June–August sales rose 26% on last year (€1.25M to €1.58M). Profit rose 77% (€357k to €631k), and margin rose from 28.5% to 40%. In July–August, the organic share of sales rose from 59% to 68%.",
+  "Over 12 months, the 4-pack brought 41% of sales from 30% of ad spend, at 24% ACOS. The 2-pack brought 20% of sales from 29% of spend, at 42% ACOS.",
+  "In August 2026, 4-pack ad clicks halved on last year (33k to 16k), and its sales fell 26% (€327k to €241k). In the same month, 2-pack spend more than doubled (€13k to €31k).",
+  "Germany was the only one of the three markets where August sales fell on last year (−5%).",
+  "In September, 4-pack spend went up (€47k in 23 days) at about 25% ACOS, and sales picked up. September is running 80% ahead of last year.",
 ];
-const deMatters = "Germany shows what good looks like: rising margin, growing organic share and a product range that sells through winter. The August dip was not a demand problem. It was allocation: the most efficient product was under-funded in the most valuable month.";
+const deMatters = "Germany is the healthiest market: margin is up, organic share is up, and sales hold up through winter. August gives us a reason to review where the budget goes. The 4-pack earns more per euro of ad spend, yet its ad clicks fell sharply. Before blaming budgets, we'd also check stock, price and competitors.";
 const deDo = [
-  "Allocate by product return. The 4-pack is funded first in peak; the 2-pack runs to a tighter ACOS ceiling.",
-  "Fix the 2-pack campaign that runs out of budget by 4pm with bids, not a bigger budget.",
-  "Watch spend share against sales share for every major SKU, every week.",
+  "Check the 2-pack's search terms. Lower bids where it pays too much, and test more 4-pack spend in peak.",
+  "The 2-pack campaign runs out of budget by 4pm. Fix its bids first, then decide on budget.",
+  "Each week, compare each main product's share of spend with its share of sales.",
 ];
-const deMeasure = ["Spend share vs sales share by SKU", "4-pack impression share on “Fruchtfliegenfalle”", "ACOS by SKU", "Profit per day in peak"];
+const deMeasure = ["Profit per day in peak", "ACOS by product", "How often the 4-pack shows on “Fruchtfliegenfalle”", "Share of spend vs share of sales (as a guide)"];
 
 const fgFound = [
-  "Fungus gnat is 14% of Germany's sales (€560k over 12 months), against about 6% in the UK and US. In January it was 49% of all German sales, and the 30-pack ranked #1 in category from November to April.",
-  "Search demand: March–August, Germany averaged ~176k fungus gnat searches a month, 1.9× its fruit fly searches. In the US it's 0.36×, in the UK 0.25×.",
-  "Our share of German fungus gnat purchases is about 10–20%, against 63% for fruit fly. Around a third of the searches are for nematodes, a product we don't sell.",
-  "Ads run flat all year instead of following demand. Summer spend of €10–12k a month ran at 62–78% ACOS, cost per click more than doubled (€0.78 → €1.77), and the product made almost no profit from June to August.",
-  "The 60-pack sold €84k over 12 months with no advertising at all.",
-  "In the US, the fungus gnat trap ranks ~#200, the price has been cut from $7.98 to $5.88, and it is losing money. That's an economics problem, not an ads problem.",
+  "Fungus gnat is 14% of German sales (€560k over 12 months), against about 6% in the UK and US. In January it was 49% of all German sales. The 30-pack ranked #1 in its category from November to April.",
+  "From March to August, Germany had about 1.9 fungus gnat searches for every fruit fly search, on the search terms we track. In the US it was 0.36, and in the UK 0.25.",
+  "Our share of German fungus gnat purchases is about 10–20%, against 63% on fruit fly. About a third of those searches are for nematodes, which we don't sell, so the share we can win is smaller than the total.",
+  "Ad spend does change through the year, but summer spend stayed high against much lower sales: €10–12k a month at 62–78% ACOS. The CPC more than doubled (€0.78 to €1.77), and the product made almost no profit from June to August.",
+  "The 60-pack sold €84k over 12 months, with no ad spend recorded against it.",
+  "In the US, the fungus gnat trap ranks around #200. The price was cut from $7.98 to $5.88, and it loses money. Price, pack size and costs need fixing alongside the ads.",
 ];
-const fgMatters = "Fungus gnat is what makes Germany a year-round business: off-season sales hold at 39% of peak, against 15% in the UK. The demand is there, and it's bigger than the fruit fly market. We are only taking a small share of it, and we're spending the budget at the wrong time of year.";
+const fgMatters = "Fungus gnat is what keeps Germany selling all year. Off-season sales hold at 39% of peak, against 15% in the UK. We take a small share of this demand, and we spent heavily in summer, when demand was low.";
 const fgDo = [
-  "Build a seasonal fungus gnat plan for Germany: pull back May–August, build from September, push October–March.",
-  "Advertise the 60-pack and test bundles for heavier users.",
-  "Treat nematode demand as a product question for Super Ninja: stock it, bundle it, or leave it.",
-  "US: fix pack size and price before spending more.",
+  "Bring bids on the main search terms down to what a click is worth, so campaigns stay live all day instead of running out by mid-morning.",
+  "Use last winter as a starting guide. Get stock, listings and campaigns ready before demand rises, then set spend from current searches, sales and profit, not the calendar alone.",
+  "Advertise the 60-pack, and test bundles for heavy users.",
+  "Nematodes are a product question for Super Ninja: stock them, bundle them, or leave them.",
+  "US: fix price and pack size before spending more.",
 ];
-const fgMeasure = ["DE purchase share on “Trauermücken” / “Gelbtafeln” searches", "Winter profit", "ACOS by season", "Off-season sales as % of peak"];
+const fgMeasure = ["CPC and how often we show on main terms", "Share of purchases on “Trauermücken” / “Gelbtafeln” searches", "Winter profit", "ACOS by season"];
 
 const pfFound = [
   "Fruit fly traps are 85% of UK sales, 93% of US sales and 75% of German sales.",
-  "Off-season sales (Nov–Feb) as a share of peak (Jul–Aug): UK 15%, US 27%, Germany 39%.",
-  "Germany's new launches work: the ant spray did €113k in its first season (March–September) at a ~30% margin, and cockroach sales were up 223% in Jul–Aug.",
-  "Several small products lose money in most months: UK mosquito spray (−18% margin), German silverfish (−3%) and moth (−8%), US fungus gnat and cockroach (~0%).",
-  "German silverfish demand is large (“silberfische bekämpfen”: 177k searches Jun–Sep) but we take 0.3% of purchases. Germans search for bait boxes (“Köderdose”), not sticky traps.",
-  "The UK has no ant product, while UK ant searches reached ~140k a month in spring.",
+  "Off-season sales (Nov–Feb) compared with peak (Jul–Aug): UK 15%, US 27%, Germany 39%.",
+  "Germany's newer products work. The ant spray sold €113k in its first season (March–September) at about a 30% margin. Cockroach sales rose 223% in July–August.",
+  "Several small products lose money in most months: UK mosquito spray (−18% margin), German silverfish (−3%) and moth traps (−8%), and US fungus gnat and cockroach (about 0%).",
+  "In summer, Germans search for silverfish fixes about as often as for fruit fly traps, but we take under 1% of those purchases. They mostly search for bait boxes (“Köderdose”), not sticky traps.",
+  "The UK has no ant product. In spring, UK ant searches were two to three times fruit fly searches.",
 ];
-const pfMatters = "Concentration makes the UK and US highly seasonal and exposed to one listing. The tail won't move the headline numbers, but every loss-making product takes budget and attention from the ones that work.";
+const pfMatters = "Relying on one product makes the UK and US very seasonal. The smaller products won't change the totals much, but each one that loses money takes budget and time from the ones that work.";
 const pfDo = [
-  "Triage every tail product: scale, fix or stop.",
-  "Port proven German launches (ant spray) to the UK for spring 2027.",
-  "Match product format to local search behaviour, for example a bait-box format for German silverfish.",
+  "Review each loss-making product: grow it, fix it, or stop advertising it.",
+  "Bring the German ant spray to the UK for spring 2027.",
+  "Match the product to what people search for, for example a bait box for German silverfish.",
 ];
-const pfMeasure = ["Profit by product", "Share of sales outside fruit fly", "Off-season revenue"];
+const pfMeasure = ["Profit by product", "Share of sales outside fruit fly", "Off-season sales"];
 
 const findings = [
-  { id: "f-uk", num: "01", tag: "United Kingdom", title: "Growth is real and profitable, but more of it is now paid for.", found: ukFound, matters: ukMatters, todo: ukDo, measure: ukMeasure },
-  { id: "f-us", num: "02", tag: "United States", title: "Spend has outrun profit.", found: usFound, matters: usMatters, todo: usDo, measure: usMeasure },
-  { id: "f-de", num: "03", tag: "Germany", title: "The most improved market. August showed where it leaks.", found: deFound, matters: deMatters, todo: deDo, measure: deMeasure },
-  { id: "f-fg", num: "04", tag: "Fungus gnat", title: "Germany's winter engine is under-used.", found: fgFound, matters: fgMatters, todo: fgDo, measure: fgMeasure },
-  { id: "f-pf", num: "05", tag: "Portfolio", title: "Two markets run on one product, and the tail loses money.", found: pfFound, matters: pfMatters, todo: pfDo, measure: pfMeasure },
+  { id: "f-uk", num: "01", tag: "United Kingdom", title: view[0].title, found: ukFound, matters: ukMatters, todo: ukDo, measure: ukMeasure },
+  { id: "f-us", num: "02", tag: "United States", title: view[1].title, found: usFound, matters: usMatters, todo: usDo, measure: usMeasure },
+  { id: "f-de", num: "03", tag: "Germany", title: view[2].title, found: deFound, matters: deMatters, todo: deDo, measure: deMeasure },
+  { id: "f-fg", num: "04", tag: "Fungus gnat", title: view[3].title, found: fgFound, matters: fgMatters, todo: fgDo, measure: fgMeasure },
+  { id: "f-pf", num: "05", tag: "Product range", title: view[4].title, found: pfFound, matters: pfMatters, todo: pfDo, measure: pfMeasure },
 ];
 
 const ukOrganic = [139, 329, 803, 644, 268, 170, 107, 84, 78, 105, 134, 156, 237, 605, 781, 494];
@@ -202,9 +213,9 @@ const fgSales = [22.5, 19.7, 21.3, 31.9, 62.8, 73.4, 88.5, 66.7, 52.2, 40.0, 38.
 const fgSpend = [2.9, 3.3, 3.5, 5.7, 10.4, 10.3, 15.1, 10.1, 7.3, 7.3, 8.6, 11.9, 10.5, 8.0, 3.7];
 
 const demand = [
-  { market: "Germany", fg: 176, ff: 94, ratio: "1.9×", share: "~13%", ffShare: "63%" },
-  { market: "United States", fg: 190, ff: 533, ratio: "0.36×", share: "~3%", ffShare: "11%" },
-  { market: "United Kingdom", fg: 42, ff: 168, ratio: "0.25×", share: "~17%", ffShare: "70%" },
+  { market: "Germany", ratio: "1.9", share: "~13%", ffShare: "63%" },
+  { market: "United States", ratio: "0.36", share: "~3%", ffShare: "11%" },
+  { market: "United Kingdom", ratio: "0.25", share: "~17%", ffShare: "70%" },
 ];
 
 const concentration = [
@@ -222,167 +233,194 @@ const cpc = [
 const adFindings = [
   {
     num: "A1",
-    title: "Paying for traffic we already own.",
+    title: "Paying extra to top searches we may already win.",
     found: [
-      "UK: the main 2-pack broad campaign carries 50% Top of Search on terms that already rank #1–2 organically.",
-      "Germany: “Fruchtfliegenfalle” (organic #1) is targeted across several campaigns at 75–100% Top of Search. The 4-pack exact campaign runs at 100%.",
-      "US: the 4-pack “fruit fly killer” campaign runs 75% Top of Search at 71% ACOS ($12.4k spend).",
+      "UK: the main 2-pack broad campaign adds a 50% top-of-search boost (an extra charge to appear first) on terms where we already rank #1–2 without ads.",
+      "Germany: “Fruchtfliegenfalle” (#1 without ads) is targeted by several campaigns with 75–100% boosts. The 4-pack exact campaign uses 100%.",
+      "US: the 4-pack “fruit fly killer” campaign uses a 75% boost, at 71% ACOS ($12.4k spend).",
     ],
-    matters: "Top of Search premiums on terms we already win push CPC up for traffic that would largely arrive anyway. It lines up with CPC rising 32–54% year on year in all three markets, and with the UK's falling organic share.",
+    matters: "These boosts push up the CPC. Ranking #1 without ads makes these campaigns good places to test a lower boost. It doesn't prove the ads aren't needed, so we'd test rather than cut.",
     todo: [
-      "Step Top of Search down gradually on #1-ranked hero terms, one campaign at a time. Trim, don't kill.",
-      "Hold for 5–7 days between steps and check organic rank, total sales and CPC before the next step.",
+      "Lower the boost in small steps, one campaign at a time. Trim it, don't switch it off.",
+      "Wait at least a week between steps, longer if orders are low. Check total sales, rank and CPC before the next step.",
     ],
-    measure: ["CPC", "Organic rank", "Total sales on the term", "TACOS"],
+    measure: ["CPC", "Top-of-search impression share", "Rank without ads", "Total sales on the term", "TACOS"],
   },
   {
     num: "A2",
-    title: "Budget sits with the wrong products.",
+    title: "Budget sits with the lower-return products.",
     found: [
-      "US: one ASIN (the 4-pack) takes ~91% of spend at 43% ACOS and a $2.50 CPC. ASINs with 9.7% of spend deliver 22.3% of sales.",
-      "Germany: the 2-pack uses 38.6% of spend for 34.3% of sales (2.7× ROAS); the 4-pack uses 37.6% for 50.7% (4.1× ROAS).",
-      "Germany: the 30-pack yellow sticky traps take 12.2% of spend at 60% ACOS.",
-      "UK: ~£8.6k sits in campaigns above 50% ACOS, including one at 149%.",
+      "US: the 4-pack takes about 91% of ad spend, at 43% ACOS and $2.50 a click.",
+      "Germany: the 2-pack takes 38.6% of ad spend for 34.3% of ad sales. The 4-pack takes 37.6% of ad spend for 50.7% of ad sales.",
+      "Germany: the 30-pack yellow sticky traps take 12.2% of ad spend at 60% ACOS.",
+      "UK: about £8.6k sits in campaigns above 50% ACOS, including one at 149%.",
     ],
-    matters: "This is the same pattern the 15-month view shows: spend share running ahead of sales share on the weaker SKUs, and the strongest SKUs held back.",
+    matters: "The 12-month data shows the same pattern. Weaker products get more than their share of spend, and the strongest are held back.",
     todo: [
-      "Reallocate incremental budget by SKU return: German 4-pack, US 6- and 12-pack, proven secondaries.",
-      "Cap the over-target products with bids before touching budgets.",
+      "Lower bids on products above their target before touching budgets.",
+      "Then test more spend on the products that return more: the German 4-pack, the US 6- and 12-pack, and proven smaller products.",
     ],
-    measure: ["Spend share vs sales share by SKU", "ACOS by SKU", "Profit by SKU"],
+    measure: ["Profit by product", "ACOS by product", "Share of spend vs share of sales (as a guide)"],
   },
   {
     num: "A3",
-    title: "Leakage from broad and irrelevant searches.",
+    title: "Money spent on searches that aren't for our product.",
     found: [
-      "UK: in the 2-pack broad campaign, electric / UV and “fly max” searches spent £131 with 131 clicks and 0 orders. The wider leak is estimated at ~£3.4k and 2,000+ clicks (11 Jul – 9 Sep).",
-      "UK: broad match takes 12.5% of SP spend but delivers 6.5% of sales at 35% ACOS. “redtop fly trap”: 32 clicks, 0 orders.",
-      "Germany: zero-order searches spent €149 across 202 clicks, led by “ninja” and wasp terms.",
+      "UK: Genny found £131 spent on 69 electric, UV and “fly max” searches, with 131 clicks and no orders. She estimates the wider waste in that campaign at about £3.4k (11 July – 9 September). We'd confirm that search by search before counting it as a saving.",
+      "UK: broad match (ads that show on loosely related searches) takes 12.5% of Sponsored Products ad spend but brings 6.5% of ad sales, at 35% ACOS. “redtop fly trap” had 32 clicks and no orders.",
+      "Germany: searches with no orders cost €149 over 202 clicks, mostly “ninja” and wasp searches.",
       "US: the wasp nest decoy runs at 99–153% ACOS.",
     ],
-    matters: "Each leak is small on its own, but together they add up. They also sit in exactly the generic “fly” space the UK now wants to grow into, so they need fixing before we push harder there.",
+    matters: "Each one is small, but together they add up. They also sit in the general “fly” searches where the UK wants to grow, so we'd fix them first.",
     todo: [
-      "Negate electric, UV, zapper, “fly max” and brand-confused terms. Review “redtop fly trap”.",
-      "Give generic “fly” searches their own campaigns so their performance is visible and controlled.",
+      "Block the exact searches that clearly aren't our product: electric, UV, zapper and “fly max”. Check each block so it doesn't stop good searches too.",
+      "Give general “fly” searches their own campaigns, so we can see and control how they perform.",
     ],
-    measure: ["Zero-order spend", "Share of spend above 50% ACOS", "Broad match ACOS"],
+    measure: ["Spend with no orders", "Share of spend above 50% ACOS", "Broad match ACOS"],
   },
   {
     num: "A4",
-    title: "Proven segments are under-funded.",
+    title: "Low-cost sales worth testing at a bigger scale.",
     found: [
-      "UK: SP product (ASIN) targeting takes 11.2% of spend for 18.4% of sales at 9.2× ROAS, from 21k orders.",
-      "US: the low-bid auto campaign spent $87 for $1,833 of sales (21× ROAS, 126 orders).",
-      "UK: the 4-pack exact campaign (7.5× ROAS) runs out of budget during the day. The US “fruit fly traps for indoors” campaign (18% ACOS) is next in line for the same protection.",
+      "UK: ads that target other products' pages take 11.2% of ad spend and bring 18.4% of ad sales, from 21k orders.",
+      "US: the low-bid automatic campaign spent $87 for $1,833 of ad sales (126 orders).",
+      "UK: the 4-pack exact campaign runs out of budget during the day. The US “fruit fly traps for indoors” campaign (18% ACOS) could be next.",
     ],
-    matters: "These are the cheapest sales in the account. Growth should come from here before we pay more for the same top-of-page clicks.",
+    matters: "These are the cheapest sales in the account. But low spend today doesn't tell us how much more is available at the same cost. We'd first check whether budget or bids are holding them back, then add spend in steps.",
     todo: [
-      "Scale ASIN and low-bid auto campaigns, and harvest their best searches into exact.",
-      "Use budget rules only on campaigns that are below target ACOS and capping out.",
+      "Add spend in steps to product-page and low-bid automatic campaigns. Move their best searches into exact match.",
+      "Only raise budgets on campaigns that are under target ACOS and running out of budget.",
     ],
-    measure: ["Share of spend in efficient segments", "Incremental ACOS", "Orders from harvested terms"],
+    measure: ["Profit from the extra spend", "ACOS on the extra spend", "Orders from the moved searches"],
   },
 ];
 
 const agreement = [
-  { genny: "Top of Search on #1-ranked terms", data: "CPC +32–54% in all three markets. UK organic share down from 71% to 58% in August." },
-  { genny: "DE 4-pack beats the 2-pack", data: "Confirmed across 14 months: 24% vs 42% ACOS, and a higher margin (~45% vs ~37%)." },
-  { genny: "US concentration in one SKU", data: "US profit flat on +75% spend. The 6- and 12-pack are efficient and barely funded." },
-  { genny: "DE yellow sticky traps at 60% ACOS", data: "Summer overspend (62–78% ACOS). The winter picture is the opposite: budget should move, not disappear." },
+  { genny: "Top-of-search boosts on #1-ranked terms", data: "CPC rose 32–54% on last year in all three markets." },
+  { genny: "The German 4-pack does better than the 2-pack", data: "The same over 14 months: 24% vs 42% ACOS, and a higher margin (about 45% vs 37%)." },
+  { genny: "US spend sits in one product", data: "US profit rose 2% on 75% more ad spend. The 6- and 12-pack run at low ACOS on very little spend." },
+  { genny: "German yellow sticky traps at 60% ACOS", data: "Summer spend ran at 62–78% ACOS. Winter is the opposite, so budget should move with the season, not disappear." },
 ];
 
 const checklist = [
-  "Structure and naming: can you tell match type, targeting, ad type and product from the campaign name?",
-  "Match-type coverage: exact, phrase, broad, auto and product targeting, each doing a clear job.",
-  "Budget use: winners that cap out vs campaigns sitting on unspent budget.",
-  "Placement modifiers: Top of Search premiums only where the numbers support them.",
-  "Bid cadence: not so many changes that nothing can be read, not so few that bids drift.",
-  "Negatives and harvesting: search terms that convert get their own targets; those that don't get blocked.",
+  "Naming: can you tell the match type, targeting, ad type and product from the campaign name?",
+  "Coverage: exact, phrase, broad, automatic and product targeting, each with a clear job.",
+  "Budget: which good campaigns run out, and which sit on unspent budget.",
+  "Top-of-search boosts: only where the numbers support them.",
+  "Bid changes: not so many that nothing can be read, not so few that bids drift.",
+  "Searches: ones that sell get their own targets, and ones that don't get blocked.",
 ];
 
 const levers = [
-  { title: "Bids", body: "Precise, per target. Always the first lever." },
-  { title: "Negatives", body: "Block searches that meet the negation criteria." },
-  { title: "Placements", body: "Only when most targets in a campaign underperform." },
-  { title: "Bidding strategy", body: "“Down only” to cut CPCs across a campaign." },
-  { title: "Budget", body: "Last resort. It cuts winners and losers alike." },
+  { title: "Cost per click", body: "Are we paying more than a click is worth? If so, lower the bid." },
+  { title: "Visibility", body: "Are we seen all day, or does the budget run out by mid-morning? Fix it with bids." },
+  { title: "Bid boosts", body: "Is a top-of-search boost pushing the price up on terms we already win?" },
+  { title: "Search waste", body: "Are we paying for searches that don't sell? Block them." },
+  { title: "Budget", body: "Only after the first four. Cutting budget cuts good and bad campaigns alike." },
+];
+
+const onTarget = [
+  "Raise bids on proven search terms where we're rarely seen.",
+  "Move searches that sell into exact match, with their own bids.",
+  "Put spare budget behind the products that earn the most per pound.",
+];
+
+const bidApproach = [
+  { title: "We make the changes", body: "Every bid change is ours, follows written rules, and is logged. We can explain every one." },
+  { title: "One change at a time", body: "At most one change per target per day, based on a longer run of data. Often none for several days while the result settles." },
+  { title: "No dayparting, yet", body: "First, bids that keep key campaigns live all day. Changing bids by time of day is something we'd add later, once the basics are right." },
+];
+
+const countryTiers = [
+  { tier: "Main markets", markets: ["US", "UK", "Germany"], share: "83% of sales · 83% of ad spend", body: "Most of our time. A weekly review from market level down to search terms." },
+  { tier: "Secondary", markets: ["France", "Italy", "Spain"], share: "13% of sales · 15% of ad spend", body: "The same process and rules, with less time. More time where we find real room to grow." },
+  { tier: "Supporting", markets: ["Australia", "Belgium", "Netherlands", "Ireland"], share: "4% of sales · 2% of ad spend", body: "Light checks against agreed limits." },
+];
+
+const scope = [
+  { label: "Set-up (one-off)", value: "TBC", note: "Hours to restructure campaigns and put our rules in place." },
+  { label: "Ongoing management", value: "TBC", note: "Hours per month across main, secondary and supporting markets." },
+  { label: "Monthly cost", value: "TBC", note: "For the scope above." },
 ];
 
 const metrics = [
-  { level: "The business", items: "Profit · total sales · market share" },
-  { level: "The market", items: "TACOS · organic share of sales · off-season revenue" },
-  { level: "The product", items: "Spend share vs sales share · ACOS vs break-even · rank" },
-  { level: "The search term", items: "Impression share vs purchase share · CPC · CTR and CVR vs market" },
+  { level: "The business", items: "Profit · total sales · share of the market" },
+  { level: "The market", items: "TACOS · organic share of sales · off-season sales" },
+  { level: "The product", items: "Share of spend vs share of sales · ACOS vs break-even · rank" },
+  { level: "The search term", items: "How often we're seen vs share of purchases · CPC · click and buy rates vs other sellers" },
 ];
 
 const seasons = [
-  { phase: "Pre-season", months: "Mar–May", focus: "Build rank before demand arrives, on tight bids: in 2026, pre-season clicks were the most expensive of the year. Launch new products." },
-  { phase: "Peak", months: "Jun–Sep", focus: "Protect heroes, lift caps on proven winners, watch profit per day." },
-  { phase: "Post-peak", months: "Oct–Nov", focus: "Trim and harvest organic. September 2025 showed how much the UK holds on its own." },
-  { phase: "Off-season", months: "Dec–Feb", focus: "Germany's fungus gnat season. Everywhere else, keep a lean floor." },
+  { phase: "Pre-season", months: "Mar–May", focus: "Build rank before demand arrives, with tight bids. In 2026, pre-season clicks were the most expensive of the year. Launch new products." },
+  { phase: "Peak", months: "Jun–Sep", focus: "Keep the main products running, give proven campaigns more room, and watch profit per day." },
+  { phase: "Post-peak", months: "Oct–Nov", focus: "Trim spend step by step, and watch how well sales hold up." },
+  { phase: "Off-season", months: "Dec–Feb", focus: "Germany's fungus gnat season. Elsewhere, keep spend at a low base level." },
 ];
 
 const rules = [
-  { when: "We rank #1 organically on a term", then: "Trim Top of Search in steps and watch rank. Never switch it off overnight." },
-  { when: "A product's spend share runs ahead of its sales share", then: "Move incremental budget to the product earning more per pound." },
-  { when: "Impression share rises but purchase share doesn't", then: "Stop buying impressions. Fix relevance, price or listing first." },
-  { when: "Profit per day falls while spend rises", then: "Step back to the last profitable spend level, then scale more slowly." },
+  { when: "We rank #1 without ads on a search term", then: "Test a lower top-of-search boost in steps, and watch sales and rank. Never switch it off overnight." },
+  { when: "A product gets more than its share of spend", then: "Check its profit and search terms, then move extra budget to the product earning more per pound." },
+  { when: "We're seen more, but our share of purchases doesn't rise", then: "Stop paying to be seen more there. Check relevance, price and the listing first." },
+  { when: "Profit per day falls while spend rises", then: "Check price, costs and stock. Then step back to the last profitable spend level and grow more slowly." },
 ];
 
 const plan = [
   {
     num: "1",
     title: "Days 1–30",
-    subtitle: "Learn, validate, stabilise, quick wins",
+    subtitle: "Learn, check, steady the account, quick wins",
     items: [
-      "Agree break-even and target ACOS per SKU and market with Super Ninja.",
-      "Negate the confirmed leaks (UK electric / UV / fly max; DE “ninja” and wasp terms).",
-      "US: bring the 4-pack's generic terms back under a profit-based ACOS ceiling.",
-      "Germany: rebalance 4-pack vs 2-pack. Fix the 2-pack cap-outs with bids.",
-      "Build the German fungus gnat winter plan, live from early October.",
-      "Set up a weekly review: marketplace → product → search term.",
+      "Agree break-even and target ACOS for each product and market with Super Ninja.",
+      "Block the confirmed wasted searches (UK electric, UV and “fly max”; German wasp searches).",
+      "US: bring the 4-pack's general search terms back under a profit-based ACOS limit.",
+      "Germany: review 4-pack vs 2-pack spend. Fix the 2-pack's bids first.",
+      "German fungus gnat: reset bids on the main terms so campaigns run all day, then start the winter plan in early October.",
+      "Set up a weekly review: market, then product, then search term.",
     ],
-    measure: "Profit per day back above last year in the US. Zero-order spend down. DE spend share in line with sales share.",
+    measure: "Targets agreed. Wasted spend down. Starting figures recorded and the first tests running.",
   },
   {
     num: "2",
     title: "Days 30–60",
-    subtitle: "Optimise, test, refine, prioritise",
+    subtitle: "Test, refine, prioritise",
     items: [
-      "Stepped Top of Search tests on UK and German hero terms, with rank tracking.",
-      "Launch 6- and 12-pack campaigns in the US.",
-      "Separate generic “fly” campaigns in the UK, then Germany.",
-      "German fungus gnat push live; 60-pack advertised.",
-      "Tail triage: decide scale, fix or stop for each loss-making product.",
+      "Top-of-search tests on UK and German main terms, tracking rank.",
+      "Test 6- and 12-pack campaigns in the US.",
+      "Separate general “fly” campaigns in the UK, then Germany.",
+      "German fungus gnat winter push live; 60-pack advertised.",
+      "Review each loss-making product: grow, fix or stop.",
     ],
-    measure: "CPC down on hero terms with rank held. US share outside the 4-pack rising. DE fungus gnat purchase share rising.",
+    measure: "First tests judged once there are enough orders. Better profit without losing sales or share. German fungus gnat spend following demand.",
   },
   {
     num: "3",
     title: "Days 60–90",
-    subtitle: "Improve workflows, tighten the model, build momentum",
+    subtitle: "Build on what works",
     items: [
-      "Roll out what worked across markets (product targeting, low-bid auto).",
-      "A seasonal budget calendar per market and product for 2027.",
-      "Weekly decision view built on Super Ninja's own data layer.",
-      "Product inputs for 2027: UK ant spray, German silverfish format, nematodes.",
-      "Pre-season plan for March–May 2027.",
+      "Roll out what worked across markets (product targeting, low-bid automatic campaigns).",
+      "A seasonal budget plan per market and product for 2027.",
+      "A weekly view of the numbers we make decisions on.",
+      "Product ideas for 2027: UK ant spray, a German silverfish bait box, nematodes.",
+      "A pre-season plan for March–May 2027.",
     ],
-    measure: "TACOS stable or falling while total sales grow. Organic share recovering in the UK. A clear 2027 plan.",
+    measure: "Profit and TACOS better than the same season last year. A clear plan for 2027.",
   },
 ];
 
 const dataNotes = [
-  "Monthly exports June 2025 to 23 September 2026 (US and German child-ASIN data from July 2025). September 2026 is a partial month, marked with *.",
-  "Marketplace comparisons are in USD. Market and product figures are in local currency (£, $, €), so exchange rates don't distort year-on-year changes.",
-  "Search Query Performance covers March to September 2026 (UK from April). Weekly data is mapped to months, so edges can overlap by a few days.",
-  "Profit is the product-level profit as reported in the exports.",
+  "Monthly exports from June 2025 to 23 September 2026 (US and German product data from July 2025). September 2026 is part of a month, marked *.",
+  "Amazon stores only. The market split is in US dollars. Market and product figures are in local currency (£, $, €), so exchange rates don't affect changes on last year.",
+  "Profit is the figure in the exports. We'd confirm which costs it includes before setting break-even targets.",
+  "Organic sales are sales not linked to an ad click, as reported by Amazon. They don't tell us which sales the ads created.",
+  "Search data (March–September 2026, UK from April) comes from weekly reports, and the weeks covered vary by search term. We use it for shares and comparisons, not exact search counts.",
+  "Account and product ad spend totals don't fully match. For example, US ad spend for 1–23 September is $77.4k at account level and $65.4k added up by product. We don't mix the two.",
+  "Genny's figures come from her campaign audit, mostly covering 11 July to 9 September 2026. Her spend and sales figures are ad spend and ad sales.",
 ];
 ---
 
 <WorkingDoc
   title="Super Ninja Audit"
-  description="Amazon account audit for Super Ninja: what's carrying the account, where it's leaking, and how we'd run it for the next 90 days."
+  description="Amazon account audit for Super Ninja: what drives sales, where money is wasted, and how we'd run the account for the next 90 days."
 >
   <header
     class="doc-nav sticky top-0 z-40 bg-ivory/90 backdrop-blur-md border-b border-putty/50"
@@ -447,11 +485,11 @@ const dataNotes = [
     <section id="overview" class="wrap scroll-mt-16 pt-14 md:pt-20 pb-4">
       <div data-reveal>
         <p class="eyebrow">Super Ninja × MAZ · Account audit</p>
-        <h1 class="mt-4 text-balance">What's carrying Super Ninja, and where it's leaking</h1>
+        <h1 class="mt-4 text-balance">What drives Super Ninja's sales, and where money is wasted</h1>
         <p class="mt-5 text-[1.1rem] md:text-[1.18rem] leading-relaxed text-moss max-w-[54ch]">
-          We looked at 15 months of sales, profit, advertising and search data
-          across the UK, Germany and the US. This is what matters most, and how
-          we would act on it.
+          We looked at 15 months of Amazon sales, profit, ad and search data for
+          the UK, Germany and the US. Here is what matters most, and what we
+          would do about it.
         </p>
       </div>
 
@@ -474,10 +512,10 @@ const dataNotes = [
       <div data-reveal>
         <p class="eyebrow">1 · Opening · 5 min · The account</p>
         <p class="doc-p mt-5">
-          Over the last twelve months (September 2025 to August 2026), Super
-          Ninja sold <strong>$18.9M</strong> across 12 stores. The UK, Germany
-          and the US make up <strong>79% of sales</strong> and
-          <strong>82% of ad spend</strong>, so that's where we have focused.
+          From September 2025 to August 2026, Super Ninja sold
+          <strong>$18.0M</strong> across 10 Amazon stores. The UK, Germany and
+          the US make up <strong>83% of those sales</strong> and
+          <strong>83% of ad spend</strong>, so that's where we focused.
         </p>
       </div>
 
@@ -519,22 +557,36 @@ const dataNotes = [
             { name: "Germany", values: marketSales.DE, color: GOLD },
             { name: "United States", values: marketSales.US, color: MOSS, dashed: true },
           ]}
-          caption="A sharp summer peak in the UK. The US runs flatter and later. Germany holds up through winter. *September 2026 covers the 1st–23rd."
+          caption="The UK has a sharp summer peak. The US is flatter and peaks later. Germany holds up through winter. *September 2026 covers the 1st–23rd."
         />
       </div>
+
+      <div data-reveal>
+        <p class="eyebrow mt-10">Terms we use</p>
+      </div>
+      <dl class="terms mt-4" data-reveal style="--reveal-delay: 70ms">
+        {
+          terms.map((t) => (
+            <div>
+              <dt>{t.term}</dt>
+              <dd>{t.meaning}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </section>
 
     <section id="approach" class="doc-section wrap">
       <div data-reveal>
         <p class="eyebrow">How we think</p>
         <p class="doc-p mt-5">
-          We look at the account on two levels. The strategic layer decides
-          where the business should grow and what it can afford. The PPC layer
-          makes the changes that move it there. Each one feeds the other.
+          We look at the account on two levels. First, where the business
+          should grow and what it can afford to spend. Second, the day-to-day
+          ad changes that get it there. Each one informs the other.
         </p>
       </div>
       <div class="flow" data-reveal style="--reveal-delay: 80ms">
-        Strategy → PPC execution → Results → Learn and adjust
+        Plan → Make the ad changes → Check the results → Adjust
       </div>
 
       <p class="eyebrow mt-10" data-reveal>How we would manage it</p>
@@ -551,7 +603,7 @@ const dataNotes = [
         }
       </div>
       <p class="statement" data-reveal>
-        We judge advertising on profit and total sales, not on ad sales alone.
+        We judge ads on profit and total sales, not on ad sales alone.
       </p>
     </section>
 
@@ -590,11 +642,11 @@ const dataNotes = [
     {/* 3. Findings */}
     <section id="findings" class="doc-section wrap scroll-mt-16">
       <div data-reveal>
-        <p class="eyebrow">3 · Findings in detail · 10–20 min</p>
+        <p class="eyebrow">3 · Findings in detail · 10 min</p>
         <h2 class="mt-4 text-balance">What we found, and what we'd do about it</h2>
         <p class="doc-p mt-5">
-          Each finding follows the same shape: what we found, why it matters,
-          what we would do, how we would measure it, and the evidence.
+          Each finding has the same parts: what we found, the evidence, why it
+          matters, what we would do, and how we would measure it.
         </p>
       </div>
 
@@ -627,9 +679,9 @@ const dataNotes = [
                   ariaLabel="UK monthly organic versus ad-attributed sales"
                   series={[
                     { name: "Organic sales", values: ukOrganic, color: INK },
-                    { name: "Ad-attributed sales", values: ukAd, color: GOLD },
+                    { name: "Sales linked to ads", values: ukAd, color: GOLD },
                   ]}
-                  caption="UK sales (£k). August and September highlighted: organic sales flat or lower year on year, while ad-attributed sales rose sharply (+77% in August). September 2025 ran on ~£570 a day of ads."
+                  caption="UK sales (£k), split into organic sales and sales linked to ads. In August and September (highlighted), organic sales were flat or lower than last year, while sales linked to ads rose sharply (+77% in August). In September 2025, ads ran at about £570 a day."
                 />
               )}
 
@@ -645,13 +697,13 @@ const dataNotes = [
                     { name: "Profit", values: usProfit, color: INK },
                     { name: "Ad spend", values: usSpend, color: GOLD },
                   ]}
-                  caption="US profit and ad spend ($k). From June to August 2026, spend rose from $62k to $90k while profit fell from $125k to $95k."
+                  caption="US profit and ad spend ($k). From June to August 2026, spend rose from $62k to $90k while profit fell from $125k to $95k. *September covers the 1st–23rd only: profit per day is up 27% on August, but 11% below September 2025."
                 />
               )}
 
               {f.id === "f-us" && (
                 <div class="split mt-8">
-                  <p class="split-title">Share of US ad spend vs share of sales (12 months)</p>
+                  <p class="split-title">Share of US ad spend vs share of total sales (12 months)</p>
                   {usSkus.map((s) => (
                     <div class="split-row">
                       <span class="split-name">{s.name}</span>
@@ -671,7 +723,7 @@ const dataNotes = [
 
               {f.id === "f-de" && (
                 <div class="split">
-                  <p class="split-title">Share of German ad spend vs share of sales (12 months)</p>
+                  <p class="split-title">Share of German ad spend vs share of total sales (12 months)</p>
                   {deSkus.map((s) => (
                     <div class="split-row">
                       <span class="split-name">{s.name}</span>
@@ -718,7 +770,7 @@ const dataNotes = [
                     { name: "Fungus gnat sales", values: fgSales, color: INK },
                     { name: "Ad spend", values: fgSpend, color: GOLD },
                   ]}
-                  caption="Germany fungus gnat (€k). Sales peak November–March. Summer 2026 ad spend (highlighted) stayed near winter levels while sales halved, at 62–78% ACOS."
+                  caption="Germany fungus gnat (€k). Sales peak from November to March. In summer 2026 (highlighted), ad spend stayed close to winter levels while sales halved, at 62–78% ACOS."
                 />
               )}
 
@@ -728,19 +780,15 @@ const dataNotes = [
                     <thead>
                       <tr>
                         <th>Market</th>
-                        <th>Fungus gnat searches / month</th>
-                        <th>Fruit fly searches / month</th>
-                        <th>Ratio</th>
-                        <th>Our fungus gnat purchase share</th>
-                        <th>Our fruit fly purchase share</th>
+                        <th>Fungus gnat searches for each fruit fly search</th>
+                        <th>Our share of fungus gnat purchases</th>
+                        <th>Our share of fruit fly purchases</th>
                       </tr>
                     </thead>
                     <tbody>
                       {demand.map((d) => (
                         <tr>
                           <td>{d.market}</td>
-                          <td>{d.fg}k</td>
-                          <td>{d.ff}k</td>
                           <td class="accent">{d.ratio}</td>
                           <td>{d.share}</td>
                           <td>{d.ffShare}</td>
@@ -749,14 +797,14 @@ const dataNotes = [
                     </tbody>
                   </table>
                   <p class="chart-caption">
-                    Search Query Performance, March–August 2026 averages (UK from April). Winter months, when fungus gnat peaks, are not yet in the data.
+                    Indicative, from the search terms we track in Amazon's Search Query Performance report, March–August 2026 (UK from April). Winter, when fungus gnat peaks, isn't in the data yet.
                   </p>
                 </div>
               )}
 
               {f.id === "f-pf" && (
                 <div class="split">
-                  <p class="split-title">Fruit fly share of sales, and off-season sales as % of peak</p>
+                  <p class="split-title">Fruit fly traps' share of sales, and off-season sales as a share of peak</p>
                   {concentration.map((c) => (
                     <div class="split-row">
                       <span class="split-name">{c.market}</span>
@@ -799,26 +847,25 @@ const dataNotes = [
     {/* 4. Amazon Ads findings */}
     <section id="ads" class="doc-section wrap scroll-mt-16">
       <div data-reveal>
-        <p class="eyebrow">4 · Amazon Ads findings · 10–15 min · Genny</p>
-        <h2 class="mt-4 text-balance">Where spend is leaking, and where it can work harder</h2>
+        <p class="eyebrow">4 · Amazon Ads findings · 10–12 min · Genny</p>
+        <h2 class="mt-4 text-balance">Where ad money is wasted, and where it could do more</h2>
         <p class="doc-p mt-5">
-          Genny reviewed campaigns, search terms and placements for 11 July to
-          9 September 2026. Her campaign-level view and our 15-month view point
-          the same way. The PPC findings explain <em>how</em> the high-level
-          patterns happen.
+          Genny reviewed campaigns, search terms and ad placements, mostly from
+          11 July to 9 September 2026. Her findings and our 15-month view point
+          the same way. Hers show <em>how</em> the bigger patterns happen.
         </p>
       </div>
 
       <div class="evidence" data-reveal>
-        <p class="eyebrow evidence-eyebrow">The backdrop: paying more for less relevant traffic</p>
+        <p class="eyebrow evidence-eyebrow">The background: clicks cost more, and fewer people click</p>
         <div class="table-wrap">
           <table class="data-table">
             <thead>
               <tr>
-                <th>Jul–Aug, year on year</th>
+                <th>Jul–Aug, vs last year</th>
                 <th>CPC</th>
                 <th>Change</th>
-                <th>Impressions</th>
+                <th>Times ads were shown</th>
                 <th>Clicks</th>
               </tr>
             </thead>
@@ -840,7 +887,7 @@ const dataNotes = [
           </table>
         </div>
         <p class="chart-caption">
-          Impressions rose far faster than clicks in every market, and click-through rate fell by 42–55%. The accounts are paying more per click and reaching broader, lower-intent placements.
+          In every market, ads were shown far more often, but clicks didn't keep up. The share of people who clicked fell by 42–55%, while each click cost more. The totals alone don't tell us why. We'd check where the ads showed, which searches they showed on, competition, and how the listings look.
         </p>
       </div>
 
@@ -848,7 +895,7 @@ const dataNotes = [
         adFindings.map((a) => (
           <article class="ad-finding card p-6 md:p-8" data-reveal>
             <p class="eyebrow finding-eyebrow">
-              <span class="stat-figure finding-num">{a.num}</span> · PPC finding
+              <span class="stat-figure finding-num">{a.num}</span> · Ads finding
             </p>
             <h3 class="mt-3 text-[1.3rem] md:text-[1.45rem] text-balance">{a.title}</h3>
 
@@ -885,7 +932,7 @@ const dataNotes = [
             <thead>
               <tr>
                 <th>Genny's finding (Jul–Sep)</th>
-                <th>What the 15-month view adds</th>
+                <th>What the 15 months of data add</th>
               </tr>
             </thead>
             <tbody>
@@ -906,9 +953,10 @@ const dataNotes = [
         <p class="eyebrow build-eyebrow">One adjustment</p>
         <p class="doc-p mt-3">
           The German 2-pack campaign runs out of budget by around 4pm. The
-          instinct is a budget rule. The 15-month view says the 2-pack is the
-          weaker SKU (42% ACOS against 24% for the 4-pack). So we fix its bids
-          and give the headroom to the 4-pack.
+          obvious fix is more budget. But over 12 months the 2-pack has been
+          the weaker product (42% ACOS against 24% for the 4-pack). So we'd
+          check its search terms and fix its bids first, and test giving the
+          spare budget to the 4-pack.
         </p>
       </div>
 
@@ -923,13 +971,13 @@ const dataNotes = [
     {/* 5. How we make decisions */}
     <section id="decisions" class="doc-section wrap scroll-mt-16">
       <div data-reveal>
-        <p class="eyebrow">5 · How we make decisions · 10 min</p>
+        <p class="eyebrow">5 · How we make decisions · 12 min</p>
         <h2 class="mt-4 text-balance">Every change answers one question</h2>
       </div>
       <p class="statement" data-reveal>Does this make more profitable sales?</p>
 
       <div data-reveal>
-        <p class="eyebrow mt-10">What we watch, top down</p>
+        <p class="eyebrow mt-10">What we watch, from the top down</p>
       </div>
       <div class="metric-stack mt-6" data-reveal style="--reveal-delay: 70ms">
         {
@@ -942,13 +990,14 @@ const dataNotes = [
         }
       </div>
       <p class="doc-p mt-6" data-reveal>
-        ACOS tells us how efficient a click or a campaign is. TACOS and organic
-        share tell us whether advertising is growing the business or just
-        replacing sales we would have had anyway. Profit is the final word.
+        ACOS tells us how efficient a campaign is. TACOS and organic share
+        give useful context, but they can't tell us on their own which sales
+        the ads created. So we judge changes on profit and total sales, and
+        test changes where we can.
       </p>
 
       <div data-reveal>
-        <p class="eyebrow mt-12">When a product is over target, we pull levers in this order</p>
+        <p class="eyebrow mt-12">When TACOS is above target, we check in this order</p>
       </div>
       <ol class="levers mt-6" data-reveal style="--reveal-delay: 70ms">
         {
@@ -962,13 +1011,40 @@ const dataNotes = [
         }
       </ol>
       <p class="doc-p mt-6" data-reveal>
-        Before any of that, we diagnose. Stock, price, reviews and listing
-        changes move rank and conversion more often than bids do, so we rule
-        them out first.
+        What a click is worth is simple: order value × the share of clicks
+        that buy × target ACOS. A €5 order, where 60% of clicks buy, at a 30%
+        target, can afford about €0.90 a click. The main German fungus gnat
+        search terms have been costing €2.40–2.60.
+      </p>
+      <p class="doc-p mt-4" data-reveal>
+        Before any of that, we check the basics. Stock, price, reviews and
+        listing changes affect rank and sales more often than bids do, so we
+        rule them out first.
       </p>
 
+      <div class="build mt-8" data-reveal>
+        <p class="eyebrow build-eyebrow">When TACOS is on target, we keep going</p>
+        <ul class="doc-list doc-list--tight mt-3">
+          {onTarget.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
       <div data-reveal>
-        <p class="eyebrow mt-12">A seasonal operating model</p>
+        <p class="eyebrow mt-12">How we change bids</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3 mt-6">
+        {
+          bidApproach.map((b, i) => (
+            <div class="card p-6" data-reveal style={`--reveal-delay: ${i * 60}ms`}>
+              <h3 class="text-[1.15rem]">{b.title}</h3>
+              <p class="mt-2 text-[0.93rem] leading-relaxed text-moss">{b.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div data-reveal>
+        <p class="eyebrow mt-12">How we'd plan the year</p>
       </div>
       <div class="grid gap-4 sm:grid-cols-2 mt-6">
         {
@@ -1010,7 +1086,7 @@ const dataNotes = [
     {/* 6. 30 / 60 / 90 */}
     <section id="plan" class="doc-section wrap scroll-mt-16">
       <div data-reveal>
-        <p class="eyebrow">6 · How we'd run Super Ninja · 8 min</p>
+        <p class="eyebrow">6 · How we'd run Super Ninja · 6 min</p>
         <h2 class="mt-4 text-balance">The next 30, 60 and 90 days</h2>
       </div>
 
@@ -1033,12 +1109,55 @@ const dataNotes = [
         }
       </div>
 
+      <div data-reveal>
+        <p class="eyebrow mt-14">Where our time goes</p>
+        <p class="doc-p mt-4">
+          Time follows the size of the business and where demand is, now and
+          for future products.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3 mt-6">
+        {
+          countryTiers.map((t, i) => (
+            <div class="card p-6" data-reveal style={`--reveal-delay: ${i * 60}ms`}>
+              <p class="member-role">{t.tier}</p>
+              <h3 class="text-[1.15rem] leading-snug">{t.markets.join("\u00a0· ")}</h3>
+              <p class="kpi-label mt-2">{t.share}</p>
+              <p class="mt-3 text-[0.93rem] leading-relaxed text-moss">{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="chart-caption" data-reveal>
+        Share of sales and ad spend, September 2025 to August 2026.
+      </p>
+    </section>
+
+    {/* 7. Scope and cost */}
+    <section id="scope" class="doc-section wrap scroll-mt-16">
+      <div data-reveal>
+        <p class="eyebrow">7 · Scope and cost · 5 min</p>
+        <h2 class="mt-4 text-balance">What it takes</h2>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-3 mt-8">
+        {
+          scope.map((s, i) => (
+            <div class="card card--placeholder p-6" data-reveal style={`--reveal-delay: ${i * 60}ms`}>
+              <p class="member-role">{s.label}</p>
+              <p class="kpi stat-figure">{s.value}</p>
+              <p class="mt-3 text-[0.93rem] leading-relaxed text-moss">{s.note}</p>
+            </div>
+          ))
+        }
+      </div>
+
       <h2 class="closing" data-reveal>
-        Clear decisions, and a strong operating plan.
+        Clear decisions, and a clear plan.
       </h2>
       <p class="doc-p" data-reveal>
-        The goal of this audit isn't to show how much analysis we did. It's to
-        show we can turn it into the right next move for each market.
+        This audit isn't about how much analysis we did. It's about turning
+        the data into the right next step for each market.
       </p>
     </section>
 
@@ -1299,6 +1418,34 @@ const dataNotes = [
       transform: translateY(-3px);
       box-shadow: 0 18px 34px -22px rgba(30, 42, 36, 0.45);
     }
+  }
+
+  .terms {
+    display: grid;
+    gap: 0.9rem 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .terms {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .terms dt {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+  }
+
+  .terms dd {
+    margin: 0.15rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--color-moss);
+  }
+
+  .card--placeholder {
+    border-style: dashed;
+    border-color: var(--color-gold);
   }
 
   .member-role {
