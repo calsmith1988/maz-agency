@@ -340,12 +340,6 @@ const countryTiers = [
   { tier: "Supporting", markets: ["Australia", "Belgium", "Netherlands", "Ireland"], share: "4% of sales · 2% of ad spend", body: "Light checks against agreed limits." },
 ];
 
-const scope = [
-  { label: "Set-up (one-off)", value: "TBC", note: "Hours to restructure campaigns and put our rules in place." },
-  { label: "Ongoing management", value: "TBC", note: "Hours per month across main, secondary and supporting markets." },
-  { label: "Monthly cost", value: "TBC", note: "For the scope above." },
-];
-
 const metrics = [
   { level: "The business", items: "Profit · total sales · share of the market" },
   { level: "The market", items: "TACOS · organic share of sales · off-season sales" },
@@ -1138,18 +1132,10 @@ const dataNotes = [
       <div data-reveal>
         <p class="eyebrow">7 · Scope and cost · 5 min</p>
         <h2 class="mt-4 text-balance">What it takes</h2>
-      </div>
-
-      <div class="grid gap-4 sm:grid-cols-3 mt-8">
-        {
-          scope.map((s, i) => (
-            <div class="card card--placeholder p-6" data-reveal style={`--reveal-delay: ${i * 60}ms`}>
-              <p class="member-role">{s.label}</p>
-              <p class="kpi stat-figure">{s.value}</p>
-              <p class="mt-3 text-[0.93rem] leading-relaxed text-moss">{s.note}</p>
-            </div>
-          ))
-        }
+        <p class="doc-p mt-5">
+          We'll send the scope and costings after this presentation, so they
+          reflect what we agree today.
+        </p>
       </div>
 
       <h2 class="closing" data-reveal>
